@@ -1,3 +1,7 @@
+<h5>1.2.2 Beta</h5>  [2025/10/12]
+<hr>
+ - update of LC Lightbox (LITE)  (goffy)
+
 <h5>1.2.1 Stable</h5>  [2025/06/07]
 <hr>
  - last version for PHP 7 (goffy)

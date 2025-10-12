@@ -25,10 +25,10 @@ $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 
 // ------------------- Informations ------------------- //
 $modversion = [
-    'version'             => '1.2.1',
-    'module_status'       => 'Stable',
-    'release'             => '07/06/2025',
-    'release_date'        => '2025/06/07', // format: yyyy/mm/dd
+    'version'             => '1.2.2',
+    'module_status'       => 'Beta1',
+    'release'             => '12/10/2025',
+    'release_date'        => '2025/10/12', // format: yyyy/mm/dd
     'name'                => \_MI_WGGALLERY_NAME,
     'description'         => \_MI_WGGALLERY_DESC,
     'author'              => 'Wedega',
