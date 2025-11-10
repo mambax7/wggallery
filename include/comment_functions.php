@@ -28,7 +28,7 @@
  * @param  $commentCount
  * @return bool
  */
-function wggalleryCommentsUpdate($itemId, $commentCount)
+function wggalleryCommentsUpdate($itemId, $commentCount): bool
 {
     $helper = \XoopsModules\Wggallery\Helper::getInstance();
     if (!$helper->getHandler('Images')->updateAll('comments', (int)$commentCount, new \Criteria('lid', (int)$itemId))) {
@@ -43,7 +43,7 @@ function wggalleryCommentsUpdate($itemId, $commentCount)
  *
  * @param string $comment
  */
-function wggalleryCommentsApprove($comment)
+function wggalleryCommentsApprove(string $comment): void
 {
     $helper = \XoopsModules\Wggallery\Helper::getInstance();
     // send notifications

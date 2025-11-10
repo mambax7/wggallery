@@ -30,7 +30,7 @@
                 <{foreach item=file from=$files}>
                     <tr class='<{cycle values='odd, even'}>'>
                         <td class='center'><{$file.nb}></td>
-                        <td class='center'><img style="height:50px;" src="<{$wggallery_upload_batch_url}><{$file.name}>"></td>
+                        <td class='center'><img style="height:50px;" src="<{$wggallery_upload_batch_url}><{$file.name}>" alt="file"></td>
                         <td class='center'><{$file.name}></td>
                         <td class='center'>
                             <{$file.mimetype}>

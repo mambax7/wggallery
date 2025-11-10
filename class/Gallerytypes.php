@@ -30,8 +30,6 @@ class Gallerytypes extends \XoopsObject
 {
     /**
      * Constructor
-     *
-     * @param null
      */
     public function __construct()
     {
@@ -42,15 +40,13 @@ class Gallerytypes extends \XoopsObject
         $this->initVar('gt_template', \XOBJ_DTYPE_TXTBOX);
         $this->initVar('gt_options', \XOBJ_DTYPE_TXTAREA);
         $this->initVar('gt_date', \XOBJ_DTYPE_INT);
-        $this->initVar('dohtml', \XOBJ_DTYPE_INT, 1, false);
+        $this->initVar('dohtml', \XOBJ_DTYPE_INT, 1);
     }
 
     /**
      * @static function &getInstance
-     *
-     * @param null
      */
-    public static function getInstance()
+    public static function getInstance(): void
     {
         static $instance = false;
         if (!$instance) {
@@ -62,7 +58,7 @@ class Gallerytypes extends \XoopsObject
      * The new inserted $Id
      * @return int inserted id
      */
-    public function getNewInsertedIdGallerytypes()
+    public function getNewInsertedIdGallerytypes(): int
     {
         return $GLOBALS['xoopsDB']->getInsertId();
     }
@@ -72,14 +68,14 @@ class Gallerytypes extends \XoopsObject
      * @param bool $action
      * @return \XoopsThemeForm
      */
-    public function getFormGallerytypes($action = false)
+    public function getFormGallerytypes(bool $action = false): \XoopsThemeForm
     {
         //$helper = \XoopsModules\Wggallery\Helper::getInstance();
         if (!$action) {
             $action = $_SERVER['REQUEST_URI'];
         }
         // Title
-        $title = $this->isNew() ? \sprintf(\_AM_WGGALLERY_GALLERYTYPE_ADD) : \sprintf(\_AM_WGGALLERY_GALLERYTYPE_EDIT);
+        $title = $this->isNew() ? \_AM_WGGALLERY_GALLERYTYPE_ADD : \_AM_WGGALLERY_GALLERYTYPE_EDIT;
         // Get Theme Form
         \xoops_load('XoopsFormLoader');
         $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
@@ -110,7 +106,7 @@ class Gallerytypes extends \XoopsObject
      * @param bool $action
      * @return \XoopsThemeForm
      */
-    public function getFormGallerytypeOptions($action = false)
+    public function getFormGallerytypeOptions(bool $action = false): \XoopsThemeForm
     {
         //$helper = \XoopsModules\Wggallery\Helper::getInstance();
         if (!$action) {
@@ -1331,7 +1327,7 @@ class Gallerytypes extends \XoopsObject
      * @param bool $admin
      * @return array
      */
-    public function getValuesGallerytypes($admin = false)
+    public function getValuesGallerytypes(bool $admin = false): array
     {
         // $helper = \XoopsModules\Wggallery\Helper::getInstance();
         $ret             = $this->getValues();
@@ -1375,7 +1371,7 @@ class Gallerytypes extends \XoopsObject
      *
      * @return array
      */
-    public function toArrayGallerytypes()
+    public function toArrayGallerytypes(): array
     {
         $ret  = [];
         $vars = $this->getVars();

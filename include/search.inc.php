@@ -38,7 +38,7 @@ use XoopsModules\Wggallery;
  * @param $userid
  * @return array
  */
-function wggallery_search($queryarray, $andor, $limit, $offset, $userid)
+function wggallery_search($queryarray, $andor, $limit, $offset, $userid): array
 {
     $ret           = [];
     $helper        = \XoopsModules\Wggallery\Helper::getInstance();

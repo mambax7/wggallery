@@ -1904,7 +1904,7 @@
 							
 								if(v.poster) {bg_img = v.poster;} break;	
 								
-							case 'dailymotion' 	: bg_img = (v.poster) ? v.poster : 'http://www.dailymotion.com/thumbnail/video/'+ v.video_id; break;
+							case 'dailymotion' 	: bg_img = (v.poster) ? v.poster : 'https://www.dailymotion.com/thumbnail/video/'+ v.video_id; break;
 						}
 						
 						if(bg_img) {
@@ -2476,7 +2476,7 @@
 					// pinterest only if there's an image
 					if(img) {
 						code += 	
-						'<a class="lcl_icon lcl_pint" onClick="window.open(\'http://pinterest.com/pin/create/button/?url='+ page_url +'&media='+ encodeURIComponent(img) +'&description='+ title +'\',\'sharer\',\'toolbar=0,status=0,width=575,height=330\');" href="javascript: void(0)" title="share on Pinterest" aria-label="share on Pinterest" tabindex="64"></a>';
+						'<a class="lcl_icon lcl_pint" onClick="window.open(\'https://pinterest.com/pin/create/button/?url='+ page_url +'&media='+ encodeURIComponent(img) +'&description='+ title +'\',\'sharer\',\'toolbar=0,status=0,width=575,height=330\');" href="javascript: void(0)" title="share on Pinterest" aria-label="share on Pinterest" tabindex="64"></a>';
 					}
                 
                     // allow URL copy for deplinked lightbox

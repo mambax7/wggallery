@@ -27,7 +27,7 @@ use XoopsModules\Wggallery;
 
 //\defined('\XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
-require_once \dirname(\dirname(__DIR__, 3)) . '/mainfile.php';
+require_once dirname(__DIR__, 4) . '/mainfile.php';
 $moduleDirName = \basename(\dirname(__DIR__, 2));
 \xoops_loadLanguage('directorychecker', $moduleDirName);
 
@@ -44,7 +44,7 @@ class DirectoryChecker
      *
      * @return bool|string
      */
-    public static function getDirectoryStatus($path, $mode = 0777, $redirectFile = null)
+    public static function getDirectoryStatus($path, int $mode = 0777, $redirectFile = null): bool|string
     {
         global $pathIcon16;
 
@@ -100,7 +100,7 @@ class DirectoryChecker
      *
      * @return bool
      */
-    public static function createDirectory($target, $mode = 0777)
+    public static function createDirectory($target, int $mode = 0777): bool
     {
         $target = \str_replace('..', '', $target);
 
@@ -114,7 +114,7 @@ class DirectoryChecker
      *
      * @return bool
      */
-    public static function setDirectoryPermissions($target, $mode = 0777)
+    public static function setDirectoryPermissions($target, int $mode = 0777): bool
     {
         $target = \str_replace('..', '', $target);
 
@@ -126,7 +126,7 @@ class DirectoryChecker
      *
      * @return bool
      */
-    public static function dirExists($dir_path)
+    public static function dirExists($dir_path): bool
     {
         return \is_dir($dir_path);
     }

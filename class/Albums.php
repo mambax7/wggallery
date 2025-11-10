@@ -43,8 +43,6 @@ class Albums extends \XoopsObject
 
     /**
      * Constructor
-     *
-     * @param null
      */
     public function __construct()
     {
@@ -63,15 +61,13 @@ class Albums extends \XoopsObject
         $this->initVar('alb_tags', \XOBJ_DTYPE_TXTAREA);
         $this->initVar('alb_date', \XOBJ_DTYPE_INT);
         $this->initVar('alb_submitter', \XOBJ_DTYPE_INT);
-        $this->initVar('dohtml', \XOBJ_DTYPE_INT, 1, false);
+        $this->initVar('dohtml', \XOBJ_DTYPE_INT, 1);
     }
 
     /**
      * @static function &getInstance
-     *
-     * @param null
      */
-    public static function getInstance()
+    public static function getInstance(): void
     {
         static $instance = false;
         if (!$instance) {
@@ -83,7 +79,7 @@ class Albums extends \XoopsObject
      * The new inserted $Id
      * @return int inserted id
      */
-    public function getNewInsertedIdAlbums()
+    public function getNewInsertedIdAlbums(): int
     {
         return $GLOBALS['xoopsDB']->getInsertId();
     }
@@ -94,7 +90,7 @@ class Albums extends \XoopsObject
      * @param bool $adminArea
      * @return \XoopsThemeForm
      */
-    public function getFormAlbums($action = false, $adminArea = false)
+    public function getFormAlbums(bool $action = false, bool $adminArea = false): \XoopsThemeForm
     {
         $helper        = \XoopsModules\Wggallery\Helper::getInstance();
         $albumsHandler = $helper->getHandler('Albums');
@@ -111,7 +107,7 @@ class Albums extends \XoopsObject
             $currentuid = $GLOBALS['xoopsUser']->getVar('uid');
         }
         // Title
-        $title = $this->isNew() ? \sprintf(\_CO_WGGALLERY_ALBUM_ADD) : \sprintf(\_CO_WGGALLERY_ALBUM_EDIT);
+        $title = $this->isNew() ? \_CO_WGGALLERY_ALBUM_ADD : \_CO_WGGALLERY_ALBUM_EDIT;
         // Get Theme Form
         \xoops_load('XoopsFormLoader');
         $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
@@ -198,7 +194,6 @@ class Albums extends \XoopsObject
             $groupsIdsDlImageL    = $grouppermHandler->getGroupIds('wggallery_albdefault', 16, $GLOBALS['xoopsModule']->getVar('mid'));
             $groupsIdsDlImageL[]  = \array_values($groupsIdsDlImageL);
             $groupsIdsDlImageM    = $grouppermHandler->getGroupIds('wggallery_albdefault', 32, $GLOBALS['xoopsModule']->getVar('mid'));
-            $groupsIdsDlImageM[]  = \array_values($groupsIdsDlImageM);
         } else {
             $groupsIdsView        = $grouppermHandler->getGroupIds('wggallery_view', $this->getVar('alb_id'), $GLOBALS['xoopsModule']->getVar('mid'));
             $groupsIdsView[]      = \array_values($groupsIdsView);
@@ -207,47 +202,47 @@ class Albums extends \XoopsObject
             $groupsIdsDlImageL    = $grouppermHandler->getGroupIds('wggallery_dlimage_large', $this->getVar('alb_id'), $GLOBALS['xoopsModule']->getVar('mid'));
             $groupsIdsDlImageL[]  = \array_values($groupsIdsDlImageL);
             $groupsIdsDlImageM    = $grouppermHandler->getGroupIds('wggallery_dlimage_medium', $this->getVar('alb_id'), $GLOBALS['xoopsModule']->getVar('mid'));
-            $groupsIdsDlImageM[]  = \array_values($groupsIdsDlImageM);
         }
+        $groupsIdsDlImageM[]  = \array_values($groupsIdsDlImageM);
         // To View
         $groupsCanViewCheckbox = new \XoopsFormCheckBox('', 'groups_view', $groupsIdsView);
         $groupsCanViewCheckbox->addOptionArray($groupList);
         $groupsCanViewTray = new \XoopsFormElementTray(\_CO_WGGALLERY_PERMS_ALB_VIEW, '&nbsp;');
-        $groupsCanViewTray->addElement($groupsCanViewCheckbox, false);
+        $groupsCanViewTray->addElement($groupsCanViewCheckbox);
         $groupsCanViewAll = new \XoopsFormCheckBox('', 'all_groups_view', 0);
         $groupsCanViewAll->setExtra('onclick="javascript:toggleCheckboxGroupPerm(' . "'groups_view'" . ')"');
         $groupsCanViewAll->addOption(1, \_CO_WGGALLERY_ALL);
-        $groupsCanViewTray->addElement($groupsCanViewAll, false);
+        $groupsCanViewTray->addElement($groupsCanViewAll);
         $form->addElement($groupsCanViewTray);
         // To Download full album
         $groupsCanDlFullAlbCheckbox = new \XoopsFormCheckBox('', 'groups_dlfullalb', $groupsIdsDlFullAlb);
         $groupsCanDlFullAlbCheckbox->addOptionArray($groupList);
         $groupsCanDlFullAlbTray = new \XoopsFormElementTray(\_CO_WGGALLERY_PERMS_ALB_DLFULLALB, '&nbsp;');
-        $groupsCanDlFullAlbTray->addElement($groupsCanDlFullAlbCheckbox, false);
+        $groupsCanDlFullAlbTray->addElement($groupsCanDlFullAlbCheckbox);
         $groupsCanDlFullAlbAll = new \XoopsFormCheckBox('', 'all_groups_dlfullalb', 0);
         $groupsCanDlFullAlbAll->setExtra('onclick="javascript:toggleCheckboxGroupPerm(' . "'groups_dlfullalb'" . ')"');
         $groupsCanDlFullAlbAll->addOption(1, \_CO_WGGALLERY_ALL);
-        $groupsCanDlFullAlbTray->addElement($groupsCanDlFullAlbAll, false);
+        $groupsCanDlFullAlbTray->addElement($groupsCanDlFullAlbAll);
         $form->addElement($groupsCanDlFullAlbTray);
         // To Download Large Images
         $groupsCanDlImageLCheckbox = new \XoopsFormCheckBox('', 'groups_dlimage_large', $groupsIdsDlImageL);
         $groupsCanDlImageLCheckbox->addOptionArray($groupList);
         $groupsCanDlImageLTray = new \XoopsFormElementTray(\_CO_WGGALLERY_PERMS_ALB_DLIMAGE_LARGE, '&nbsp;');
-        $groupsCanDlImageLTray->addElement($groupsCanDlImageLCheckbox, false);
+        $groupsCanDlImageLTray->addElement($groupsCanDlImageLCheckbox);
         $groupsCanDlImageLAll = new \XoopsFormCheckBox('', 'all_groups_dlimage_large', 0);
         $groupsCanDlImageLAll->setExtra('onclick="javascript:toggleCheckboxGroupPerm(' . "'groups_dlimage_large'" . ')"');
         $groupsCanDlImageLAll->addOption(1, \_CO_WGGALLERY_ALL);
-        $groupsCanDlImageLTray->addElement($groupsCanDlImageLAll, false);
+        $groupsCanDlImageLTray->addElement($groupsCanDlImageLAll);
         $form->addElement($groupsCanDlImageLTray);
         // To Download Medium Images
         $groupsCanDlImageMCheckbox = new \XoopsFormCheckBox('', 'groups_dlimage_medium', $groupsIdsDlImageM);
         $groupsCanDlImageMCheckbox->addOptionArray($groupList);
         $groupsCanDlImageMTray = new \XoopsFormElementTray(\_CO_WGGALLERY_PERMS_ALB_DLIMAGE_MEDIUM, '&nbsp;');
-        $groupsCanDlImageMTray->addElement($groupsCanDlImageMCheckbox, false);
+        $groupsCanDlImageMTray->addElement($groupsCanDlImageMCheckbox);
         $groupsCanDlImageMAll = new \XoopsFormCheckBox('', 'all_groups_dlimage_medium', 0);
         $groupsCanDlImageMAll->setExtra('onclick="javascript:toggleCheckboxGroupPerm(' . "'groups_dlimage_medium'" . ')"');
         $groupsCanDlImageMAll->addOption(1, \_CO_WGGALLERY_ALL);
-        $groupsCanDlImageMTray->addElement($groupsCanDlImageMAll, false);
+        $groupsCanDlImageMTray->addElement($groupsCanDlImageMAll);
         $form->addElement($groupsCanDlImageMTray);
         // Form Select Album watermark
         $albWmid = $this->isNew() ? 0 : $this->getVar('alb_wmid');
@@ -296,14 +291,14 @@ class Albums extends \XoopsObject
                 foreach (\array_keys($categoriesAll) as $i) {
                     $selectCategories->addOption($categoriesAll[$i]->getVar('cat_id'), $categoriesAll[$i]->getVar('cat_text'));
                 }
-                $form->addElement($selectCategories, false);
+                $form->addElement($selectCategories);
             }
         } else {
             $form->addElement(new \XoopsFormHidden('alb_cats', ''));
         }
         // Form Text AlbTags
         if ($helper->getConfig('use_tags')) {
-            $form->addElement(new \XoopsFormText(\_CO_WGGALLERY_TAGS_ENTER, 'alb_tags', 50, 255, $this->getVar('alb_tags')), false);
+            $form->addElement(new \XoopsFormText(\_CO_WGGALLERY_TAGS_ENTER, 'alb_tags', 50, 255, $this->getVar('alb_tags')));
         } else {
             $form->addElement(new \XoopsFormHidden('alb_tags', $this->getVar('alb_tags')));
         }
@@ -340,7 +335,7 @@ class Albums extends \XoopsObject
      * @param bool $action
      * @return \XoopsThemeForm
      */
-    public function getFormUploadToAlbum($action = false)
+    public function getFormUploadToAlbum(bool $action = false): \XoopsThemeForm
     {
         $helper = \XoopsModules\Wggallery\Helper::getInstance();
         if (!$action) {
@@ -392,7 +387,7 @@ class Albums extends \XoopsObject
      * provide form for uploading a new album image
      * @return \XoopsThemeForm
      */
-    public function getFormUploadAlbumimage()
+    public function getFormUploadAlbumimage(): \XoopsThemeForm
     {
         $helper = \XoopsModules\Wggallery\Helper::getInstance();
         // Get Theme Form
@@ -407,13 +402,13 @@ class Albums extends \XoopsObject
             $albImage = 'blank.gif';
         }
         $imageDirectory = '/uploads/wggallery/images/albums';
-        $imageSelect    = new \XoopsFormSelect(\sprintf(\_CO_WGGALLERY_FORM_IMAGE_PATH, ".{$imageDirectory}/"), 'alb_image', $albImage, 5);
+        $imageSelect    = new \XoopsFormSelect(\sprintf(\_CO_WGGALLERY_FORM_IMAGE_PATH, ".$imageDirectory/"), 'alb_image', $albImage, 5);
         $imageArray     = \XoopsLists::getImgListAsArray(\XOOPS_ROOT_PATH . $imageDirectory);
         foreach ($imageArray as $imagepreview2) {
-            $imageSelect->addOption((string)$imagepreview2, $imagepreview2);
+            $imageSelect->addOption($imagepreview2, $imagepreview2);
         }
         $imageSelect->setExtra("onchange='showImgSelected(\"imagepreview2\", \"alb_image\", \"" . $imageDirectory . '", "", "' . \XOOPS_URL . "\")'");
-        $imageTray2->addElement($imageSelect, false);
+        $imageTray2->addElement($imageSelect);
         $imageTray2->addElement(new \XoopsFormLabel('', "<br><img src='" . \XOOPS_URL . $imageDirectory . '/' . $albImage . "' name='imagepreview2' id='imagepreview2' alt='' style='max-width:100px'>"));
         $form->addElement($imageTray2);
 
@@ -436,10 +431,10 @@ class Albums extends \XoopsObject
      * Get Values
      * @param null        $keys
      * @param string|null $format
-     * @param int|null    $maxDepth
+     * @param int|null $maxDepth
      * @return array
      */
-    public function getValuesAlbums($keys = null, $format = null, $maxDepth = null)
+    public function getValuesAlbums($keys = null, string $format = null, int $maxDepth = null): array
     {
         $helper        = \XoopsModules\Wggallery\Helper::getInstance();
         $ret           = $this->getValues($keys, $format, $maxDepth);
@@ -454,7 +449,7 @@ class Albums extends \XoopsObject
         if (Constants::ALBUM_IMGCAT_USE_EXIST_VAL === $this->getVar('alb_imgtype')) {
             if ($this->getVar('alb_imgid') > 0) {
                 $imagesObj = $imagesHandler->get($this->getVar('alb_imgid'));
-                if (null !== $imagesObj && \is_object($imagesObj)) {
+                if (\is_object($imagesObj)) {
                     $image      = \WGGALLERY_UPLOAD_IMAGES_URL . '/medium/' . $imagesObj->getVar('img_name');
                     $image_path = '../uploads/wggallery/images/medium/' . $imagesObj->getVar('img_name');
                 } else {
@@ -502,7 +497,7 @@ class Albums extends \XoopsObject
      *
      * @return array
      */
-    public function toArrayAlbums()
+    public function toArrayAlbums(): array
     {
         $ret  = [];
         $vars = $this->getVars();

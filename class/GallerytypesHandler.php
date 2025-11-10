@@ -43,7 +43,7 @@ class GallerytypesHandler extends \XoopsPersistableObjectHandler
      *
      * @return object
      */
-    public function create($isNew = true)
+    public function create($isNew = true): object
     {
         return parent::create($isNew);
     }
@@ -53,33 +53,32 @@ class GallerytypesHandler extends \XoopsPersistableObjectHandler
      *
      * @param int   $i field id
      * @param array $fields
-     * @return mixed reference to the {@link Get} object
+     * @return \XoopsObject|null reference to the {@link Get} object
      */
-    public function get($i = null, $fields = null)
+    public function get($id = null, $fields = null): mixed
     {
-        return parent::get($i, $fields);
+        return parent::get($id, $fields);
     }
 
     /**
      * get inserted id
      *
-     * @param null
      * @return int reference to the {@link Get} object
      */
-    public function getInsertId()
+    public function getInsertId(): int
     {
         return $this->db->getInsertId();
     }
 
     /**
      * Get Count Gallerytypes in the database
-     * @param int    $start
-     * @param int    $limit
+     * @param int $start
+     * @param int $limit
      * @param string $sort
      * @param string $order
      * @return int
      */
-    public function getCountGallerytypes($start = 0, $limit = 0, $sort = 'gt_id ASC, gt_name', $order = 'ASC')
+    public function getCountGallerytypes(int $start = 0, int $limit = 0, string $sort = 'gt_id ASC, gt_name', string $order = 'ASC'): int
     {
         $crCountGallerytypes = new \CriteriaCompo();
         $crCountGallerytypes = $this->getGallerytypesCriteria($crCountGallerytypes, $start, $limit, $sort, $order);
@@ -89,13 +88,13 @@ class GallerytypesHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get All Gallerytypes in the database
-     * @param int    $start
-     * @param int    $limit
+     * @param int $start
+     * @param int $limit
      * @param string $sort
      * @param string $order
      * @return array
      */
-    public function getAllGallerytypes($start = 0, $limit = 0, $sort = 'gt_id ASC, gt_name', $order = 'ASC')
+    public function getAllGallerytypes(int $start = 0, int $limit = 0, string $sort = 'gt_id ASC, gt_name', string $order = 'ASC'): array
     {
         $crAllGallerytypes = new \CriteriaCompo();
         $crAllGallerytypes = $this->getGallerytypesCriteria($crAllGallerytypes, $start, $limit, $sort, $order);
@@ -112,7 +111,7 @@ class GallerytypesHandler extends \XoopsPersistableObjectHandler
      * @param  $order
      * @return int
      */
-    private function getGallerytypesCriteria($crGallerytypes, $start, $limit, $sort, $order)
+    private function getGallerytypesCriteria($crGallerytypes, $start, $limit, $sort, $order): int
     {
         $crGallerytypes->setStart($start);
         $crGallerytypes->setLimit($limit);
@@ -126,7 +125,7 @@ class GallerytypesHandler extends \XoopsPersistableObjectHandler
      * Get primary Gallerytype
      * @return array
      */
-    public function getPrimaryGallery()
+    public function getPrimaryGallery(): array
     {
         $gallerytype    = [];
         $crGallerytypes = new \CriteriaCompo();
@@ -147,7 +146,7 @@ class GallerytypesHandler extends \XoopsPersistableObjectHandler
      * @param $success
      * @param $errors
      */
-    public function gallerytypesCreateReset(&$success, &$errors)
+    public function gallerytypesCreateReset(&$success, &$errors): void
     {
         // create new gallerytypes if not existing
         $templates = ['none', 'lightbox2', 'justifiedgallery', 'viewerjs', 'jssor', 'lclightboxlite'];
@@ -209,7 +208,7 @@ class GallerytypesHandler extends \XoopsPersistableObjectHandler
      * @param     $primary
      * @return bool
      */
-    public function reset($gtId, $template, $primary)
+    public function reset(int $gtId, $template, $primary): bool
     {
         $options = [];
         $gt_name    = '';
@@ -217,7 +216,6 @@ class GallerytypesHandler extends \XoopsPersistableObjectHandler
         switch ($template) {
             case 'none':
                 $gt_name    = 'none';
-                $gt_credits = '';
                 break;
             case 'lclightboxlite':
                 $gt_name    = 'LC Lightbox LITE';
@@ -295,7 +293,7 @@ class GallerytypesHandler extends \XoopsPersistableObjectHandler
                 break;
             case 'justifiedgallery':
                 $gt_name    = 'Justified Gallery with Colorbox';
-                $gt_credits = 'http://miromannino.com/';
+                $gt_credits = 'https://miromannino.com/';
                 $options[]  = ['name' => 'source', 'value' => 'large', 'caption' => '_AM_WGGALLERY_OPTION_GT_SOURCE'];
                 $options[]  = ['name' => 'source_preview', 'value' => 'thumb', 'caption' => '_AM_WGGALLERY_OPTION_GT_SOURCE_PREVIEW'];
                 $options[]  = ['name' => 'showTitle', 'value' => 'true', 'caption' => '_AM_WGGALLERY_OPTION_SHOWTITLE'];
@@ -315,7 +313,7 @@ class GallerytypesHandler extends \XoopsPersistableObjectHandler
                 break;
             case 'viewerjs':
                 $gt_name    = 'ViewerJs';
-                $gt_credits = 'http://chenfengyuan.com';
+                $gt_credits = 'https://chenfengyuan.com';
                 $options[]  = ['name' => 'source', 'value' => 'large', 'caption' => '_AM_WGGALLERY_OPTION_GT_SOURCE'];
                 $options[]  = ['name' => 'source_preview', 'value' => 'thumb', 'caption' => '_AM_WGGALLERY_OPTION_GT_SOURCE_PREVIEW'];
                 $options[]  = ['name' => 'button_close', 'value' => 'true', 'caption' => '_AM_WGGALLERY_OPTION_GT_BUTTTONCLOSE'];

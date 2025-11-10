@@ -42,7 +42,7 @@ class RatingsHandler extends \XoopsPersistableObjectHandler
      *
      * @return Object
      */
-    public function create($isNew = true)
+    public function create($isNew = true): object
     {
         return parent::create($isNew);
     }
@@ -52,20 +52,19 @@ class RatingsHandler extends \XoopsPersistableObjectHandler
      *
      * @param int   $i field id
      * @param array $fields
-     * @return mixed reference to the {@link Get} object
+     * @return \XoopsObject|null reference to the {@link Get} object
      */
-    public function get($i = null, $fields = null)
+    public function get($id = null, $fields = null): mixed
     {
-        return parent::get($i, $fields);
+        return parent::get($id, $fields);
     }
 
     /**
      * get inserted id
      *
-     * @param null
      * @return int reference to the {@link Get} object
      */
-    public function getInsertId()
+    public function getInsertId(): int
     {
         return $this->db->getInsertId();
     }
@@ -76,7 +75,7 @@ class RatingsHandler extends \XoopsPersistableObjectHandler
      * @param int $source
      * @return array
      */
-    public function getItemRating($itemid = 0, $source = 0)
+    public function getItemRating(int $itemid = 0, int $source = 0): array
     {
         $helper = \XoopsModules\Wggallery\Helper::getInstance();
 
@@ -190,7 +189,7 @@ class RatingsHandler extends \XoopsPersistableObjectHandler
      * @param  $source
      * @return bool
      */
-    public function deleteAllRatings($itemid, $source)
+    public function deleteAllRatings($itemid, $source): bool
     {
         $criteria = new \CriteriaCompo();
         $criteria->add(new \Criteria('rate_itemid', $itemid));
@@ -208,7 +207,7 @@ class RatingsHandler extends \XoopsPersistableObjectHandler
      * @param  $order
      * @return int
      */
-    private function getRatingsCriteria($crRatings, $start, $limit, $sort, $order)
+    private function getRatingsCriteria($crRatings, $start, $limit, $sort, $order): int
     {
         $crRatings->setStart($start);
         $crRatings->setLimit($limit);

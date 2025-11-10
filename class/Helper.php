@@ -44,7 +44,7 @@ class Helper extends \Xmf\Module\Helper
      *
      * @return \XoopsModules\Wggallery\Helper
      */
-    public static function getInstance($debug = false)
+    public static function getInstance(bool $debug = false): Helper
     {
         static $instance;
         if (null === $instance) {
@@ -57,7 +57,7 @@ class Helper extends \Xmf\Module\Helper
     /**
      * @return string
      */
-    public function getDirname()
+    public function getDirname(): string
     {
         return $this->dirname;
     }
@@ -65,13 +65,11 @@ class Helper extends \Xmf\Module\Helper
     /**
      * @return int
      */
-    public static function getMid()
+    public static function getMid(): int
     {
         $moduleHandler = \xoops_getHandler('module');
         $xoopsModule   = $moduleHandler->getByDirname('wggallery');
-        $mid           = $xoopsModule->mid();
-
-        return $mid;
+        return $xoopsModule->mid();
     }
 
     /**
@@ -80,8 +78,10 @@ class Helper extends \Xmf\Module\Helper
      * @param  $name name of handler to load
      *
      * @return bool|\XoopsObjectHandler|\XoopsPersistableObjectHandler
+     * @throws \Exception
+     * @throws \Exception
      */
-    public function getHandler($name)
+    public function getHandler($name): \XoopsObjectHandler|bool|\XoopsPersistableObjectHandler
     {
         $ret = false;
 
@@ -93,7 +93,7 @@ class Helper extends \Xmf\Module\Helper
         $db     = \XoopsDatabaseFactory::getDatabaseConnection();
         $helper = self::getInstance();
         $ret    = new $class($db, $helper);
-        $this->addLog("Getting handler '{$name}'");
+        $this->addLog("Getting handler '$name'");
 
         return $ret;
     }
@@ -103,18 +103,14 @@ class Helper extends \Xmf\Module\Helper
      * @param  $state
      * @return string text for state
      */
-    public function getStateText($state)
+    public function getStateText($state): string
     {
-        switch ($state) {
-            case Constants::STATE_ONLINE_VAL:
-                return \_CO_WGGALLERY_STATE_ONLINE;
-            case Constants::STATE_APPROVAL_VAL:
-                return \_CO_WGGALLERY_STATE_APPROVAL;
-            case Constants::STATE_OFFLINE_VAL:
-                return \_CO_WGGALLERY_STATE_OFFLINE;
-            default:
-                return 'invalid state in getStateText in Class/Helper.php'; //should never happen
-        }
+        return match ($state) {
+            Constants::STATE_ONLINE_VAL => \_CO_WGGALLERY_STATE_ONLINE,
+            Constants::STATE_APPROVAL_VAL => \_CO_WGGALLERY_STATE_APPROVAL,
+            Constants::STATE_OFFLINE_VAL => \_CO_WGGALLERY_STATE_OFFLINE,
+            default => 'invalid state in getStateText in Class/Helper.php',
+        };
     }
 
     /**
@@ -122,10 +118,10 @@ class Helper extends \Xmf\Module\Helper
      * @param  $arrParams
      * @param  $title
      * @param  $text
-     * @param  string $descr
+     * @param string $descr
      * @return \XoopsThemeForm
      */
-    public function getFormDelete($arrParams, $title, $text, $descr = '')
+    public function getFormDelete($arrParams, $title, $text, string $descr = ''): \XoopsThemeForm
     {
         $helper = self::getInstance();
         $action = $_SERVER['REQUEST_URI'];

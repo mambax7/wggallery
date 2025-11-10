@@ -27,7 +27,7 @@ use XoopsModules\Wggallery;
 
 //\defined('\XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
-require_once \dirname(\dirname(__DIR__, 3)) . '/mainfile.php';
+require_once dirname(__DIR__, 4) . '/mainfile.php';
 $moduleDirName = \basename(\dirname(__DIR__, 2));
 \xoops_loadLanguage('filechecker', $moduleDirName);
 
@@ -38,12 +38,12 @@ $moduleDirName = \basename(\dirname(__DIR__, 2));
 class FileChecker
 {
     /**
-     * @param string      $file_path
+     * @param string $file_path
      * @param string|null $original_file_path
-     * @param string      $redirectFile
+     * @param string $redirectFile
      * @return bool|string
      */
-    public static function getFileStatus($file_path, $original_file_path, $redirectFile)
+    public static function getFileStatus(string $file_path, ?string $original_file_path, string $redirectFile): bool|string
     {
         global $pathIcon16;
 
@@ -87,7 +87,7 @@ class FileChecker
      *
      * @return bool
      */
-    public static function copyFile($source_path, $destination_path)
+    public static function copyFile($source_path, $destination_path): bool
     {
         $source_path      = \str_replace('..', '', $source_path);
         $destination_path = \str_replace('..', '', $destination_path);
@@ -101,7 +101,7 @@ class FileChecker
      *
      * @return bool
      */
-    public static function compareFiles($file1_path, $file2_path)
+    public static function compareFiles($file1_path, $file2_path): bool
     {
         if (!self::fileExists($file1_path) || !self::fileExists($file2_path)) {
             return false;
@@ -123,7 +123,7 @@ class FileChecker
      *
      * @return bool
      */
-    public static function fileExists($file_path)
+    public static function fileExists($file_path): bool
     {
         return \is_file($file_path);
     }
@@ -134,7 +134,7 @@ class FileChecker
      *
      * @return bool
      */
-    public static function setFilePermissions($target, $mode = 0777)
+    public static function setFilePermissions($target, int $mode = 0777): bool
     {
         $target = \str_replace('..', '', $target);
 

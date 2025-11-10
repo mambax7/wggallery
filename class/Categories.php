@@ -35,8 +35,6 @@ class Categories extends \XoopsObject
 
     /**
      * Constructor
-     *
-     * @param null
      */
     public function __construct()
     {
@@ -48,15 +46,13 @@ class Categories extends \XoopsObject
         $this->initVar('cat_weight', \XOBJ_DTYPE_INT);
         $this->initVar('cat_date', \XOBJ_DTYPE_INT);
         $this->initVar('cat_submitter', \XOBJ_DTYPE_INT);
-        $this->initVar('dohtml', \XOBJ_DTYPE_INT, 1, false);
+        $this->initVar('dohtml', \XOBJ_DTYPE_INT, 1);
     }
 
     /**
      * @static function &getInstance
-     *
-     * @param null
      */
-    public static function getInstance()
+    public static function getInstance(): void
     {
         static $instance = false;
         if (!$instance) {
@@ -80,13 +76,13 @@ class Categories extends \XoopsObject
      * @param bool $action
      * @return \XoopsThemeForm
      */
-    public function getFormCategories($action = false)
+    public function getFormCategories(bool $action = false): \XoopsThemeForm
     {
         if (!$action) {
             $action = $_SERVER['REQUEST_URI'];
         }
         // Title
-        $title = $this->isNew() ? \sprintf(\_AM_WGGALLERY_ADD_CATEGORY) : \sprintf(\_AM_WGGALLERY_EDIT_CATEGORY);
+        $title = $this->isNew() ? \_AM_WGGALLERY_ADD_CATEGORY : \_AM_WGGALLERY_EDIT_CATEGORY;
         // Get Theme Form
         \xoops_load('XoopsFormLoader');
         $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
@@ -121,10 +117,10 @@ class Categories extends \XoopsObject
      * Get Values
      * @param null $keys
      * @param null $format
-     * @param int  $maxDepth
+     * @param int|null $maxDepth
      * @return array
      */
-    public function getValuesCategories($keys = null, $format = null, $maxDepth = null)
+    public function getValuesCategories($keys = null, $format = null, int $maxDepth = null): array
     {
         $ret              = $this->getValues($keys, $format, $maxDepth);
         $ret['id']        = $this->getVar('cat_id');
@@ -144,7 +140,7 @@ class Categories extends \XoopsObject
      *
      * @return array
      */
-    public function toArrayCategories()
+    public function toArrayCategories(): array
     {
         $ret  = [];
         $vars = $this->getVars();

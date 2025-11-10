@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="http://miromannino.github.io/Justified-Gallery/" target="_blank">
+  <a href="https://miromannino.github.io/Justified-Gallery/" target="_blank">
     <img src="https://raw.github.com/miromannino/Justified-Gallery/gh-imgs/jgcover.png" />
   </a>
 </div>
@@ -14,7 +14,7 @@ This is a common problem for people who create websites: you have a series of im
 Justified Gallery is a professional and open source library that even 500px, one of the best photography social network, chose for displaying their images!
 
 <div style="text-align: center; font-size: 110%;">
-	<a href="http://miromannino.github.io/Justified-Gallery/" target="_blank">Official project page</a>
+	<a href="https://miromannino.github.io/Justified-Gallery/" target="_blank">Official project page</a>
 </div>
 
 ## Release History

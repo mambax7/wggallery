@@ -28,12 +28,12 @@
  * @param $item_id
  * @return array item|null
  */
-function wggallery_notify_iteminfo($category, $item_id)
+function wggallery_notify_iteminfo($category, $item_id): ?array
 {
     global $xoopsDB;
 
-    if (!\defined('\WGGALLERY_URL')) {
-        \define('\WGGALLERY_URL', \XOOPS_URL . '/modules/wggallery');
+    if (!\defined('WGGALLERY_URL')) {
+        \define('WGGALLERY_URL', \XOOPS_URL . '/modules/wggallery');
     }
 
     switch ($category) {

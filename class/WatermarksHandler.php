@@ -43,7 +43,7 @@ class WatermarksHandler extends \XoopsPersistableObjectHandler
      *
      * @return object
      */
-    public function create($isNew = true)
+    public function create($isNew = true): object
     {
         return parent::create($isNew);
     }
@@ -53,33 +53,32 @@ class WatermarksHandler extends \XoopsPersistableObjectHandler
      *
      * @param int   $i field id
      * @param array $fields
-     * @return mixed reference to the {@link Get} object
+     * @return \XoopsObject|null reference to the {@link Get} object
      */
-    public function get($i = null, $fields = null)
+    public function get($id = null, $fields = null): mixed
     {
-        return parent::get($i, $fields);
+        return parent::get($id, $fields);
     }
 
     /**
      * get inserted id
      *
-     * @param null
      * @return int reference to the {@link Get} object
      */
-    public function getInsertId()
+    public function getInsertId(): int
     {
         return $this->db->getInsertId();
     }
 
     /**
      * Get Count Watermarks in the database
-     * @param int    $start
-     * @param int    $limit
+     * @param int $start
+     * @param int $limit
      * @param string $sort
      * @param string $order
      * @return int
      */
-    public function getCountWatermarks($start = 0, $limit = 0, $sort = 'wm_id ASC, wm_name', $order = 'ASC')
+    public function getCountWatermarks(int $start = 0, int $limit = 0, string $sort = 'wm_id ASC, wm_name', string $order = 'ASC'): int
     {
         $crCountWatermarks = new \CriteriaCompo();
         $crCountWatermarks = $this->getWatermarksCriteria($crCountWatermarks, $start, $limit, $sort, $order);
@@ -89,13 +88,13 @@ class WatermarksHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get All Watermarks in the database
-     * @param int    $start
-     * @param int    $limit
+     * @param int $start
+     * @param int $limit
      * @param string $sort
      * @param string $order
      * @return array
      */
-    public function getAllWatermarks($start = 0, $limit = 0, $sort = 'wm_id ASC, wm_name', $order = 'ASC')
+    public function getAllWatermarks(int $start = 0, int $limit = 0, string $sort = 'wm_id ASC, wm_name', string $order = 'ASC'): array
     {
         $crAllWatermarks = new \CriteriaCompo();
         $crAllWatermarks = $this->getWatermarksCriteria($crAllWatermarks, $start, $limit, $sort, $order);
@@ -112,7 +111,7 @@ class WatermarksHandler extends \XoopsPersistableObjectHandler
      * @param  $order
      * @return int
      */
-    private function getWatermarksCriteria($crWatermarks, $start, $limit, $sort, $order)
+    private function getWatermarksCriteria($crWatermarks, $start, $limit, $sort, $order): int
     {
         $crWatermarks->setStart($start);
         $crWatermarks->setLimit($limit);
@@ -128,7 +127,7 @@ class WatermarksHandler extends \XoopsPersistableObjectHandler
      * @param $DestinationFile
      * @return bool|string
      */
-    public function watermarkImage($wmId, $SourceFile, $DestinationFile)
+    public function watermarkImage($wmId, $SourceFile, $DestinationFile): bool|string
     {
         // check file exists
         if (!\file_exists($SourceFile)) {

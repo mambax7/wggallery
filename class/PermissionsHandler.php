@@ -43,7 +43,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      *
      * @return int
      */
-    public function permGlobalSubmit()
+    public function permGlobalSubmit(): int
     {
         global $xoopsUser;
 
@@ -79,7 +79,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      * function to check permission to use album collections
      * @return bool
      */
-    public function permGlobalUseCollections()
+    public function permGlobalUseCollections(): bool
     {
         global $xoopsUser;
 
@@ -110,7 +110,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      * @param int $albSubmitter
      * @return bool
      */
-    public function permAlbumEdit($albId = 0, $albSubmitter = 0)
+    public function permAlbumEdit(int $albId = 0, int $albSubmitter = 0): bool
     {
         global $xoopsUser;
 
@@ -144,7 +144,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      * @param  $albId
      * @return int
      */
-    public function permAlbumView($albId)
+    public function permAlbumView($albId): true|int
     {
         global $xoopsUser, $xoopsModule;
 
@@ -171,7 +171,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      * @param $albId
      * @return int
      */
-    public function permAlbumDownload($albId)
+    public function permAlbumDownload($albId): int
     {
         global $xoopsUser, $xoopsModule;
 
@@ -198,7 +198,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      * @param $albId
      * @return int
      */
-    public function permImageDownloadLarge($albId)
+    public function permImageDownloadLarge($albId): int
     {
         global $xoopsUser, $xoopsModule;
 
@@ -225,7 +225,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      * @param $albId
      * @return int
      */
-    public function permImageDownloadMedium($albId)
+    public function permImageDownloadMedium($albId): int
     {
         global $xoopsUser, $xoopsModule;
 

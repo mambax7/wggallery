@@ -26,7 +26,7 @@ use XoopsModules\Wggallery\Common;
  * @param \XoopsModule $module
  * @return bool
  */
-function xoops_module_pre_install_wggallery(\XoopsModule $module)
+function xoops_module_pre_install_wggallery(\XoopsModule $module): bool
 {
     require \dirname(__DIR__) . '/preloads/autoloader.php';
     $utility = new Wggallery\Utility();
@@ -49,9 +49,9 @@ function xoops_module_pre_install_wggallery(\XoopsModule $module)
 
 /**
  * @param \XoopsModule $module
- * @return bool|string
+ * @return true
  */
-function xoops_module_install_wggallery(\XoopsModule $module)
+function xoops_module_install_wggallery(\XoopsModule $module): bool|string
 {
     require \dirname(__DIR__) . '/preloads/autoloader.php';
 
@@ -112,7 +112,7 @@ function xoops_module_install_wggallery(\XoopsModule $module)
     $dir    = \opendir($rep);
     while ($f = \readdir($dir)) {
         if (\is_file($rep . $f)) {
-            if (\preg_match('/.*ttf/', \mb_strtolower($f))) {
+            if (\preg_match('/ttf/', \mb_strtolower($f))) {
                 \copy($rep . $f, $target . '/' . $f);
             }
         }

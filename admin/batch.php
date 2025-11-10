@@ -152,7 +152,7 @@ require __DIR__ . '/footer.php';
  * @param  $params
  * @return array
  */
-function batchRead($nb, $file, $params)
+function batchRead($nb, $file, $params): array
 {
     $imagePath = \WGGALLERY_UPLOAD_BATCH_PATH . '/' . $file;
     list($width, $height, $type, $attr) = \getimagesize($imagePath);
@@ -165,13 +165,11 @@ function batchRead($nb, $file, $params)
     $check_width   = $params['maxwidth'] < $width ? \str_replace('%s',  $params['maxwidth'],  \_AM_WGGALLERY_BATCH_CHECKWIDTH) : '';
     $check_height  = $params['maxheight'] < $height ? \str_replace('%s', $params['maxheight'],  \_AM_WGGALLERY_BATCH_CHECKHEIGHT) : '';
 
-    $ret = ['nb' => $nb + 1, 'name' => $file,
+    return ['nb' => $nb + 1, 'name' => $file,
         'mimetype' => $mimetype, 'check_mimetype' => $check_mimetype,
         'size' => $size, 'check_size' => $check_size,
         'width' => $width, 'check_width' => $check_width,
         'height' => $height, 'check_height' => $check_height,
         'date' => $date
     ];
-
-    return $ret;
 }

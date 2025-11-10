@@ -27,7 +27,7 @@ require_once \dirname(__DIR__) . '/include/common.php';
 /**
  * @return array
  */
-function wggalleryPluginGetDataExtgallery()
+function wggalleryPluginGetDataExtgallery(): array
 {
     // get number of albums
     $sql = 'SELECT `cat_id` FROM ' . $GLOBALS['xoopsDB']->prefix('extgallery_publiccat');
@@ -48,7 +48,7 @@ function wggalleryPluginGetDataExtgallery()
  * @param  $num_images
  * @return XoopsThemeForm
  */
-function wggalleryPluginGetFormExtgallery($im_name, $num_albums, $num_images)
+function wggalleryPluginGetFormExtgallery($im_name, $num_albums, $num_images): XoopsThemeForm
 {
     $action = $_SERVER['REQUEST_URI'];
 
@@ -131,7 +131,7 @@ function wggalleryPluginGetFormExtgallery($im_name, $num_albums, $num_images)
  *
  * @return bool
  */
-function wggalleryPluginExecImportExtgallery($albState = 0, $albSubmitter = 0)
+function wggalleryPluginExecImportExtgallery(mixed|int $albState = 0, mixed|int $albSubmitter = 0): bool
 {
     // define source image path
     //$dir_original = \XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/original/';
@@ -153,7 +153,7 @@ function wggalleryPluginExecImportExtgallery($albState = 0, $albSubmitter = 0)
     // copy album images
     $sql = 'SELECT `cat_id`, `cat_imgurl` FROM ' . $GLOBALS['xoopsDB']->prefix('extgallery_publiccat');
     $result = $GLOBALS['xoopsDB']->query($sql) or die('MySQL-Error: ' . $GLOBALS['xoopsDB']->error());
-    while (false !== (list($cat_id, $cat_imgurl) = $GLOBALS['xoopsDB']->fetchRow($result))) {
+    while (false != (list($cat_id, $cat_imgurl) = $GLOBALS['xoopsDB']->fetchRow($result))) {
         if ('' !== $cat_imgurl) {
             $imageName = \basename($cat_imgurl);
             $sql       = 'UPDATE ' . $GLOBALS['xoopsDB']->prefix('wggallery_albums') . " SET alb_image = '" . $imageName . "' WHERE (((wgg_wggallery_albums.alb_id)=" . $cat_id . '))';
@@ -171,7 +171,7 @@ function wggalleryPluginExecImportExtgallery($albState = 0, $albSubmitter = 0)
     // create perms for each album
     $sql = 'SELECT `alb_id` FROM ' . $GLOBALS['xoopsDB']->prefix('wggallery_albums');
     $result = $GLOBALS['xoopsDB']->query($sql) or die('MySQL-Error: ' . $GLOBALS['xoopsDB']->error());
-    while (false !== (list($albId) = $GLOBALS['xoopsDB']->fetchRow($result))) {
+    while (false != (list($albId) = $GLOBALS['xoopsDB']->fetchRow($result))) {
         $permId           = $albId;
         $perm_modid       = $GLOBALS['xoopsModule']->getVar('mid');
         $grouppermHandler = \xoops_getHandler('groupperm');
@@ -218,7 +218,7 @@ function wggalleryPluginExecImportExtgallery($albState = 0, $albSubmitter = 0)
     // copy all images
     $sql = 'SELECT `photo_name` FROM ' . $GLOBALS['xoopsDB']->prefix('extgallery_publicphoto');
     $result = $GLOBALS['xoopsDB']->query($sql) or die('MySQL-Error: ' . $GLOBALS['xoopsDB']->error());
-    while (false !== (list($photo_name) = $GLOBALS['xoopsDB']->fetchRow($result))) {
+    while (false != (list($photo_name) = $GLOBALS['xoopsDB']->fetchRow($result))) {
         //$imageEG      = \basename($cat_imgurl);
         $largeExists  = \file_exists($dir_large . $photo_name) ? 1 : 0;
         $mediumExists = \file_exists($dir_medium . $photo_name) ? 1 : 0;

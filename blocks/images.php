@@ -29,7 +29,7 @@ require_once \XOOPS_ROOT_PATH . '/modules/wggallery/include/common.php';
  * @param $options
  * @return array
  */
-function b_wggallery_images_show($options)
+function b_wggallery_images_show($options): array
 {
     $helper = \XoopsModules\Wggallery\Helper::getInstance();
 
@@ -119,7 +119,7 @@ function b_wggallery_images_show($options)
  * @param $options
  * @return string
  */
-function b_wggallery_images_edit($options)
+function b_wggallery_images_edit($options): string
 {
     $helper        = \XoopsModules\Wggallery\Helper::getInstance();
     $albumsHandler = $helper->getHandler('Albums');

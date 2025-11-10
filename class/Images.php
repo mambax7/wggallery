@@ -35,8 +35,6 @@ class Images extends \XoopsObject
 
     /**
      * Constructor
-     *
-     * @param null
      */
     public function __construct()
     {
@@ -63,15 +61,13 @@ class Images extends \XoopsObject
         $this->initVar('img_date', \XOBJ_DTYPE_INT);
         $this->initVar('img_submitter', \XOBJ_DTYPE_INT);
         $this->initVar('img_ip', \XOBJ_DTYPE_TXTAREA);
-        $this->initVar('dohtml', \XOBJ_DTYPE_INT, 1, false);
+        $this->initVar('dohtml', \XOBJ_DTYPE_INT, 1);
     }
 
     /**
      * @static function &getInstance
-     *
-     * @param null
      */
-    public static function getInstance()
+    public static function getInstance(): void
     {
         static $instance = false;
         if (!$instance) {
@@ -83,7 +79,7 @@ class Images extends \XoopsObject
      * The new inserted $Id
      * @return int inserted id
      */
-    public function getNewInsertedIdImages()
+    public function getNewInsertedIdImages(): int
     {
         return $GLOBALS['xoopsDB']->getInsertId();
     }
@@ -94,7 +90,7 @@ class Images extends \XoopsObject
      * @param bool $action
      * @return \XoopsThemeForm
      */
-    public function getFormImages($adminarea = false, $action = false)
+    public function getFormImages(bool $adminarea = false, bool $action = false): \XoopsThemeForm
     {
         $helper = \XoopsModules\Wggallery\Helper::getInstance();
         if (!$action) {
@@ -237,14 +233,14 @@ class Images extends \XoopsObject
                 foreach (\array_keys($categoriesAll) as $i) {
                     $selectCategories->addOption($categoriesAll[$i]->getVar('cat_id'), $categoriesAll[$i]->getVar('cat_text'));
                 }
-                $form->addElement($selectCategories, false);
+                $form->addElement($selectCategories);
             }
         } else {
             $form->addElement(new \XoopsFormHidden('img_cats', $imgCats));
         }
         // Form Text AlbTags
         if ($helper->getConfig('use_tags')) {
-            $form->addElement(new \XoopsFormText(\_CO_WGGALLERY_TAGS_ENTER, 'img_tags', 50, 255, $this->getVar('img_tags')), false);
+            $form->addElement(new \XoopsFormText(\_CO_WGGALLERY_TAGS_ENTER, 'img_tags', 50, 255, $this->getVar('img_tags')));
         } else {
             $form->addElement(new \XoopsFormHidden('img_tags', $this->getVar('img_tags')));
         }
@@ -289,10 +285,10 @@ class Images extends \XoopsObject
      * Get Values
      * @param null $keys
      * @param null $format
-     * @param int  $maxDepth
+     * @param int|null $maxDepth
      * @return array
      */
-    public function getValuesImages($keys = null, $format = null, $maxDepth = null)
+    public function getValuesImages($keys = null, $format = null, int $maxDepth = null): array
     {
         $helper             = \XoopsModules\Wggallery\Helper::getInstance();
         $ret                = $this->getValues($keys, $format, $maxDepth);
@@ -433,7 +429,7 @@ class Images extends \XoopsObject
      *
      * @return array
      */
-    public function toArrayImages()
+    public function toArrayImages(): array
     {
         $ret  = [];
         $vars = $this->getVars();

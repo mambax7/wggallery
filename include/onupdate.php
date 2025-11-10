@@ -34,7 +34,7 @@ use XoopsModules\Wggallery\Common\ {
  *
  * @return bool true if ready to install, false if not
  */
-function xoops_module_pre_update_wggallery(\XoopsModule $module)
+function xoops_module_pre_update_wggallery(\XoopsModule $module): bool
 {
     $utility = new Wggallery\Utility();
 
@@ -50,7 +50,7 @@ function xoops_module_pre_update_wggallery(\XoopsModule $module)
  *
  * @return bool|null
  */
-function xoops_module_update_wggallery($module, $prev_version = null)
+function xoops_module_update_wggallery($module, $prev_version = null): ?bool
 {
     $ret = null;
 
@@ -110,7 +110,7 @@ function xoops_module_update_wggallery($module, $prev_version = null)
  *
  * @return bool
  */
-function wggallery_check_db($module)
+function wggallery_check_db($module): bool
 {
     // for the moment no action required
     return true;

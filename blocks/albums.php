@@ -28,7 +28,7 @@ require_once \XOOPS_ROOT_PATH . '/modules/wggallery/include/common.php';
  * @param $options
  * @return array
  */
-function b_wggallery_albums_show($options)
+function b_wggallery_albums_show($options): array
 {
     $block        = [];
     $typeBlock    = $options[0];
@@ -180,7 +180,7 @@ function b_wggallery_albums_show($options)
  * @param $options
  * @return string
  */
-function b_wggallery_albums_edit($options)
+function b_wggallery_albums_edit($options): string
 {
     $helper        = Wggallery\Helper::getInstance();
     $albumsHandler = $helper->getHandler('Albums');
@@ -192,7 +192,6 @@ function b_wggallery_albums_edit($options)
     unset($criteria);
     $albumtypesHandler = $helper->getHandler('Albumtypes');
     $albumtypesAll     = $albumtypesHandler->getAll();
-    unset($criteria);
 
     $GLOBALS['xoopsTpl']->assign('wggallery_upload_url', \WGGALLERY_UPLOAD_URL);
 
