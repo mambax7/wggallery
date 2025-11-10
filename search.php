@@ -30,7 +30,7 @@ $start = Request::getInt('start');
 $limit = Request::getInt('limit', $helper->getConfig('userpager'));
 
 $search_text = \mb_strtolower(Request::getString('search_text'));
-$search_cats = Request::getArray('search_cats', []);
+$search_cats = Request::getArray('search_cats');
 $search_subm = Request::getInt('search_subm');
 $search_act  = Request::getInt('search_act', 1);
 $imageIdsIn  = Request::getString('imageIdsIn');
@@ -50,11 +50,11 @@ if ($helper->getConfig('ratingbars') > 0) {
 $GLOBALS['xoopsTpl']->assign('show_exif', $helper->getConfig('store_exif'));
 
 // defines only for search
-\define('\WGGALLERY_SEARCH_NOTAPPLY', 0);
-\define('\WGGALLERY_SEARCH_ACT_DOWNLOADS', 1);
-\define('\WGGALLERY_SEARCH_ACT_VIEWS', 2);
-\define('\WGGALLERY_SEARCH_ACT_RATINGS', 3);
-\define('\WGGALLERY_SEARCH_ACT_VOTES', 4);
+\define('WGGALLERY_SEARCH_NOTAPPLY', 0);
+\define('WGGALLERY_SEARCH_ACT_DOWNLOADS', 1);
+\define('WGGALLERY_SEARCH_ACT_VIEWS', 2);
+\define('WGGALLERY_SEARCH_ACT_RATINGS', 3);
+\define('WGGALLERY_SEARCH_ACT_VOTES', 4);
 
 // **************************
 // start search form section

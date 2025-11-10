@@ -309,7 +309,7 @@ switch ($op) {
         $albImage1 = 'blank.gif';
         if ($albImgid > 0) {
             $imagesObj = $imagesHandler->get($albImgid);
-            if (null !== $imagesObj && \is_object($imagesObj)) {
+            if (\is_object($imagesObj)) {
                 $albImage1 = $imagesObj->getVar('img_name');
             }
         }

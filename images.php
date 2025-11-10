@@ -244,8 +244,8 @@ switch ($op) {
             // send notifications
             $tags                = [];
             $tags['IMAGE_NAME']  = $img_name;
-            $tags['IMAGE_URL']   = \XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . "/images.php?op=show&img_id={$imgId}&amp;alb_id={$albId}";
-            $tags['ALBUM_URL']   = \XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . "/albums.php?op=show&alb_id={$albId}&amp;alb_pid={$imgAlbPid}";
+            $tags['IMAGE_URL']   = \XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . "/images.php?op=show&img_id=$imgId&amp;alb_id=$albId";
+            $tags['ALBUM_URL']   = \XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . "/albums.php?op=show&alb_id=$albId&amp;alb_pid=$imgAlbPid";
             $notificationHandler = \xoops_getHandler('notification');
 
             if (Constants::STATE_APPROVAL_VAL === $imgState) {
@@ -411,7 +411,7 @@ switch ($op) {
                     $images[$i]['rating'] = $ratingsHandler->getItemRating($images[$i]['id'], 1);
                 }
                 if ('_modal' === $image_target || '_modalinfo' === $image_target) {
-                    $images[$i]['img_modal'] = $image['thumb'];
+                    $images[$i]['img_modal'] = $images[$i]['thumb'];
                     if ($permissionsHandler->permImageDownloadLarge($albId)) {
                         $images[$i]['img_modal'] = $images[$i]['large'];
                     } elseif ($permissionsHandler->permImageDownloadMedium($albId)) {

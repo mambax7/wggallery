@@ -245,7 +245,7 @@ switch ($op) {
             // send notifications
             $tags                = [];
             $tags['ALBUM_NAME']  = $alb_name;
-            $tags['ALBUM_URL']   = \XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . "/albums.php?op=show&alb_id={$albId}&amp;alb_pid={$albPid}";
+            $tags['ALBUM_URL']   = \XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . "/albums.php?op=show&alb_id=$albId&amp;alb_pid=$albPid";
             $notificationHandler = \xoops_getHandler('notification');
 
             if (Constants::STATE_APPROVAL_VAL === $albState) {

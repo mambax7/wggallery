@@ -128,7 +128,7 @@ if ($albId > 0) {
     $GLOBALS['xoopsTpl']->assign('jwt', $jwt);
     setcookie('jwt', $jwt);
     $fineup_debug = 'false';
-    if (($xoopsUser instanceof \XoopsUser ? $xoopsUser->isAdmin() : false)
+    if (($xoopsUser instanceof \XoopsUser && $xoopsUser->isAdmin())
         && isset($_REQUEST['FINEUPLOADER_DEBUG'])) {
         $fineup_debug = 'true';
     }
