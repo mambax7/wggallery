@@ -118,7 +118,7 @@ class DirectoryChecker
     {
         $target = \str_replace('..', '', $target);
 
-        return @chmod($target, (int)$mode);
+        return @chmod($target, $mode);
     }
 
     /**

@@ -138,23 +138,21 @@ class FileChecker
     {
         $target = \str_replace('..', '', $target);
 
-        return @chmod($target, (int)$mode);
+        return @chmod($target, $mode);
     }
 }
 
 $op = Request::getString('op', '', 'POST');
-switch ($op) {
-    case 'copyfile':
-        if (\Xmf\Request::hasVar('original_file_path', 'POST')) {
-            $original_file_path = $_POST['original_file_path'];
-        }
-        if (\Xmf\Request::hasVar('file_path', 'POST')) {
-            $file_path = $_POST['file_path'];
-        }
-        if (\Xmf\Request::hasVar('redirect', 'POST')) {
-            $redirect = $_POST['redirect'];
-        }
-        $msg = FileChecker::copyFile($original_file_path, $file_path) ? _FC_WGGALLERY_FILECOPIED : _FC_WGGALLERY_FILENOTCOPIED;
-        \redirect_header($redirect, 2, $msg . ': ' . $file_path);
-        break;
+if ($op == 'copyfile') {
+    if (\Xmf\Request::hasVar('original_file_path', 'POST')) {
+        $original_file_path = $_POST['original_file_path'];
+    }
+    if (\Xmf\Request::hasVar('file_path', 'POST')) {
+        $file_path = $_POST['file_path'];
+    }
+    if (\Xmf\Request::hasVar('redirect', 'POST')) {
+        $redirect = $_POST['redirect'];
+    }
+    $msg = FileChecker::copyFile($original_file_path, $file_path) ? _FC_WGGALLERY_FILECOPIED : _FC_WGGALLERY_FILENOTCOPIED;
+    \redirect_header($redirect, 2, $msg . ': ' . $file_path);
 }

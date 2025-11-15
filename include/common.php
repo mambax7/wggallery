@@ -28,8 +28,7 @@ $moduleDirNameUpper = \mb_strtoupper($moduleDirName); //$capsDirName
 /** @var \XoopsModules\Wggallery\Helper $helper */
 /** @var \XoopsModules\Wggallery\Utility $utility */
 $db      = \XoopsDatabaseFactory::getDatabaseConnection();
-$debug   = false;
-$helper  = \XoopsModules\Wggallery\Helper::getInstance($debug);
+$helper  = \XoopsModules\Wggallery\Helper::getInstance(false);
 $utility = new \XoopsModules\Wggallery\Utility();
 //$configurator = new Wggallery\Common\Configurator();
 
@@ -83,8 +82,6 @@ $icons = [
     '0'       => "<img src='" . $pathIcon16 . "/0.png' alt='" . 0 . "' align='middle'>",
     '1'       => "<img src='" . $pathIcon16 . "/1.png' alt='" . 1 . "' align='middle'>",
 ];
-
-$debug = false;
 
 // MyTextSanitizer object
 $myts = \MyTextSanitizer::getInstance();

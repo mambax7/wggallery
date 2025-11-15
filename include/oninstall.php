@@ -48,8 +48,8 @@ function xoops_module_pre_install_wggallery(\XoopsModule $module): bool
 }
 
 /**
- * @param \XoopsModule $module
- * @return true
+ * @param XoopsModule $module
+ * @return bool|string
  */
 function xoops_module_install_wggallery(\XoopsModule $module): bool|string
 {
@@ -68,7 +68,7 @@ function xoops_module_install_wggallery(\XoopsModule $module): bool|string
     $helper->loadLanguage('common');
 
     //  ---  CREATE FOLDERS ---------------
-    if ($configurator->uploadFolders && \is_array($configurator->uploadFolders)) {
+    if ($configurator->uploadFolders) {
         //    foreach (\array_keys($GLOBALS['uploadFolders']) as $i) {
         foreach (\array_keys($configurator->uploadFolders) as $i) {
             $utility::createFolder($configurator->uploadFolders[$i]);
@@ -77,7 +77,7 @@ function xoops_module_install_wggallery(\XoopsModule $module): bool|string
     }
 
     //  ---  COPY blank.gif FILES ---------------
-    if ($configurator->copyBlankFiles && \is_array($configurator->copyBlankFiles)) {
+    if ($configurator->copyBlankFiles) {
         $file = \dirname(__DIR__) . '/assets/images/blank.gif';
         foreach (\array_keys($configurator->copyBlankFiles) as $i) {
             $dest = $configurator->copyBlankFiles[$i] . '/blank.gif';
@@ -112,7 +112,7 @@ function xoops_module_install_wggallery(\XoopsModule $module): bool|string
     $dir    = \opendir($rep);
     while ($f = \readdir($dir)) {
         if (\is_file($rep . $f)) {
-            if (\preg_match('/ttf/', \mb_strtolower($f))) {
+            if (str_contains(\mb_strtolower($f), 'ttf')) {
                 \copy($rep . $f, $target . '/' . $f);
             }
         }

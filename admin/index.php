@@ -56,7 +56,7 @@ $adminObject->addInfoBoxLine(\sprintf('<label>' . \_AM_WGGALLERY_THEREARE_CATEGO
 // Upload Folders
 $adminObject->addConfigBoxLine();
 $configurator = new Common\Configurator();
-if ($configurator->uploadFolders && \is_array($configurator->uploadFolders)) {
+if ($configurator->uploadFolders) {
     foreach (\array_keys($configurator->uploadFolders) as $i) {
         $folder[] = $configurator->uploadFolders[$i];
     }

@@ -28,6 +28,7 @@ class Modulemenu
     /** function to create an array for XOOPS main menu
      *
      * @return array
+     * @throws \Exception
      */
     public function getMenuitemsDefault(): array
     {
@@ -87,6 +88,7 @@ class Modulemenu
     /** function to create a list of sublinks
      *
      * @return array
+     * @throws \Exception
      */
     public function getMenuitemsSbadmin5(): array
     {

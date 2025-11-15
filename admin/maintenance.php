@@ -1276,6 +1276,8 @@ function returnCleanBytes($val): float|int
  * @param  $unused
  * @param  $directory
  * @return bool
+ * @throws Exception
+ * @throws Exception
  */
 function getUnusedImages(&$unused, $directory): bool
 {

@@ -126,12 +126,12 @@ function wggalleryPluginGetFormExtgallery($im_name, $num_albums, $num_images): X
 }
 
 /**
- * @param mixed $albState
- * @param mixed $albSubmitter
+ * @param int $albState
+ * @param int $albSubmitter
  *
  * @return bool
  */
-function wggalleryPluginExecImportExtgallery(mixed|int $albState = 0, mixed|int $albSubmitter = 0): bool
+function wggalleryPluginExecImportExtgallery(int $albState = 0, int $albSubmitter = 0): bool
 {
     // define source image path
     //$dir_original = \XOOPS_ROOT_PATH . '/uploads/extgallery/public-photo/original/';

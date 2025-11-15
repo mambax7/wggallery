@@ -27,6 +27,8 @@
  * @param  $itemId
  * @param  $commentCount
  * @return bool
+ * @throws Exception
+ * @throws Exception
  */
 function wggalleryCommentsUpdate($itemId, $commentCount): bool
 {
@@ -42,6 +44,8 @@ function wggalleryCommentsUpdate($itemId, $commentCount): bool
  * CommentsApprove
  *
  * @param string $comment
+ * @throws Exception
+ * @throws Exception
  */
 function wggalleryCommentsApprove(string $comment): void
 {

@@ -89,6 +89,7 @@ class Albums extends \XoopsObject
      * @param bool $action
      * @param bool $adminArea
      * @return \XoopsThemeForm
+     * @throws \Exception
      */
     public function getFormAlbums(bool $action = false, bool $adminArea = false): \XoopsThemeForm
     {
@@ -334,6 +335,7 @@ class Albums extends \XoopsObject
      * provide form with a dropdown select containing all existing albums
      * @param bool $action
      * @return \XoopsThemeForm
+     * @throws \Exception
      */
     public function getFormUploadToAlbum(bool $action = false): \XoopsThemeForm
     {
@@ -429,10 +431,11 @@ class Albums extends \XoopsObject
 
     /**
      * Get Values
-     * @param null        $keys
+     * @param null $keys
      * @param string|null $format
      * @param int|null $maxDepth
      * @return array
+     * @throws \Exception
      */
     public function getValuesAlbums($keys = null, string $format = null, int $maxDepth = null): array
     {

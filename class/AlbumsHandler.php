@@ -54,11 +54,11 @@ class AlbumsHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve a field
      *
-     * @param int   $i field id
-     * @param array $fields
+     * @param null $id
+     * @param null $fields
      * @return \XoopsObject|null reference to the {@link Get} object
      */
-    public function get($id = null, $fields = null): mixed
+    public function get($id = null, $fields = null): ?\XoopsObject
     {
         return parent::get($id, $fields);
     }
@@ -150,6 +150,7 @@ class AlbumsHandler extends \XoopsPersistableObjectHandler
      * Get all childs of a category
      * @param $albPid
      * @return string
+     * @throws \Exception
      */
     public function getChildsOfCategory($albPid): string
     {
@@ -179,6 +180,7 @@ class AlbumsHandler extends \XoopsPersistableObjectHandler
      * Get all childs of a category
      * @param $albPid
      * @return bool|string
+     * @throws \Exception
      */
     public function getListChildsOfCollection($albPid): bool|string
     {
@@ -239,6 +241,7 @@ class AlbumsHandler extends \XoopsPersistableObjectHandler
      * @param $target
      * @param bool $showThumb
      * @return bool|string
+     * @throws \Exception
      */
     public function getListChildsOfCollectionIndex($albPid, $target, bool $showThumb = false): bool|string
     {

@@ -89,6 +89,7 @@ class Images extends \XoopsObject
      * @param bool $adminarea
      * @param bool $action
      * @return \XoopsThemeForm
+     * @throws \Exception
      */
     public function getFormImages(bool $adminarea = false, bool $action = false): \XoopsThemeForm
     {
@@ -287,6 +288,7 @@ class Images extends \XoopsObject
      * @param null $format
      * @param int|null $maxDepth
      * @return array
+     * @throws \Exception
      */
     public function getValuesImages($keys = null, $format = null, int $maxDepth = null): array
     {

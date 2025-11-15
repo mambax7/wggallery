@@ -54,11 +54,11 @@ class CategoriesHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve a field
      *
-     * @param int   $i field id
-     * @param array $fields
+     * @param null $id
+     * @param null $fields
      * @return \XoopsObject|null reference to the {@link Get} object
      */
-    public function get($id = null, $fields = null): mixed
+    public function get($id = null, $fields = null): ?\XoopsObject
     {
         return parent::get($id, $fields);
     }
@@ -127,7 +127,7 @@ class CategoriesHandler extends \XoopsPersistableObjectHandler
     /**
      * Get Criteria Categories
      * @param $cats
-     * @return string
+     * @return int|string
      */
     public function getCatsList($cats): int|string
     {

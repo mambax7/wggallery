@@ -79,7 +79,6 @@ class Helper extends \Xmf\Module\Helper
      *
      * @return bool|\XoopsObjectHandler|\XoopsPersistableObjectHandler
      * @throws \Exception
-     * @throws \Exception
      */
     public function getHandler($name): \XoopsObjectHandler|bool|\XoopsPersistableObjectHandler
     {

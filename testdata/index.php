@@ -63,7 +63,7 @@ function loadSampleData(): void
     loadTableFromArrayWithReplace($table, $tabledata, 'gperm_modid', $mid);
 
     //  ---  COPY test folder files ---------------
-    if (\is_array($configurator->copyTestFolders) && \count($configurator->copyTestFolders) > 0) {
+    if (\count($configurator->copyTestFolders) > 0) {
         //        $file =  \dirname(__DIR__) . '/testdata/images/';
         foreach (\array_keys($configurator->copyTestFolders) as $i) {
             $src  = $configurator->copyTestFolders[$i][0];
@@ -126,7 +126,6 @@ function exportSchema(): void
  */
 function loadTableFromArrayWithReplace(value $table, array $data, name $search, $replace): int
 {
-    /** @var \XoopsDatabase $db */
     $db = \XoopsDatabaseFactory::getDatabaseConnection();
 
     $prefixedTable = $db->prefix($table);

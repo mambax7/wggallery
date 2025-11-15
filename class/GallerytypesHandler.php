@@ -51,11 +51,11 @@ class GallerytypesHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve a field
      *
-     * @param int   $i field id
-     * @param array $fields
+     * @param null $id
+     * @param null $fields
      * @return \XoopsObject|null reference to the {@link Get} object
      */
-    public function get($id = null, $fields = null): mixed
+    public function get($id = null, $fields = null): ?\XoopsObject
     {
         return parent::get($id, $fields);
     }
@@ -344,19 +344,17 @@ class GallerytypesHandler extends \XoopsPersistableObjectHandler
         }
         $options[] = ['name' => 'option_sort', 'value' => $option_sort];
 
-        if (null !== $gtId) {
-            $gallerytypesObj = $this->get($gtId);
-            // Set Vars
-            $gallerytypesObj->setVar('gt_primary', $primary);
-            $gallerytypesObj->setVar('gt_name', $gt_name);
-            $gallerytypesObj->setVar('gt_credits', $gt_credits);
-            $gallerytypesObj->setVar('gt_template', $template);
-            $gallerytypesObj->setVar('gt_options', serialize($options));
-            $gallerytypesObj->setVar('gt_date', \time());
-            // Insert Data
-            if ($this->insert($gallerytypesObj)) {
-                return true;
-            }
+        $gallerytypesObj = $this->get($gtId);
+        // Set Vars
+        $gallerytypesObj->setVar('gt_primary', $primary);
+        $gallerytypesObj->setVar('gt_name', $gt_name);
+        $gallerytypesObj->setVar('gt_credits', $gt_credits);
+        $gallerytypesObj->setVar('gt_template', $template);
+        $gallerytypesObj->setVar('gt_options', serialize($options));
+        $gallerytypesObj->setVar('gt_date', \time());
+        // Insert Data
+        if ($this->insert($gallerytypesObj)) {
+            return true;
         }
 
         return false;

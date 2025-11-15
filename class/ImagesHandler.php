@@ -128,11 +128,11 @@ class ImagesHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve a field
      *
-     * @param int   $i field id
-     * @param array $fields
+     * @param null $id
+     * @param null $fields
      * @return \XoopsObject|null reference to the {@link Get} object
      */
-    public function get($id = null, $fields = null): mixed
+    public function get($id = null, $fields = null): ?\XoopsObject
     {
         return parent::get($id, $fields);
     }
@@ -230,7 +230,7 @@ class ImagesHandler extends \XoopsPersistableObjectHandler
      * extract data from exif as tags
      * @param  $exifs
      * @param  $exif_tags
-     * @return string or null
+     * @return string|null or null
      */
     public function exifExtractTags($exifs, $exif_tags): ?string
     {
@@ -316,6 +316,7 @@ class ImagesHandler extends \XoopsPersistableObjectHandler
      * @param $imageSize
      * @param $albId
      * @return bool|array
+     * @throws \Exception
      */
     public function handleSingleUpload($imgName, $imgTitle, $imgDesc, $imageMimetype, $imageSize, $albId): bool|array
     {
@@ -535,6 +536,7 @@ class ImagesHandler extends \XoopsPersistableObjectHandler
      * @param array $files
      * @param bool $action
      * @return \XoopsThemeForm
+     * @throws \Exception
      */
     public function getFormBatchUpload(array $files, bool $action = false): \XoopsThemeForm
     {

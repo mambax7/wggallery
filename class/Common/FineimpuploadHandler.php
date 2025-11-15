@@ -123,6 +123,7 @@ class FineimpuploadHandler extends \SystemFineUploadHandler
      * @param $mimeType
      * @param $uid
      * @return array|bool
+     * @throws \Exception
      */
     protected function storeUploadedFile($target, $mimeType, $uid): bool|array
     {

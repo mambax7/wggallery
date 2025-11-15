@@ -26,7 +26,7 @@
  *
  * @param $category
  * @param $item_id
- * @return array item|null
+ * @return array|null item|null
  */
 function wggallery_notify_iteminfo($category, $item_id): ?array
 {

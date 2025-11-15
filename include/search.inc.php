@@ -37,6 +37,8 @@ use XoopsModules\Wggallery;
  * @param $offset
  * @param $userid
  * @return array
+ * @throws Exception
+ * @throws Exception
  */
 function wggallery_search($queryarray, $andor, $limit, $offset, $userid): array
 {
