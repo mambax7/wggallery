@@ -35,7 +35,6 @@ use XoopsModules\Tag;
  * @param array $items pass-by-ref
  * @return bool true - items found | false - nothing found/created
  * @throws Exception
- * @throws Exception
  */
 function wggallery_tag_iteminfo(array &$items): bool
 {
@@ -90,7 +89,6 @@ function wggallery_tag_iteminfo(array &$items): bool
 /** Remove orphan tag-item links *
  * @param int $mid
  * @return bool
- * @throws Exception
  * @throws Exception
  */
 function wggallery_tag_synchronization(int $mid): bool

@@ -28,7 +28,6 @@ require_once \XOOPS_ROOT_PATH . '/modules/wggallery/include/common.php';
  * @param $options
  * @return array
  * @throws Exception
- * @throws Exception
  */
 function b_wggallery_albums_show($options): array
 {
@@ -181,7 +180,6 @@ function b_wggallery_albums_show($options): array
 /**
  * @param $options
  * @return string
- * @throws Exception
  * @throws Exception
  */
 function b_wggallery_albums_edit($options): string

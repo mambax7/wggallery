@@ -122,7 +122,6 @@ function exportSchema(): void
  * @param  $replace
  * @return int number of rows inserted
  * @throws Exception
- * @throws Exception
  */
 function loadTableFromArrayWithReplace(value $table, array $data, name $search, $replace): int
 {
