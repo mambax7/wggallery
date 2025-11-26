@@ -16,10 +16,10 @@ Most of the templates on user side are fully responsive, but for proper displayi
 
 
 ### Require:
-- XOOPS 2.5.11;
+- XOOPS 2.5.12;
 - XOOPS Admin 1.2;
-- PHP 7.4 or higher;
-- MySQL 5.5; -> Minimum Recommended Using InnoDB Version 5.1 or Later
+- PHP 8.4 or higher;
+- MySQL 5.7.8 or higher, 8.4.5+ recommended
 
 # Info
 
