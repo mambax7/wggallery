@@ -42,7 +42,7 @@ class AlbumsHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * @param bool $isNew
+     * @param $isNew
      *
      * @return object
      */
@@ -54,8 +54,8 @@ class AlbumsHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve a field
      *
-     * @param null $id
-     * @param null $fields
+     * @param $id
+     * @param $fields
      * @return \XoopsObject|null reference to the {@link Get} object
      */
     public function get($id = null, $fields = null): ?\XoopsObject

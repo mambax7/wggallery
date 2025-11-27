@@ -38,7 +38,7 @@ class RatingsHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * @param bool $isNew
+     * @param $isNew
      *
      * @return Object
      */
@@ -50,8 +50,8 @@ class RatingsHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve a field
      *
-     * @param null $id
-     * @param null $fields
+     * @param $id
+     * @param $fields
      * @return \XoopsObject|null reference to the {@link Get} object
      */
     public function get($id = null, $fields = null): ?\XoopsObject
