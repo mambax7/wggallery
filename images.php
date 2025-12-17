@@ -15,8 +15,6 @@
  * @copyright      module for xoops
  * @license        GPL 2.0 or later
  * @package        wggallery
- * @since          1.0
- * @min_xoops      2.5.11
  * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version        $Id: 1.0 images.php 1 Mon 2018-03-19 10:04:51Z XOOPS Project (www.xoops.org) $
  */
@@ -114,7 +112,7 @@ $albSubmitter = '';
 $albumsObj = $albumsHandler->get($albId);
 if (isset($albumsObj) && \is_object($albumsObj)) {
     $albName      = $albumsObj->getVar('alb_name');
-    $albSubmitter = $albumsObj->getVar('alb_submitter');
+    $albSubmitter = (int)$albumsObj->getVar('alb_submitter');
 }
 $permAlbumEdit = $permissionsHandler->permAlbumEdit($albId, $albSubmitter);
 
@@ -246,8 +244,8 @@ switch ($op) {
             // send notifications
             $tags                = [];
             $tags['IMAGE_NAME']  = $img_name;
-            $tags['IMAGE_URL']   = \XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . "/images.php?op=show&img_id={$imgId}&amp;alb_id={$albId}";
-            $tags['ALBUM_URL']   = \XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . "/albums.php?op=show&alb_id={$albId}&amp;alb_pid={$imgAlbPid}";
+            $tags['IMAGE_URL']   = \XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . "/images.php?op=show&img_id=$imgId&amp;alb_id=$albId";
+            $tags['ALBUM_URL']   = \XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . "/albums.php?op=show&alb_id=$albId&amp;alb_pid=$imgAlbPid";
             $notificationHandler = \xoops_getHandler('notification');
 
             if (Constants::STATE_APPROVAL_VAL === $imgState) {
@@ -378,7 +376,7 @@ switch ($op) {
         $albumsObj = $albums->get($albId);
         if (isset($albumsObj) && \is_object($albumsObj)) {
             $albName      = $albumsObj->getVar('alb_name');
-            $albSubmitter = $albumsObj->getVar('alb_submitter');
+            $albSubmitter = (int)$albumsObj->getVar('alb_submitter');
         }
         $GLOBALS['xoopsTpl']->assign('alb_name', $albName);
         $GLOBALS['xoopsTpl']->assign(
@@ -413,7 +411,7 @@ switch ($op) {
                     $images[$i]['rating'] = $ratingsHandler->getItemRating($images[$i]['id'], 1);
                 }
                 if ('_modal' === $image_target || '_modalinfo' === $image_target) {
-                    $images[$i]['img_modal'] = $image['thumb'];
+                    $images[$i]['img_modal'] = $images[$i]['thumb'];
                     if ($permissionsHandler->permImageDownloadLarge($albId)) {
                         $images[$i]['img_modal'] = $images[$i]['large'];
                     } elseif ($permissionsHandler->permImageDownloadMedium($albId)) {

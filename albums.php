@@ -15,8 +15,6 @@
  * @copyright      module for xoops
  * @license        GPL 2.0 or later
  * @package        wggallery
- * @since          1.0
- * @min_xoops      2.5.11
  * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version        $Id: 1.0 albums.php 1 Mon 2018-03-19 10:04:50Z XOOPS Project (www.xoops.org) $
  */
@@ -117,13 +115,13 @@ switch ($op) {
             foreach (\array_keys($albumsAll) as $i) {
                 //check permissions
                 $album = [];
-                if ($permissionsHandler->permAlbumEdit($albumsAll[$i]->getVar('alb_id'), $albumsAll[$i]->getVar('alb_submitter'))) {
+                if ($permissionsHandler->permAlbumEdit((int)$albumsAll[$i]->getVar('alb_id'), (int)$albumsAll[$i]->getVar('alb_submitter'))) {
                     $album         = $albumsAll[$i]->getValuesAlbums();
                     $album['edit'] = true;
                     $albumsPermEdit++;
                     $keywords[] = $albumsAll[$i]->getVar('alb_name');
                 }
-                if ($permissionsHandler->permAlbumDownload($albumsAll[$i]->getVar('alb_id'))) {
+                if ($permissionsHandler->permAlbumDownload((int)$albumsAll[$i]->getVar('alb_id'))) {
                     $album['download'] = true;
                 }
                 $GLOBALS['xoopsTpl']->append('albums_list', $album);
@@ -170,7 +168,7 @@ switch ($op) {
         $albNew = 0;
         if ($albId > 0) {
             $albumsObj = $albumsHandler->get($albId);
-            if (!$permissionsHandler->permAlbumEdit($albId, $albumsObj->getVar('alb_submitter'))) {
+            if (!$permissionsHandler->permAlbumEdit($albId, (int)$albumsObj->getVar('alb_submitter'))) {
                 \redirect_header('albums.php', 3, _NOPERM);
             }
         } else {
@@ -247,7 +245,7 @@ switch ($op) {
             // send notifications
             $tags                = [];
             $tags['ALBUM_NAME']  = $alb_name;
-            $tags['ALBUM_URL']   = \XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . "/albums.php?op=show&alb_id={$albId}&amp;alb_pid={$albPid}";
+            $tags['ALBUM_URL']   = \XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . "/albums.php?op=show&alb_id=$albId&amp;alb_pid=$albPid";
             $notificationHandler = \xoops_getHandler('notification');
 
             if (Constants::STATE_APPROVAL_VAL === $albState) {
@@ -276,7 +274,7 @@ switch ($op) {
     case 'edit':
         // Get Form
         $albumsObj = $albumsHandler->get($albId);
-        if ($permissionsHandler->permAlbumEdit($albId, $albumsObj->getVar('alb_submitter'))) {
+        if ($permissionsHandler->permAlbumEdit($albId, (int)$albumsObj->getVar('alb_submitter'))) {
             $form = $albumsObj->getFormAlbums();
             $GLOBALS['xoopsTpl']->assign('form', $form->render());
         } else {
@@ -286,7 +284,7 @@ switch ($op) {
         break;
     case 'delete':
         $albumsObj = $albumsHandler->get($albId);
-        if (!$permissionsHandler->permAlbumEdit($albId, $albumsObj->getVar('alb_submitter'))) {
+        if (!$permissionsHandler->permAlbumEdit($albId, (int)$albumsObj->getVar('alb_submitter'))) {
             \redirect_header('albums.php', 3, _NOPERM);
         }
         if (1 == Request::getInt('ok')) {

@@ -18,8 +18,6 @@ namespace XoopsModules\Wggallery;
  * @copyright      module for xoops
  * @license        GPL 3.0 or later
  * @package        wgtimelines
- * @since          1.0
- * @min_xoops      2.5.7
  * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
  * @version        $Id: 1.0 ratings.php 13070 Wed 2016-12-14 22:22:34Z XOOPS Development Team $
  */
@@ -40,11 +38,11 @@ class RatingsHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * @param bool $isNew
+     * @param $isNew
      *
      * @return Object
      */
-    public function create($isNew = true)
+    public function create($isNew = true): object
     {
         return parent::create($isNew);
     }
@@ -52,22 +50,21 @@ class RatingsHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve a field
      *
-     * @param int   $i field id
-     * @param array $fields
-     * @return mixed reference to the {@link Get} object
+     * @param $id
+     * @param $fields
+     * @return \XoopsObject|null reference to the {@link Get} object
      */
-    public function get($i = null, $fields = null)
+    public function get($id = null, $fields = null): ?\XoopsObject
     {
-        return parent::get($i, $fields);
+        return parent::get($id, $fields);
     }
 
     /**
      * get inserted id
      *
-     * @param null
      * @return int reference to the {@link Get} object
      */
-    public function getInsertId()
+    public function getInsertId(): int
     {
         return $this->db->getInsertId();
     }
@@ -77,8 +74,9 @@ class RatingsHandler extends \XoopsPersistableObjectHandler
      * @param int $itemid
      * @param int $source
      * @return array
+     * @throws \Exception
      */
-    public function getItemRating($itemid = 0, $source = 0)
+    public function getItemRating(int $itemid = 0, int $source = 0): array
     {
         $helper = \XoopsModules\Wggallery\Helper::getInstance();
 
@@ -192,7 +190,7 @@ class RatingsHandler extends \XoopsPersistableObjectHandler
      * @param  $source
      * @return bool
      */
-    public function deleteAllRatings($itemid, $source)
+    public function deleteAllRatings($itemid, $source): bool
     {
         $criteria = new \CriteriaCompo();
         $criteria->add(new \Criteria('rate_itemid', $itemid));
@@ -208,9 +206,9 @@ class RatingsHandler extends \XoopsPersistableObjectHandler
      * @param  $limit
      * @param  $sort
      * @param  $order
-     * @return int
+     * @return \CriteriaCompo
      */
-    private function getRatingsCriteria($crRatings, $start, $limit, $sort, $order)
+    private function getRatingsCriteria($crRatings, $start, $limit, $sort, $order): \CriteriaCompo
     {
         $crRatings->setStart($start);
         $crRatings->setLimit($limit);

@@ -32,7 +32,7 @@ switch ($op) {
 
 // XMF TableLoad for SAMPLE data
 
-function loadSampleData()
+function loadSampleData(): void
 {
     $moduleDirName      = \basename(\dirname(__DIR__));
     $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
@@ -63,7 +63,7 @@ function loadSampleData()
     loadTableFromArrayWithReplace($table, $tabledata, 'gperm_modid', $mid);
 
     //  ---  COPY test folder files ---------------
-    if (\is_array($configurator->copyTestFolders) && \count($configurator->copyTestFolders) > 0) {
+    if (\count($configurator->copyTestFolders) > 0) {
         //        $file =  \dirname(__DIR__) . '/testdata/images/';
         foreach (\array_keys($configurator->copyTestFolders) as $i) {
             $src  = $configurator->copyTestFolders[$i][0];
@@ -75,7 +75,7 @@ function loadSampleData()
     \redirect_header('../admin/index.php', 1, \constant('CO_' . $moduleDirNameUpper . '_' . 'SAMPLEDATA_SUCCESS'));
 }
 
-function saveSampleData()
+function saveSampleData(): void
 {
     $moduleDirName      = \basename(\dirname(__DIR__));
     $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
@@ -95,7 +95,7 @@ function saveSampleData()
     \redirect_header('../admin/index.php', 1, \constant('CO_' . $moduleDirNameUpper . '_' . 'SAMPLEDATA_SUCCESS'));
 }
 
-function exportSchema()
+function exportSchema(): void
 {
     try {
         $moduleDirName      = \basename(\dirname(__DIR__));
@@ -121,10 +121,10 @@ function exportSchema()
  * @param  $search name of column for which the value should be replaced
  * @param  $replace
  * @return int number of rows inserted
+ * @throws Exception
  */
-function loadTableFromArrayWithReplace($table, $data, $search, $replace)
+function loadTableFromArrayWithReplace(value $table, array $data, name $search, $replace): int
 {
-    /** @var \XoopsDatabase */
     $db = \XoopsDatabaseFactory::getDatabaseConnection();
 
     $prefixedTable = $db->prefix($table);

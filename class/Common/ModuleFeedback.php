@@ -18,8 +18,6 @@ namespace XoopsModules\Wggallery\Common;
  * @copyright      module for xoops
  * @license        GPL 2.0 or later
  * @package        general
- * @since          1.0
- * @min_xoops      2.5.11
  * @author         XOOPS - Website:<https://xoops.org>
  */
 \defined('\XOOPS_ROOT_PATH') || exit('Restricted access');
@@ -29,16 +27,14 @@ namespace XoopsModules\Wggallery\Common;
  */
 class ModuleFeedback extends \XoopsObject
 {
-    public $name    = '';
-    public $email   = '';
-    public $site    = '';
-    public $type    = '';
-    public $content = '';
+    public string $name    = '';
+    public string $email   = '';
+    public string $site    = '';
+    public string $type    = '';
+    public string $content = '';
 
     /**
      * Constructor
-     *
-     * @param null
      */
     public function __construct()
     {
@@ -46,10 +42,8 @@ class ModuleFeedback extends \XoopsObject
 
     /**
      * @static function &getInstance
-     *
-     * @param null
      */
-    public static function getInstance()
+    public static function getInstance(): void
     {
         static $instance = false;
         if (!$instance) {
@@ -60,10 +54,10 @@ class ModuleFeedback extends \XoopsObject
     /**
      * @public function getFormFeedback:
      * provide form for sending a feedback to module author
-     * @param null
+     *
      * @return \XoopsThemeForm
      */
-    public function getFormFeedback()
+    public function getFormFeedback(): \XoopsThemeForm
     {
 
         // Get Theme Form

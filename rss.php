@@ -15,8 +15,6 @@
  * @copyright      module for xoops
  * @license        GPL 2.0 or later
  * @package        wggallery
- * @since          1.0
- * @min_xoops      2.5.11
  * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version        $Id: 1.0 rss.php 1 Mon 2018-03-19 10:04:55Z XOOPS Project (www.xoops.org) $
  */
@@ -64,9 +62,9 @@ if (!$tpl->is_cached('db:wggallery_rss.tpl', $cid)) {
     $tpl->assign('channel_generator', 'XOOPS - ' . htmlspecialchars($xoopsModule->getVar('img_ip'), ENT_QUOTES));
     $tpl->assign('channel_language', _LANGCODE);
     if (_LANGCODE === 'fr') {
-        $tpl->assign('docs', 'http://www.scriptol.fr/rss/RSS-2.0.html');
+        $tpl->assign('docs', 'https://www.scriptol.fr/rss/RSS-2.0.html');
     } else {
-        $tpl->assign('docs', 'http://cyber.law.harvard.edu/rss/rss.html');
+        $tpl->assign('docs', 'https://cyber.law.harvard.edu/rss/rss.html');
     }
     $tpl->assign('image_url', \XOOPS_URL . $xoopsModuleConfig['logorss']);
     $dimention = \getimagesize(\XOOPS_ROOT_PATH . $xoopsModuleConfig['logorss']);

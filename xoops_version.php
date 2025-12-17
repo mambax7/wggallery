@@ -15,8 +15,6 @@
  * @copyright      module for xoops
  * @license        GPL 2.0 or later
  * @package        wggallery
- * @since          1.0
- * @min_xoops      2.5.11
  * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version        $Id: 1.0 xoops_version.php 1 Mon 2018-03-19 07:47:33Z XOOPS Project (www.xoops.org) $
  */
@@ -25,10 +23,10 @@ $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 
 // ------------------- Informations ------------------- //
 $modversion = [
-    'version'             => '1.2.1',
-    'module_status'       => 'Stable',
-    'release'             => '07/06/2025',
-    'release_date'        => '2025/06/07', // format: yyyy/mm/dd
+    'version'             => '1.2.3',
+    'module_status'       => 'Beta1',
+    'release'             => '09/11/2025',
+    'release_date'        => '2025/11/09', // format: yyyy/mm/dd
     'name'                => \_MI_WGGALLERY_NAME,
     'description'         => \_MI_WGGALLERY_DESC,
     'author'              => 'Wedega',
@@ -43,10 +41,10 @@ $modversion = [
     'release_file'        => \XOOPS_URL . '/modules/wggallery/docs/release_info file',
     'manual'              => 'link to manual file',
     'manual_file'         => \XOOPS_URL . '/modules/wggallery/docs/install.txt',
-    'min_php'             => '7.4',
-    'min_xoops'           => '2.5.11 Stable',
+    'min_php'             => '8.4',
+    'min_xoops'           => '2.5.12 Beta8',
     'min_admin'           => '1.1',
-    'min_db'              => ['mysql' => '5.5'],
+    'min_db'              => ['mysql' => '5.7.8'],
     'image'               => 'assets/images/logoModule.png',
     'dirname'             => \basename(__DIR__),
     'modicons16'          => 'assets/icons/16',

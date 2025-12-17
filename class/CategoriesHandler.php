@@ -18,8 +18,6 @@ namespace XoopsModules\Wggallery;
  * @copyright      module for xoops
  * @license        GPL 2.0 or later
  * @package        wggallery
- * @since          1.0
- * @min_xoops      2.5.11
  * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version        $Id: 1.0 images.php 1 Mon 2018-03-19 10:04:51Z XOOPS Project (www.xoops.org) $
  */
@@ -44,11 +42,11 @@ class CategoriesHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * @param bool $isNew
+     * @param $isNew
      *
      * @return object
      */
-    public function create($isNew = true)
+    public function create($isNew = true): object
     {
         return parent::create($isNew);
     }
@@ -56,35 +54,34 @@ class CategoriesHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve a field
      *
-     * @param int   $i field id
-     * @param array $fields
-     * @return mixed reference to the {@link Get} object
+     * @param $id
+     * @param $fields
+     * @return \XoopsObject|null reference to the {@link Get} object
      */
-    public function get($i = null, $fields = null)
+    public function get($id = null, $fields = null): ?\XoopsObject
     {
-        return parent::get($i, $fields);
+        return parent::get($id, $fields);
     }
 
     /**
      * get inserted id
      *
-     * @param null
      * @return int reference to the {@link Get} object
      */
-    public function getInsertId()
+    public function getInsertId(): int
     {
         return $this->db->getInsertId();
     }
 
     /**
      * Get Count Categories in the database
-     * @param int    $start
-     * @param int    $limit
+     * @param int $start
+     * @param int $limit
      * @param string $sort
      * @param string $order
      * @return int
      */
-    public function getCountCategories($start = 0, $limit = 0, $sort = 'cat_weight ASC, cat_id', $order = 'ASC')
+    public function getCountCategories(int $start = 0, int $limit = 0, string $sort = 'cat_weight ASC, cat_id', string $order = 'ASC'): int
     {
         $crCountCategories = new \CriteriaCompo();
         $crCountCategories = $this->getCategoriesCriteria($crCountCategories, $start, $limit, $sort, $order);
@@ -94,13 +91,13 @@ class CategoriesHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get All Categories in the database
-     * @param int    $start
-     * @param int    $limit
+     * @param int $start
+     * @param int $limit
      * @param string $sort
      * @param string $order
      * @return array
      */
-    public function getAllCategories($start = 0, $limit = 0, $sort = 'cat_weight ASC, cat_id', $order = 'ASC')
+    public function getAllCategories(int $start = 0, int $limit = 0, string $sort = 'cat_weight ASC, cat_id', string $order = 'ASC'): array
     {
         $crAllCategories = new \CriteriaCompo();
         $crAllCategories = $this->getCategoriesCriteria($crAllCategories, $start, $limit, $sort, $order);
@@ -115,9 +112,9 @@ class CategoriesHandler extends \XoopsPersistableObjectHandler
      * @param $limit
      * @param $sort
      * @param $order
-     * @return int
+     * @return \CriteriaCompo
      */
-    private function getCategoriesCriteria($crCategories, $start, $limit, $sort, $order)
+    private function getCategoriesCriteria($crCategories, $start, $limit, $sort, $order): \CriteriaCompo
     {
         $crCategories->setStart($start);
         $crCategories->setLimit($limit);
@@ -130,9 +127,9 @@ class CategoriesHandler extends \XoopsPersistableObjectHandler
     /**
      * Get Criteria Categories
      * @param $cats
-     * @return int
+     * @return int|string
      */
-    public function getCatsList($cats)
+    public function getCatsList($cats): int|string
     {
         $listText = '';
         if (\is_array($cats)) {

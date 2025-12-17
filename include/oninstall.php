@@ -15,8 +15,6 @@
  * @copyright      module for xoops
  * @license        GPL 2.0 or later
  * @package        wggallery
- * @since          1.0
- * @min_xoops      2.5.11
  * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version        $Id: 1.0 install.php 1 Mon 2018-03-19 10:04:53Z XOOPS Project (www.xoops.org) $
  */
@@ -28,7 +26,7 @@ use XoopsModules\Wggallery\Common;
  * @param \XoopsModule $module
  * @return bool
  */
-function xoops_module_pre_install_wggallery(\XoopsModule $module)
+function xoops_module_pre_install_wggallery(\XoopsModule $module): bool
 {
     require \dirname(__DIR__) . '/preloads/autoloader.php';
     $utility = new Wggallery\Utility();
@@ -50,10 +48,10 @@ function xoops_module_pre_install_wggallery(\XoopsModule $module)
 }
 
 /**
- * @param \XoopsModule $module
+ * @param XoopsModule $module
  * @return bool|string
  */
-function xoops_module_install_wggallery(\XoopsModule $module)
+function xoops_module_install_wggallery(\XoopsModule $module): bool|string
 {
     require \dirname(__DIR__) . '/preloads/autoloader.php';
 
@@ -70,7 +68,7 @@ function xoops_module_install_wggallery(\XoopsModule $module)
     $helper->loadLanguage('common');
 
     //  ---  CREATE FOLDERS ---------------
-    if ($configurator->uploadFolders && \is_array($configurator->uploadFolders)) {
+    if ($configurator->uploadFolders) {
         //    foreach (\array_keys($GLOBALS['uploadFolders']) as $i) {
         foreach (\array_keys($configurator->uploadFolders) as $i) {
             $utility::createFolder($configurator->uploadFolders[$i]);
@@ -79,7 +77,7 @@ function xoops_module_install_wggallery(\XoopsModule $module)
     }
 
     //  ---  COPY blank.gif FILES ---------------
-    if ($configurator->copyBlankFiles && \is_array($configurator->copyBlankFiles)) {
+    if ($configurator->copyBlankFiles) {
         $file = \dirname(__DIR__) . '/assets/images/blank.gif';
         foreach (\array_keys($configurator->copyBlankFiles) as $i) {
             $dest = $configurator->copyBlankFiles[$i] . '/blank.gif';
@@ -114,7 +112,7 @@ function xoops_module_install_wggallery(\XoopsModule $module)
     $dir    = \opendir($rep);
     while ($f = \readdir($dir)) {
         if (\is_file($rep . $f)) {
-            if (\preg_match('/.*ttf/', \mb_strtolower($f))) {
+            if (str_contains(\mb_strtolower($f), 'ttf')) {
                 \copy($rep . $f, $target . '/' . $f);
             }
         }

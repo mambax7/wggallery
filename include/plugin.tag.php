@@ -34,10 +34,11 @@ use XoopsModules\Tag;
  *
  * @param array $items pass-by-ref
  * @return bool true - items found | false - nothing found/created
+ * @throws Exception
  */
-function wggallery_tag_iteminfo(&$items)
+function wggallery_tag_iteminfo(array &$items): bool
 {
-    if (empty($items) || !is_array($items)) {
+    if (empty($items)) {
         return false;
     }
 
@@ -88,8 +89,9 @@ function wggallery_tag_iteminfo(&$items)
 /** Remove orphan tag-item links *
  * @param int $mid
  * @return bool
+ * @throws Exception
  */
-function wggallery_tag_synchronization($mid)
+function wggallery_tag_synchronization(int $mid): bool
 {
     // Optional
     $itemHandler = Helper::getInstance()->getHandler('Images');
@@ -100,14 +102,14 @@ function wggallery_tag_synchronization($mid)
     //$mid = Request::getInt('mid');
 
     /* clear tag-item links */
-    $sql    = "    DELETE FROM {$linkHandler->table}"
+    $sql    = "    DELETE FROM $linkHandler->table"
               . '    WHERE '
-              . "        tag_modid = {$mid}"
+              . "        tag_modid = $mid"
               . '        AND '
               . '        ( tag_itemid NOT IN '
-              . "            ( SELECT DISTINCT {$itemHandler->keyName} "
-              . "                FROM {$itemHandler->table} "
-              . "                WHERE {$itemHandler->table}.img_state > 0 "
+              . "            ( SELECT DISTINCT $itemHandler->keyName "
+              . "                FROM $itemHandler->table "
+              . "                WHERE $itemHandler->table.img_state > 0 "
               . '            ) '
               . '        )';
 

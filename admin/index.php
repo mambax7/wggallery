@@ -15,8 +15,6 @@
  * @copyright      module for xoops
  * @license        GPL 2.0 or later
  * @package        wggallery
- * @since          1.0
- * @min_xoops      2.5.11
  * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version        $Id: 1.0 index.php 1 Mon 2018-03-19 10:04:52Z XOOPS Project (www.xoops.org) $
  */
@@ -58,7 +56,7 @@ $adminObject->addInfoBoxLine(\sprintf('<label>' . \_AM_WGGALLERY_THEREARE_CATEGO
 // Upload Folders
 $adminObject->addConfigBoxLine();
 $configurator = new Common\Configurator();
-if ($configurator->uploadFolders && \is_array($configurator->uploadFolders)) {
+if ($configurator->uploadFolders) {
     foreach (\array_keys($configurator->uploadFolders) as $i) {
         $folder[] = $configurator->uploadFolders[$i];
     }

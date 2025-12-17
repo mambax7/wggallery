@@ -15,8 +15,6 @@
  * @copyright      module for xoops
  * @license        GPL 2.0 or later
  * @package        wggallery
- * @since          1.0
- * @min_xoops      2.5.11
  * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version        $Id: 1.0 search.php 1 Mon 2018-03-19 10:04:51Z XOOPS Project (www.xoops.org) $
  */
@@ -32,7 +30,7 @@ $start = Request::getInt('start');
 $limit = Request::getInt('limit', $helper->getConfig('userpager'));
 
 $search_text = \mb_strtolower(Request::getString('search_text'));
-$search_cats = Request::getArray('search_cats', []);
+$search_cats = Request::getArray('search_cats');
 $search_subm = Request::getInt('search_subm');
 $search_act  = Request::getInt('search_act', 1);
 $imageIdsIn  = Request::getString('imageIdsIn');
@@ -52,11 +50,11 @@ if ($helper->getConfig('ratingbars') > 0) {
 $GLOBALS['xoopsTpl']->assign('show_exif', $helper->getConfig('store_exif'));
 
 // defines only for search
-\define('\WGGALLERY_SEARCH_NOTAPPLY', 0);
-\define('\WGGALLERY_SEARCH_ACT_DOWNLOADS', 1);
-\define('\WGGALLERY_SEARCH_ACT_VIEWS', 2);
-\define('\WGGALLERY_SEARCH_ACT_RATINGS', 3);
-\define('\WGGALLERY_SEARCH_ACT_VOTES', 4);
+\define('WGGALLERY_SEARCH_NOTAPPLY', 0);
+\define('WGGALLERY_SEARCH_ACT_DOWNLOADS', 1);
+\define('WGGALLERY_SEARCH_ACT_VIEWS', 2);
+\define('WGGALLERY_SEARCH_ACT_RATINGS', 3);
+\define('WGGALLERY_SEARCH_ACT_VOTES', 4);
 
 // **************************
 // start search form section
@@ -183,7 +181,7 @@ switch ($op) {
             if ($albumsCount > 0) {
                 $albumsAll = $albumsHandler->getAll($crAlbums);
                 foreach (\array_keys($albumsAll) as $i) {
-                    $albId    = $albumsAll[$i]->getVar('alb_id');
+                    $albId    = (int)$albumsAll[$i]->getVar('alb_id');
                     $permView = $permissionsHandler->permAlbumView($albId);
                     if ($permView) {
                         $album_ids_view[] = $albId;

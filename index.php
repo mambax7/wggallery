@@ -15,8 +15,6 @@
  * @copyright      module for xoops
  * @license        GPL 2.0 or later
  * @package        wggallery
- * @since          1.0
- * @min_xoops      2.5.11
  * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version        $Id: 1.0 albums.php 1 Mon 2018-03-19 10:04:50Z XOOPS Project (www.xoops.org) $
  */
@@ -120,7 +118,7 @@ $albumsAll   = $albumsHandler->getAll($crAlbums);
 $permAlbView = [];
 if ($albumsCount > 0) {
     foreach (\array_keys($albumsAll) as $i) {
-        if ($permissionsHandler->permAlbumView($albumsAll[$i]->getVar('alb_id')) > 0) {
+        if ($permissionsHandler->permAlbumView((int)$albumsAll[$i]->getVar('alb_id')) > 0) {
             $permAlbView[] = $albumsAll[$i]->getVar('alb_id');
         }
         // echo "<br>------------------------------------------------------------";
@@ -157,7 +155,7 @@ if ($albumsCount > 0) {
             $submitter  = $albumsAll[$i]->getVar('alb_submitter');
             //check permissions
             //$albums[$i]['edit'] = $permissionsHandler->permAlbumEdit($albumsAll[$i]->getVar('alb_id'), $albumsAll[$i]->getVar('alb_submitter'));
-            if ($permissionsHandler->permAlbumDownload($albumsAll[$i]->getVar('alb_id'))) {
+            if ($permissionsHandler->permAlbumDownload((int)$albumsAll[$i]->getVar('alb_id'))) {
                 $albums[$i]['download'] = true;
             }
             //set indicator for line break
@@ -205,7 +203,7 @@ $albumsAll   = $albumsHandler->getAll($crAlbums);
 $permAlbView = [];
 if ($catsCount > 0) {
     foreach (\array_keys($albumsAll) as $i) {
-        if ($permissionsHandler->permAlbumView($albumsAll[$i]->getVar('alb_id')) > 0) {
+        if ($permissionsHandler->permAlbumView((int)$albumsAll[$i]->getVar('alb_id')) > 0) {
             $permAlbView[] = $albumsAll[$i]->getVar('alb_id');
         }
         // echo "<br>------------------------------------------------------------";

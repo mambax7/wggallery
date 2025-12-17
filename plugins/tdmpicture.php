@@ -15,8 +15,6 @@
  * @copyright      module for xoops
  * @license        GPL 2.0 or later
  * @package        wggallery
- * @since          1.0
- * @min_xoops      2.5.11
  * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version        $Id: 1.0 albums.php 1 Mon 2018-03-19 10:04:49Z XOOPS Project (www.xoops.org) $
  */
@@ -29,7 +27,7 @@ require_once \dirname(__DIR__) . '/include/common.php';
 /**
  * @return array
  */
-function wggalleryPluginGetDataTdmpicture()
+function wggalleryPluginGetDataTdmpicture(): array
 {
     // get number of albums
     $sql = 'SELECT `cat_id` FROM ' . $GLOBALS['xoopsDB']->prefix('tdmpicture_cat');
@@ -50,7 +48,7 @@ function wggalleryPluginGetDataTdmpicture()
  * @param  $num_images
  * @return XoopsThemeForm
  */
-function wggalleryPluginGetFormTdmpicture($im_name, $num_albums, $num_images)
+function wggalleryPluginGetFormTdmpicture($im_name, $num_albums, $num_images): XoopsThemeForm
 {
     $action = $_SERVER['REQUEST_URI'];
 
@@ -121,7 +119,7 @@ function wggalleryPluginGetFormTdmpicture($im_name, $num_albums, $num_images)
 /**
  * @return bool
  */
-function wggalleryPluginExecImportTdmpicture()
+function wggalleryPluginExecImportTdmpicture(): bool
 {
     // define source image path
     /*
@@ -145,7 +143,7 @@ function wggalleryPluginExecImportTdmpicture()
     // copy album images
     $sql = 'SELECT `cat_id`, `cat_img` FROM ' . $GLOBALS['xoopsDB']->prefix('tdmpicture_cat');
     $result = $GLOBALS['xoopsDB']->query($sql) or die('MySQL-Error: ' . $GLOBALS['xoopsDB']->error());
-    while (false !== (list($cat_id, $cat_imgurl) = $GLOBALS['xoopsDB']->fetchRow($result))) {
+    while (false != (list($cat_id, $cat_imgurl) = $GLOBALS['xoopsDB']->fetchRow($result))) {
         $imageName = \basename($cat_imgurl);
         if ('' !== $imageName) {
             $sql = 'UPDATE ' . $GLOBALS['xoopsDB']->prefix('wggallery_albums') . ' SET alb_imgtype = 2 WHERE (alb_id=' . $cat_id . ')';
@@ -161,7 +159,7 @@ function wggalleryPluginExecImportTdmpicture()
     // create perms for each album
     $sql = 'SELECT `alb_id` FROM ' . $GLOBALS['xoopsDB']->prefix('wggallery_albums');
     $result = $GLOBALS['xoopsDB']->query($sql) or die('MySQL-Error: ' . $GLOBALS['xoopsDB']->error());
-    while (false !== (list($albId) = $GLOBALS['xoopsDB']->fetchRow($result))) {
+    while (false != (list($albId) = $GLOBALS['xoopsDB']->fetchRow($result))) {
         $permId           = $albId;
         $perm_modid       = $GLOBALS['xoopsModule']->getVar('mid');
         $grouppermHandler = \xoops_getHandler('groupperm');
@@ -207,7 +205,7 @@ function wggalleryPluginExecImportTdmpicture()
     // copy all images
     $sql = 'SELECT `file_file` FROM ' . $GLOBALS['xoopsDB']->prefix('tdmpicture_file');
     $result = $GLOBALS['xoopsDB']->query($sql) or die('MySQL-Error: ' . $GLOBALS['xoopsDB']->error());
-    while (false !== (list($photo_name) = $GLOBALS['xoopsDB']->fetchRow($result))) {
+    while (false != (list($photo_name) = $GLOBALS['xoopsDB']->fetchRow($result))) {
         \copy(\XOOPS_ROOT_PATH . '/uploads/tdmpicture/' . $photo_name, \WGGALLERY_UPLOAD_IMAGE_PATH . '/large/' . $photo_name);
         \copy(\XOOPS_ROOT_PATH . '/uploads/tdmpicture/' . $photo_name, \WGGALLERY_UPLOAD_IMAGE_PATH . '/medium/' . $photo_name);
         \copy(\XOOPS_ROOT_PATH . '/uploads/tdmpicture/thumb/' . $photo_name, \WGGALLERY_UPLOAD_IMAGE_PATH . '/thumbs/' . $photo_name);

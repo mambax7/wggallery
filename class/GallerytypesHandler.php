@@ -18,8 +18,6 @@ namespace XoopsModules\Wggallery;
  * @copyright      module for xoops
  * @license        GPL 2.0 or later
  * @package        wggallery
- * @since          1.0
- * @min_xoops      2.5.11
  * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version        $Id: 1.0 gallerytypes.php 1 Sat 2018-03-31 11:31:09Z XOOPS Project (www.xoops.org) $
  */
@@ -41,11 +39,11 @@ class GallerytypesHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * @param bool $isNew
+     * @param $isNew
      *
      * @return object
      */
-    public function create($isNew = true)
+    public function create($isNew = true): object
     {
         return parent::create($isNew);
     }
@@ -53,35 +51,34 @@ class GallerytypesHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve a field
      *
-     * @param int   $i field id
-     * @param array $fields
-     * @return mixed reference to the {@link Get} object
+     * @param $id
+     * @param $fields
+     * @return \XoopsObject|null reference to the {@link Get} object
      */
-    public function get($i = null, $fields = null)
+    public function get($id = null, $fields = null): ?\XoopsObject
     {
-        return parent::get($i, $fields);
+        return parent::get($id, $fields);
     }
 
     /**
      * get inserted id
      *
-     * @param null
      * @return int reference to the {@link Get} object
      */
-    public function getInsertId()
+    public function getInsertId(): int
     {
         return $this->db->getInsertId();
     }
 
     /**
      * Get Count Gallerytypes in the database
-     * @param int    $start
-     * @param int    $limit
+     * @param int $start
+     * @param int $limit
      * @param string $sort
      * @param string $order
      * @return int
      */
-    public function getCountGallerytypes($start = 0, $limit = 0, $sort = 'gt_id ASC, gt_name', $order = 'ASC')
+    public function getCountGallerytypes(int $start = 0, int $limit = 0, string $sort = 'gt_id ASC, gt_name', string $order = 'ASC'): int
     {
         $crCountGallerytypes = new \CriteriaCompo();
         $crCountGallerytypes = $this->getGallerytypesCriteria($crCountGallerytypes, $start, $limit, $sort, $order);
@@ -91,13 +88,13 @@ class GallerytypesHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get All Gallerytypes in the database
-     * @param int    $start
-     * @param int    $limit
+     * @param int $start
+     * @param int $limit
      * @param string $sort
      * @param string $order
      * @return array
      */
-    public function getAllGallerytypes($start = 0, $limit = 0, $sort = 'gt_id ASC, gt_name', $order = 'ASC')
+    public function getAllGallerytypes(int $start = 0, int $limit = 0, string $sort = 'gt_id ASC, gt_name', string $order = 'ASC'): array
     {
         $crAllGallerytypes = new \CriteriaCompo();
         $crAllGallerytypes = $this->getGallerytypesCriteria($crAllGallerytypes, $start, $limit, $sort, $order);
@@ -112,9 +109,9 @@ class GallerytypesHandler extends \XoopsPersistableObjectHandler
      * @param  $limit
      * @param  $sort
      * @param  $order
-     * @return int
+     * @return \CriteriaCompo
      */
-    private function getGallerytypesCriteria($crGallerytypes, $start, $limit, $sort, $order)
+    private function getGallerytypesCriteria($crGallerytypes, $start, $limit, $sort, $order): \CriteriaCompo
     {
         $crGallerytypes->setStart($start);
         $crGallerytypes->setLimit($limit);
@@ -128,7 +125,7 @@ class GallerytypesHandler extends \XoopsPersistableObjectHandler
      * Get primary Gallerytype
      * @return array
      */
-    public function getPrimaryGallery()
+    public function getPrimaryGallery(): array
     {
         $gallerytype    = [];
         $crGallerytypes = new \CriteriaCompo();
@@ -149,7 +146,7 @@ class GallerytypesHandler extends \XoopsPersistableObjectHandler
      * @param $success
      * @param $errors
      */
-    public function gallerytypesCreateReset(&$success, &$errors)
+    public function gallerytypesCreateReset(&$success, &$errors): void
     {
         // create new gallerytypes if not existing
         $templates = ['none', 'lightbox2', 'justifiedgallery', 'viewerjs', 'jssor', 'lclightboxlite'];
@@ -211,7 +208,7 @@ class GallerytypesHandler extends \XoopsPersistableObjectHandler
      * @param     $primary
      * @return bool
      */
-    public function reset($gtId, $template, $primary)
+    public function reset(int $gtId, $template, $primary): bool
     {
         $options = [];
         $gt_name    = '';
@@ -219,7 +216,6 @@ class GallerytypesHandler extends \XoopsPersistableObjectHandler
         switch ($template) {
             case 'none':
                 $gt_name    = 'none';
-                $gt_credits = '';
                 break;
             case 'lclightboxlite':
                 $gt_name    = 'LC Lightbox LITE';
@@ -297,7 +293,7 @@ class GallerytypesHandler extends \XoopsPersistableObjectHandler
                 break;
             case 'justifiedgallery':
                 $gt_name    = 'Justified Gallery with Colorbox';
-                $gt_credits = 'http://miromannino.com/';
+                $gt_credits = 'https://miromannino.com/';
                 $options[]  = ['name' => 'source', 'value' => 'large', 'caption' => '_AM_WGGALLERY_OPTION_GT_SOURCE'];
                 $options[]  = ['name' => 'source_preview', 'value' => 'thumb', 'caption' => '_AM_WGGALLERY_OPTION_GT_SOURCE_PREVIEW'];
                 $options[]  = ['name' => 'showTitle', 'value' => 'true', 'caption' => '_AM_WGGALLERY_OPTION_SHOWTITLE'];
@@ -317,7 +313,7 @@ class GallerytypesHandler extends \XoopsPersistableObjectHandler
                 break;
             case 'viewerjs':
                 $gt_name    = 'ViewerJs';
-                $gt_credits = 'http://chenfengyuan.com';
+                $gt_credits = 'https://chenfengyuan.com';
                 $options[]  = ['name' => 'source', 'value' => 'large', 'caption' => '_AM_WGGALLERY_OPTION_GT_SOURCE'];
                 $options[]  = ['name' => 'source_preview', 'value' => 'thumb', 'caption' => '_AM_WGGALLERY_OPTION_GT_SOURCE_PREVIEW'];
                 $options[]  = ['name' => 'button_close', 'value' => 'true', 'caption' => '_AM_WGGALLERY_OPTION_GT_BUTTTONCLOSE'];
@@ -348,19 +344,17 @@ class GallerytypesHandler extends \XoopsPersistableObjectHandler
         }
         $options[] = ['name' => 'option_sort', 'value' => $option_sort];
 
-        if (null !== $gtId) {
-            $gallerytypesObj = $this->get($gtId);
-            // Set Vars
-            $gallerytypesObj->setVar('gt_primary', $primary);
-            $gallerytypesObj->setVar('gt_name', $gt_name);
-            $gallerytypesObj->setVar('gt_credits', $gt_credits);
-            $gallerytypesObj->setVar('gt_template', $template);
-            $gallerytypesObj->setVar('gt_options', serialize($options));
-            $gallerytypesObj->setVar('gt_date', \time());
-            // Insert Data
-            if ($this->insert($gallerytypesObj)) {
-                return true;
-            }
+        $gallerytypesObj = $this->get($gtId);
+        // Set Vars
+        $gallerytypesObj->setVar('gt_primary', $primary);
+        $gallerytypesObj->setVar('gt_name', $gt_name);
+        $gallerytypesObj->setVar('gt_credits', $gt_credits);
+        $gallerytypesObj->setVar('gt_template', $template);
+        $gallerytypesObj->setVar('gt_options', serialize($options));
+        $gallerytypesObj->setVar('gt_date', \time());
+        // Insert Data
+        if ($this->insert($gallerytypesObj)) {
+            return true;
         }
 
         return false;

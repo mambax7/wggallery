@@ -15,8 +15,6 @@
  * @copyright      module for xoops
  * @license        GPL 2.0 or later
  * @package        wggallery
- * @since          1.0
- * @min_xoops      2.5.11
  * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version        $Id: 1.0 categories.php 1 Mon 2018-03-19 10:04:51Z XOOPS Project (www.xoops.org) $
  */
@@ -101,7 +99,7 @@ switch ($op) {
         $categoriesObj->setVar('cat_weight', $_POST['cat_weight']);
         $catDate = date_create_from_format(_SHORTDATESTRING, $_POST['cat_date']);
         $categoriesObj->setVar('cat_date', $catDate->getTimestamp());
-        $categoriesObj->setVar('cat_submitter', isset($_POST['cat_submitter']) ? $_POST['cat_submitter'] : 0);
+        $categoriesObj->setVar('cat_submitter', $_POST['cat_submitter'] ?? 0);
         // Insert Data
         if ($categoriesHandler->insert($categoriesObj)) {
             \redirect_header('categories.php?op=list', 2, \_CO_WGGALLERY_FORM_OK);

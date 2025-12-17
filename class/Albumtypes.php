@@ -18,8 +18,6 @@ namespace XoopsModules\Wggallery;
  * @copyright      module for xoops
  * @license        GPL 2.0 or later
  * @package        wggallery
- * @since          1.0
- * @min_xoops      2.5.11
  * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version        $Id: 1.0 albumtypes.php 1 Sat 2018-03-31 11:31:09Z XOOPS Project (www.xoops.org) $
  */
@@ -33,7 +31,6 @@ class Albumtypes extends \XoopsObject
     /**
      * Constructor
      *
-     * @param null
      */
     public function __construct()
     {
@@ -50,9 +47,8 @@ class Albumtypes extends \XoopsObject
     /**
      * @static function &getInstance
      *
-     * @param null
      */
-    public static function getInstance()
+    public static function getInstance(): void
     {
         static $instance = false;
         if (!$instance) {
@@ -64,7 +60,7 @@ class Albumtypes extends \XoopsObject
      * The new inserted $Id
      * @return int inserted id
      */
-    public function getNewInsertedIdAlbumtypes()
+    public function getNewInsertedIdAlbumtypes(): int
     {
         return $GLOBALS['xoopsDB']->getInsertId();
     }
@@ -74,14 +70,14 @@ class Albumtypes extends \XoopsObject
      * @param bool $action
      * @return \XoopsThemeForm
      */
-    public function getFormAlbumtypes($action = false)
+    public function getFormAlbumtypes(bool $action = false): \XoopsThemeForm
     {
         //$helper = \XoopsModules\Wggallery\Helper::getInstance();
         if (!$action) {
             $action = $_SERVER['REQUEST_URI'];
         }
         // Title
-        $title = $this->isNew() ? \sprintf(\_AM_WGGALLERY_ALBUMTYPE_ADD) : \sprintf(\_AM_WGGALLERY_ALBUMTYPE_EDIT);
+        $title = $this->isNew() ? \_AM_WGGALLERY_ALBUMTYPE_ADD : \_AM_WGGALLERY_ALBUMTYPE_EDIT;
         // Get Theme Form
         \xoops_load('XoopsFormLoader');
         $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
@@ -114,7 +110,7 @@ class Albumtypes extends \XoopsObject
      * @param bool $action
      * @return \XoopsThemeForm
      */
-    public function getFormAlbumtypeOptions($action = false)
+    public function getFormAlbumtypeOptions(bool $action = false): \XoopsThemeForm
     {
         //$helper = \XoopsModules\Wggallery\Helper::getInstance();
         if (!$action) {
@@ -221,7 +217,7 @@ class Albumtypes extends \XoopsObject
      * @param int|null $maxDepth
      * @return array
      */
-    public function getValuesAlbumtypes($keys = null, $format = null, $maxDepth = null)
+    public function getValuesAlbumtypes($keys = null, $format = null, int $maxDepth = null): array
     {
         // $helper = \XoopsModules\Wggallery\Helper::getInstance();
         $ret             = $this->getValues($keys, $format, $maxDepth);
@@ -261,7 +257,7 @@ class Albumtypes extends \XoopsObject
      *
      * @return array
      */
-    public function toArrayAlbumtypes()
+    public function toArrayAlbumtypes(): array
     {
         $ret  = [];
         $vars = $this->getVars();

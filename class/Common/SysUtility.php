@@ -21,8 +21,6 @@ namespace XoopsModules\Wggallery\Common;
  * @copyright      module for xoops
  * @license        GPL 2.0 or later
  * @package        wggallery
- * @since          1.0
- * @min_xoops      2.5.11
  * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  */
 
@@ -45,14 +43,14 @@ class SysUtility
      * www.cakephp.org
      *
      * @param string $text         String to truncate.
-     * @param int    $length       Length of returned string, including ellipsis.
+     * @param int $length       Length of returned string, including ellipsis.
      * @param string $ending       Ending to be appended to the trimmed string.
-     * @param bool   $exact        If false, $text will not be cut mid-word
-     * @param bool   $considerHtml If true, HTML tags would be handled correctly
+     * @param bool $exact        If false, $text will not be cut mid-word
+     * @param bool $considerHtml If true, HTML tags would be handled correctly
      *
      * @return string Trimmed string.
      */
-    public static function truncateHtml($text, $length = 100, $ending = '...', $exact = false, $considerHtml = true)
+    public static function truncateHtml(string $text, int $length = 100, string $ending = '...', bool $exact = false, bool $considerHtml = true): string
     {
         if ($considerHtml) {
             // if the plain text is shorter than the maximum length, return the whole text

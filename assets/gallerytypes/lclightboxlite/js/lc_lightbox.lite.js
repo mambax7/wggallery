@@ -2,8 +2,8 @@
   * LC Lightbox - LITE
   * yet.. another jQuery lightbox.. or not?
   *
-  * @version	: 	1.2.3
-  * @copyright	:	Luca Montanari aka LCweb
+  * @version	: 	1.5.0
+  * @copyright	:	Luca Montanari (LCweb)
   * @website	:	https://lcweb.it
   * @requires	:	jQuery v1.7 or later
   
@@ -16,9 +16,7 @@
 	lcl_shown 		= false; // know whether lightbox is shown
 	lcl_is_active 	= false; // true when lightbox systems are acting (disable triggers)
 	lcl_slideshow	= undefined; // lightbox slideshow - setInterval object
-	
-	lcl_on_mobile	= /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(navigator.userAgent);
-	
+	lcl_on_mobile	= /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 		
 	// static vars avoiding useless parameters usage - related to currently opened lightbox - otherwise they are empty
 	lcl_curr_obj	= false; // store currently active object 
@@ -33,21 +31,22 @@
 	var lb_code =
 	'<div id="lcl_wrap" class="lcl_pre_show lcl_pre_first_el lcl_first_sizing lcl_is_resizing">'+
 		'<div id="lcl_window">'+
-			'<div id="lcl_corner_close" title="close"></div>'+
+			'<a href="javascript:void(0);" id="lcl_corner_close" title="close" aria-label="close" tabindex="300"></a>'+
 			'<div id="lcl_loader" class="lcl_loader_pre_first_el"><span id="lcll_1"></span><span id="lcll_2"></span></div>'+
 			'<div id="lcl_nav_cmd">'+
-				'<div id="lcl_prev" class="lcl_icon lcl_prev" title="previous"></div>'+
-				'<div id="lcl_play" class="lcl_icon lcl_play"></div>'+
-				'<div id="lcl_next" class="lcl_icon lcl_next" title="next"></div>'+
-				'<div id="lcl_counter" class="lcl_icon lcl_counter"></div>'+
-				'<div id="lcl_close" class="lcl_icon lcl_right_icon lcl_close" title="close"></div>'+				
-				'<div id="lcl_fullscreen" class="lcl_icon lcl_right_icon lcl_fullscreen" title="toggle fullscreen"></div>'+
-				'<div id="lcl_txt_toggle" class="lcl_icon lcl_right_icon lcl_txt_toggle" title="toggle text"></div>'+
-				'<div id="lcl_download" class="lcl_icon lcl_right_icon lcl_download" title="download"></div>'+
-				'<div id="lcl_thumbs_toggle" class="lcl_icon lcl_right_icon lcl_thumbs_toggle" title="toggle thumbnails"></div>'+
-				'<div id="lcl_socials" class="lcl_icon lcl_right_icon lcl_socials" title="toggle socials"></div>'+
+				'<button class="lcl_icon lcl_prev" title="previous" aria-label="previous" tabindex="10"></button>'+
+				'<button class="lcl_icon lcl_play" title="play/pause" aria-label="play/pause" tabindex="20"></button>'+
+				'<button class="lcl_icon lcl_next" title="next" aria-label="next" tabindex="30"></button>'+
+				'<div class="lcl_icon lcl_counter"></div>'+
+
+				'<button class="lcl_icon lcl_right_icon lcl_close" title="close" tabindex="300"></button>'+
+				
+				'<button class="lcl_icon lcl_right_icon lcl_fullscreen" title="toggle fullscreen" aria-label="toggle fullscreen" tabindex="100"></button>'+
+				'<button class="lcl_icon lcl_right_icon lcl_txt_toggle" title="toggle text" aria-label="toggle text" tabindex="90"></button>'+
+				'<button class="lcl_icon lcl_right_icon lcl_download" title="download" aria-label="download" tabindex="80"></button>'+
+				'<button class="lcl_icon lcl_right_icon lcl_thumbs_toggle" title="toggle thumbnails" aria-label="toggle thumbnails" tabindex="70"></button>'+
+				'<button class="lcl_icon lcl_right_icon lcl_socials" title="toggle socials" aria-label="toggle socials" tabindex="60"></button>'+
 			'</div>'+
-            '<div id="lbl_album"></div>'+
 			'<div id="lcl_contents_wrap">'+
 				'<div id="lcl_subj">'+
 					'<div id="lcl_elem_wrap"></div>'+
@@ -55,7 +54,7 @@
 				'<div id="lcl_txt"></div>'+
 			'</div>'+	
 		'</div>'+
-		'<div id="lcl_thumbs_nav"></div>'+
+		'<div id="lcl_thumbs_nav" class="lcl_pre_tn_scroll"></div>'+
 		'<div id="lcl_overlay"></div>'+
 	'</div>';
 	
@@ -114,7 +113,8 @@
 			src_attr		: 'href', // attribute containing element's source
 			title_attr		: 'title', // attribute containing the title - is possible to specify a selector with this syntax: "> .selector" or "> span" 
 			txt_attr		: 'data-lcl-txt', // attribute containing the description - is possible to specify a selector with this syntax: "> .selector" or "> span" 
-			author_attr		: 'data-lcl-author', // attribute containing the author - is possible to specify a selector with this syntax: "> .selector" or "> span" 
+			author_attr		: 'data-lcl-author', // attribute containing the author - is possible to specify a selector with this syntax: "> .selector" or "> span"
+            author_by_txt   : 'by', // which text is used before the author name, by default is "by"
 			
 			slideshow		: true, // whether to enable slideshow
 			open_close_time	: 400, // animation duration for lightbox opening and closing / 1000 = 1sec
@@ -148,9 +148,9 @@
 			nav_btn_pos		: 'normal', // set arrows and play/pause position - normal/middle
 	
 			txt_hidden		: 500, // whether to hide texts on lightbox opening - bool or int (related to browser's smaller side)
-			show_title		: false, // bool / whether to display titles
-			show_descr		: false, // bool / whether to display descriptions
-			show_author		: false, // bool / whether to display authors
+			show_title		: true, // bool / whether to display titles
+			show_descr		: true, // bool / whether to display descriptions
+			show_author		: true, // bool / whether to display authors
 			
 			thumbs_nav		: true, // enables thumbnails navigation (requires elements poster or images)
 			tn_icons		: true, // print type icons on thumbs if types are mixed
@@ -166,7 +166,7 @@
 			browser_fs_mode : true, // whether to trigger or nor browser fullscreen mode
 			
 			socials			: false, // bool
-			fb_direct_share	: false, // bool / whether to use direct FB contents share (requires APP ID to be specified)  
+			fb_share_params	: false, // bool/string / whether to use direct FB contents share (Read the doc to know what to use) 
 			
 			txt_toggle_cmd	: true, // bool / allow text hiding
 			download		: false, // bool / whether to add download button
@@ -254,6 +254,20 @@
 		};
 	
 		
+        /* get the adopted animation time. Set to zero for mobile devices and fullscren to be swifter */
+        var adjusted_animation_time = function() {
+            var o = lcl_ai_opts;
+            return ($('.lcl_fullscreen_mode').length) ? 0 : o.animation_time;
+        };
+        
+		
+        /* get the adopted animation time. Set to zero for mobile devices and fullscren to be swifter */
+        var adjusted_fading_time = function() {
+            var o = lcl_ai_opts;
+            return ($('.lcl_fullscreen_mode').length) ? 0 : o.fading_time;
+        };
+        
+        
 		/* revert HTML entitles that might have been used in attrs (and trim) */
 		var revert_html_entit = function(str) {
 			if(!str) {return str;}
@@ -365,7 +379,7 @@
 			}
 			
 			src = src.toLowerCase();
-			var img_regex 	= /^https?:\/\/(?:[a-z\-]+\.)+[a-z]{2,6}(?:\/[^\/#?]+)+\.(?:jpe?g|gif|png)$/;
+			var img_regex 	= /^(http|https)?:\/\/(?:[a-z\-]+\.)+[a-z]{2,6}(?:\/[^\/#?]+)+\.(?:jpe?g|gif|png|webp|avif)$/;
 
 			if(img_regex.test(src)) { // image matching
 				return 'image';	
@@ -411,17 +425,20 @@
 			else {var to_preload = '';}
 					
 			if(to_preload && typeof(v.img_sizes_cache[to_preload]) == 'undefined') {
-				$('<img/>').bind("load", function(){ 
-					v.img_sizes_cache[to_preload] = {
-						w : this.width, 
-						h : this.height
-					};
-					
-					// if sizes are zero, recalculate
-					if(show_when_ready && el_index == v.elem_index) {
-						show_element();
-					}
-				}).attr('src', to_preload);
+                let img = new Image();
+                img.src = to_preload;
+
+                img.onload = function(e) {
+                    v.img_sizes_cache[to_preload] = {
+                        w : e.target.width, 
+                        h : e.target.height
+                    };
+
+                    // if sizes are zero, recalculate
+                    if(show_when_ready && el_index == v.elem_index) {
+                        show_element();
+                    }    
+                };
 			}
 			else {
 				if(show_when_ready || typeof(cache_check) != 'undefined') {
@@ -531,7 +548,7 @@
 			
 			// elements parsed - throw callback
 			if(typeof(o.elems_parsed) == 'function') {
-				o.elems_parsed.call({opts : lcl_ai_opts, vars: lcl_ai_vars});
+				o.elems_parsed.call(null, lcl_ai_opts, lcl_ai_vars);
 			}
 			
 			// elements parsed | args: elements array
@@ -611,7 +628,10 @@
 
 
 			setup_code();
-			touch_events();
+            
+            if(o.touchswipe) {
+			 touch_events();
+            }
 
 			// directly fullscreen?
 			if(v.force_fullscreen) {
@@ -756,7 +776,7 @@
 			if(o.cmd_position == 'inner' && o.ins_close_pos == 'corner') {
 				css += '#lcl_corner_close {'+
 					'top: '+ ((o.border_w + Math.ceil($('#lcl_corner_close').outerWidth() / 2)) * -1) +'px;'+
-					'right: '+ ((o.border_w + Math.ceil($('#lcl_corner_close').outerHeight() / 2)) * -1) +';'+
+					'right: '+ ((o.border_w + Math.ceil($('#lcl_corner_close').outerHeight() / 2)) * -1) +'px;'+
 				'}';
 				
 				
@@ -778,22 +798,22 @@
 				'opacity: '+o.ol_opacity+';'+
 			'}'+
 			'#lcl_window, #lcl_txt, #lcl_subj {'+
-				'-webkit-transition-duration: '+o.animation_time+'ms; transition-duration: '+o.animation_time+'ms;'+	
+				'transition-duration: '+adjusted_animation_time()+'ms;'+	
 			'}'+
 			'#lcl_overlay {'+
-				'-webkit-transition-duration: '+o.open_close_time+'ms; transition-duration: '+o.open_close_time+'ms;'+	
+				'transition-duration: '+o.open_close_time+'ms;'+	
 			'}'+
 			'.lcl_first_sizing #lcl_window, .lcl_is_closing #lcl_window {'+
-				'-webkit-transition-duration: '+(o.open_close_time - o.ol_time_diff)+'ms; transition-duration: '+(o.open_close_time - o.ol_time_diff)+'ms;'+	
+				'transition-duration: '+(o.open_close_time - o.ol_time_diff)+'ms;'+	
 			'}'+
 			'.lcl_first_sizing #lcl_window {'+
-				'-webkit-transition-delay: '+o.ol_time_diff+'ms; transition-delay: '+o.ol_time_diff+'ms;'+	
+				'transition-delay: '+o.ol_time_diff+'ms;'+	
 			'}'+
 			'#lcl_loader, #lcl_contents_wrap, #lcl_corner_close {'+
-				'-webkit-transition-duration: '+o.fading_time+'ms; transition-duration: '+o.fading_time+'ms;'+
+				'transition-duration: '+adjusted_fading_time()+'ms;'+
 			'}'+
 			'.lcl_toggling_txt #lcl_subj {'+ /* delay to allow sizing on text hiding */
-				'-webkit-transition-delay: '+(o.fading_time + 200)+'ms !important;  transition-delay: '+(o.fading_time + 200)+'ms !important;'+
+				'transition-delay: '+(o.fading_time + 200)+'ms !important;'+
 			'}'+
 			'.lcl_fullscreen_mode.lcl_txt_over:not(.lcl_tn_hidden) #lcl_txt, .lcl_fullscreen_mode.lcl_force_txt_over:not(.lcl_tn_hidden) #lcl_txt {'+ /* fs txt margin when thumbs are shown */
 				'max-height: calc(100% - 42px - '+ o.thumbs_h +'px);'+
@@ -843,7 +863,7 @@
 
 			// html is appended and ready - callback
 			if(typeof(o.html_is_ready) == 'function') {
-				o.html_is_ready.call({opts : lcl_ai_opts, vars: lcl_ai_vars});
+				o.html_is_ready.call(null, lcl_ai_opts, lcl_ai_vars);
 			}
 			
 			// lightbox html has been appended and managed 
@@ -942,7 +962,7 @@
 			
 				// first element show - callback
 				if(typeof(lcl_ai_opts.on_open) == 'function') {
-					lcl_ai_opts.on_open.call({opts : lcl_ai_opts, vars: lcl_ai_vars});
+					lcl_ai_opts.on_open.call(null, lcl_ai_opts, lcl_ai_vars);
 				}
 				
 				// first element show | args: element
@@ -960,6 +980,7 @@
 			//////
 
 			$('#lcl_subj').removeClass('lcl_switching_el');
+            $('#lcl_window').focus();
 		};
 		
 		
@@ -998,7 +1019,7 @@
 					
 					var arr = el.download.split('/');
 					var filename = arr[ (arr.length -1) ];
-					$('.lcl_download').html('<a id="lcl_downloadlink" href="'+ el.download +'" target="_blank" download="'+ filename +'"></a>');
+					$('.lcl_download').html('<a href="'+ el.download +'" target="_blank" download="'+ filename +'"></a>');
 				} else {
 					$('.lcl_download').hide();	
 				}
@@ -1013,7 +1034,7 @@
 				$('.lcl_txt_toggle').show();
 				
 				if(el.title) 	{$('#lcl_txt').append('<h3 id="lcl_title">'+ el.title +'</h3>');}
-				if(el.author) 	{$('#lcl_txt').append('<h5 id="lcl_author">by '+ el.author +'</h5>');}
+				if(el.author) 	{$('#lcl_txt').append('<h5 id="lcl_author">'+ lcl_settings.author_by_txt +' '+ el.author +'</h5>');}
 				if(el.txt) 		{$('#lcl_txt').append('<section id="lcl_descr">'+ el.txt +'</section>');}
 				
 				// set class for bottom border
@@ -1047,6 +1068,10 @@
 		 */
 		var css_size_to_px = function(size, dimension, ignore_max) {
 			var px = 0; 
+            if(!size) {
+                return px;  
+            }
+            
 			var $wrap = $('#lcl_wrap');
 			
 			var win_w = $(window).width() - parseInt($wrap.css('padding-left'), 10) - parseInt($wrap.css('padding-right'), 10);
@@ -1128,7 +1153,12 @@
 					case 'image' : // discard forced sizes
 						$('#lcl_elem_wrap').css('bottom', 0);
 						
+						// no image found in cache - wait a bit and retry
 						if(typeof(v.img_sizes_cache[ el.src ]) == 'undefined') {
+                            setTimeout(function() {
+                                size_elem(el, flags, txt_und_sizes);  
+                            }, 50);
+                                
 							return false;	
 						}
 						var img_sizes = v.img_sizes_cache[ el.src ];
@@ -1239,7 +1269,7 @@
 			if(typeof(lcl_size_n_show_timeout) != 'undefined') {
 				clearTimeout(lcl_size_n_show_timeout);
 			}
-			var timing = ($('.lcl_first_sizing').length) ? o.open_close_time + 20 : o.animation_time; // +20 trick used to let CSS execute the opening timing
+			var timing = ($('.lcl_first_sizing').length) ? o.open_close_time + 20 : adjusted_animation_time(); // +20 trick used to let CSS execute the opening timing
 			if($('.lcl_browser_resize').length || $('.lcl_toggling_fs').length || fs_mode) {
 				timing = 0;
 			}
@@ -1518,7 +1548,7 @@
 
 				// switching element - callback
 				if(typeof(lcl_ai_opts.on_elem_switch) == 'function') {
-					lcl_ai_opts.on_elem_switch.call({opts : lcl_ai_opts, vars: lcl_ai_vars, new_el : new_el});
+					lcl_ai_opts.on_elem_switch.call(null, lcl_ai_opts, lcl_ai_vars, new_el);
 				}
 				
 				// switching | args: old_elem_id, new_elem_id
@@ -1535,7 +1565,7 @@
 				
 				maybe_preload(true);
 				close_img_preload();
-			}, lcl_ai_opts.fading_time);
+			}, adjusted_fading_time());
 		};
 		
 		
@@ -1552,8 +1582,8 @@
 			var o = lcl_ai_opts;
 			if(!o.progressbar) {return false;}
 			
-			var delay = (first_run) ? 0 : (o.animation_time + o.fading_time);  
-			var time = o.slideshow_time + o.animation_time - delay;
+			var delay = (first_run) ? 0 : (adjusted_animation_time() + adjusted_fading_time());  
+			var time = o.slideshow_time + adjusted_animation_time() - delay;
 			
 			if(!$('#lcl_progressbar').length) {
 				$('#lcl_wrap').append('<div id="lcl_progressbar"></div>');	
@@ -1576,7 +1606,7 @@
 			
 			// lightbox is about to be closed - callback
 			if(typeof(lcl_ai_opts.on_close) == 'function') {
-				lcl_ai_opts.on_close.call({opts : lcl_ai_opts, vars: lcl_ai_vars});
+				lcl_ai_opts.on_close.call(null, lcl_ai_opts, lcl_ai_vars);
 			}
 			
 			// event on lightbox closing
@@ -1644,7 +1674,7 @@
 			$('#lcl_wrap').addClass('lcl_toggling_fs');
 			
 			// enbale browser's fs
-			if(o.browser_fs_mode && typeof(set_browser_status) != 'undefined') {
+			if(o.browser_fs_mode && document.fullscreenEnabled && typeof(navigator.userActivation) != 'undefined' && navigator.userActivation.hasBeenActive) {
 				if (document.documentElement.requestFullscreen) {
 					document.documentElement.requestFullscreen();
 				} else if (document.documentElement.msRequestFullscreen) {
@@ -1681,7 +1711,7 @@
 			
 			// entering fullscreen - callback
 			if(typeof(o.on_fs_enter) == 'function') {
-				o.on_fs_enter.call({opts : o, vars: v});
+				o.on_fs_enter.call(null, o, v);
 			}
 			
 			// entering fullscreen - action
@@ -1778,7 +1808,7 @@
 			
 			// exiting fullscreen - callback
 			if(typeof(o.on_fs_exit) == 'function') {
-				o.on_fs_exit.call({opts : lcl_ai_opts, vars: lcl_ai_vars});
+				o.on_fs_exit.call(null, lcl_ai_opts, lcl_ai_vars);
 			}
 			
 			// exiting fullscreen - action
@@ -1874,7 +1904,7 @@
 							
 								if(v.poster) {bg_img = v.poster;} break;	
 								
-							case 'dailymotion' 	: bg_img = (v.poster) ? v.poster : 'http://www.dailymotion.com/thumbnail/video/'+ v.video_id; break;
+							case 'dailymotion' 	: bg_img = (v.poster) ? v.poster : 'https://www.dailymotion.com/thumbnail/video/'+ v.video_id; break;
 						}
 						
 						if(bg_img) {
@@ -1934,8 +1964,10 @@
 				$('.lcl_tn_inner').addClass('lcl_tn_mixed_types');	
 			}
 		
-			// elem offset
-			thumbs_nav_scroll_to_item(lcl_ai_vars.elem_index);
+			// elem offset - use a bit of delay to let thumbs to have proper shape
+			setTimeout(function() {
+				thumbs_nav_scroll_to_item(lcl_ai_vars.elem_index);
+			}, 300);
 		};
 		
 		
@@ -2024,6 +2056,9 @@
 			
 			$('.lcl_tn_inner').stop(true).animate({"scrollLeft" : new_offset}, 500, function() {
 				$('.lcl_tn_inner').trigger('lcl_smoothscroll_end');	
+				
+				// show after having scrolled
+				$('#lcl_thumbs_nav').removeClass('lcl_pre_tn_scroll');
 			});
 			
 			// set selected nav thumb class
@@ -2420,24 +2455,34 @@
 				var code = 
 				'<div class="lcl_socials_tt lcl_tooltip lcl_tt_bottom">';
 				
-					if(lcl_curr_opts.fb_direct_share) {
-						code += '<a class="lcl_icon lcl_fb" href="javascript: void(0)"></a>';	
+					if(lcl_curr_opts.fb_share_params) {
+						
+						var share_url = page_url;
+						share_url += (window.location.href.indexOf('?') === -1) ? '%3F' : '%26';
+						share_url += encodeURIComponent(lcl_curr_opts.fb_share_params.replace('%TITLE%', title).replace('%DESCR%', descr).replace('%IMG%', img)); 
+						
+						code += '<a class="lcl_icon lcl_fb" onClick="window.open(\'https://www.facebook.com/sharer?u='+ share_url +'&display=popup\',\'sharer\',\'toolbar=0,status=0,width=590,height=500\');" href="javascript: void(0)" title="share on Facebook" aria-label="share on Facebook" tabindex="61"></a>';	
 					} else {
-						code += '<a class="lcl_icon lcl_fb" onClick="window.open(\'https://www.facebook.com/sharer?u='+ page_url +'&display=popup\',\'sharer\',\'toolbar=0,status=0,width=590,height=325\');" href="javascript: void(0)"></a>';	
+						code += '<a class="lcl_icon lcl_fb" onClick="window.open(\'https://www.facebook.com/sharer?u='+ page_url +'&display=popup\',\'sharer\',\'toolbar=0,status=0,width=590,height=500\');" href="javascript: void(0)" title="share on Facebook" aria-label="share on Facebook" tabindex="61"></a>';	
 					}
 
-					code += '<a class="lcl_icon lcl_twit" onClick="window.open(\'https://twitter.com/share?text=Check%20out%20%22'+ title +'%22%20@&url='+ page_url +'\',\'sharer\',\'toolbar=0,status=0,width=548,height=325\');" href="javascript: void(0)"></a>';
+					code += '<a class="lcl_icon lcl_twit" onClick="window.open(\'https://twitter.com/share?text=Check%20out%20%22'+ title +'%22%20@&url='+ page_url +'\',\'sharer\',\'toolbar=0,status=0,width=548,height=325\');" href="javascript: void(0)" title="share on X" aria-label="share on X" tabindex="62"></a>';
 					
 					// on mobile - use Whatsapp
 					if(lcl_on_mobile) {
-						code += '<br/><a class="lcl_icon lcl_wa" href="whatsapp://send?text='+ page_url +'" data-action="share/whatsapp/share"></a>'; 	
+						code += '<a class="lcl_icon lcl_wa" href="whatsapp://send?text='+ page_url +'" data-action="share/whatsapp/share" title="share on WhatsApp" aria-label="share on WhatsApp" tabindex="63"></a>'; 	
 					}
-					
+                
 					// pinterest only if there's an image
 					if(img) {
 						code += 	
-						'<a class="lcl_icon lcl_pint" onClick="window.open(\'http://pinterest.com/pin/create/button/?url='+ page_url +'&media='+ encodeURIComponent(img) +'&description='+ title +'\',\'sharer\',\'toolbar=0,status=0,width=575,height=330\');" href="javascript: void(0)"></a>';
+						'<a class="lcl_icon lcl_pint" onClick="window.open(\'https://pinterest.com/pin/create/button/?url='+ page_url +'&media='+ encodeURIComponent(img) +'&description='+ title +'\',\'sharer\',\'toolbar=0,status=0,width=575,height=330\');" href="javascript: void(0)" title="share on Pinterest" aria-label="share on Pinterest" tabindex="64"></a>';
 					}
+                
+                    // allow URL copy for deplinked lightbox
+                    if(lcl_curr_opts.deeplink) {
+                        code += '<a class="lcl_icon lcl_copy_dlu" href="javascript:void(0);" data-action="share/whatsapp/share" title="copy lightbox link" aria-label="copy lightbox link" tabindex="65"></a>';
+                    }
 				
 				code += 	
 				'</div>';
@@ -2581,6 +2626,43 @@
 			}
 		});
 		
+        
+        /* copy lightbox link - share option */
+        $(document).on('click', '.lcl_copy_dlu', function(e) {
+            if(obj != lcl_curr_obj) {return true;}
+            e.preventDefault();
+            
+            navigator.clipboard.writeText(window.location.href);
+            return false;
+        });
+        
+        
+        /* change focus on nav commands */
+        $(document).on('keydown', function(e) {
+            if(obj != lcl_curr_obj) {return true;}
+            
+            if(e.key === "Tab" && $('.lcl_shown').length) {
+                e.preventDefault();
+                
+                let focusableElements = $('#lcl_wrap').find('#lcl_corner_close, #lcl_nav_cmd button.lcl_icon, #lcl_nav_cmd a.lcl_icon').not('.lcl_zoom_disabled, :hidden').sort((a, b) => (a.tabIndex || 0) - (b.tabIndex || 0)),
+                    index = focusableElements.index(document.activeElement);
+
+                index = ((index + 1) >= focusableElements.length) ? 0 : index + 1;
+                focusableElements.eq(index).focus();
+            }
+        });
+        
+        
+        // remove focus status on click to not display the outline
+        $(document).on('mousedown', '#lcl_nav_cmd a, #lcl_nav_cmd button', function(e) {
+            if(obj != lcl_curr_obj) {return true;}
+            
+            const $this = $(this);
+            setTimeout(() => {
+                $(this).blur();
+            }, 5);
+        });
+        
 		
 		/////////////////////////////////////////////////////////////
 		
@@ -2643,7 +2725,7 @@
 							return false;	
 						}
 
-						var delay = ($(e.target).parents('.lcl_zoomable').length) ? 250 : 0;
+						var delay = ($(e.target).parents('.lcl_zoomable').length) ? adjusted_fading_time() : 0;
 						if(typeof(lcl_swipe_delay) != 'undefined') {clearTimeout(lcl_swipe_delay);}
 						
 						lcl_swipe_delay = setTimeout(function() {
@@ -2764,7 +2846,7 @@
 				
 				// slideshow start - callback
 				if(typeof(o.slideshow_start) == 'function') {
-					o.slideshow_start.call({opts : o, vars: lcl_ai_vars});
+					o.slideshow_start.call(null, o, lcl_ai_vars);
 				}
 				
 				// slideshow start - hook | args: interval time
@@ -2800,7 +2882,7 @@
 			
 			// slideshow end - callback
 			if(typeof(o.slideshow_end) == 'function') {
-				o.slideshow_end.call({opts : lcl_ai_opts, vars: lcl_ai_vars});
+				o.slideshow_end.call(null, lcl_ai_opts, lcl_ai_vars);
 			}
 			
 			// slideshow end - hook

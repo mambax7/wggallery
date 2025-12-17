@@ -49,63 +49,63 @@ class FineimpuploadHandler extends \SystemFineUploadHandler
     /**
      * @var int
      */
-    private $permUseralbum = 0;
+    private int $permUseralbum = 0;
     /**
      * @var int
      */
-    private $imageId = 0;
+    private int $imageId = 0;
     /**
      * @var string
      */
-    private $imageOrigName = null;
+    private ?string $imageOrigName = null;
     /**
      * @var string
      */
-    private $imageName = null;
+    private ?string $imageName = null;
     /**
      * @var string
      */
-    private $imageNameLarge = null;
+    private ?string $imageNameLarge = null;
     /**
      * @var string
      */
-    private $imageNicename = null;
+    private ?string $imageNicename = null;
     /**
      * @var string
      */
-    private $imagePath = null;
+    private ?string $imagePath = null;
     /**
      * @var string
      */
-    private $imageNameOrig = null;
+    private ?string $imageNameOrig = null;
     /**
      * @var string
      */
-    private $imageMimetype = null;
+    private ?string $imageMimetype = null;
     /**
      * @var int
      */
-    private $imageSize = 0;
+    private int $imageSize = 0;
     /**
      * @var int
      */
-    private $imageWidth = 0;
+    private int $imageWidth = 0;
     /**
      * @var int
      */
-    private $imageHeight = 0;
+    private int $imageHeight = 0;
     /**
      * @var string
      */
-    private $pathUpload = null;
+    private ?string $pathUpload = null;
     /**
      * @var string
      */
-    private $exifData = null;
+    private ?string $exifData = null;
     /**
      * @var string
      */
-    private $imageTags = null;
+    private ?string $imageTags = null;
 
     /**
      * XoopsFineImUploadHandler constructor.
@@ -123,8 +123,9 @@ class FineimpuploadHandler extends \SystemFineUploadHandler
      * @param $mimeType
      * @param $uid
      * @return array|bool
+     * @throws \Exception
      */
-    protected function storeUploadedFile($target, $mimeType, $uid)
+    protected function storeUploadedFile($target, $mimeType, $uid): bool|array
     {
         require_once \XOOPS_ROOT_PATH . '/modules/wggallery/header.php';
         $helper           = \XoopsModules\Wggallery\Helper::getInstance();

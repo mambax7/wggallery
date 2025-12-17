@@ -15,8 +15,6 @@
  * @param mixed $category
  * @param mixed $item_id
  * @package        wggallery
- * @since          1.0
- * @min_xoops      2.5.11
  * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version        $Id: 1.0 notifications.inc.php 1 Mon 2018-03-19 10:04:53Z XOOPS Project (www.xoops.org) $
  * @copyright      module for xoops
@@ -28,14 +26,14 @@
  *
  * @param $category
  * @param $item_id
- * @return array item|null
+ * @return array|null item|null
  */
-function wggallery_notify_iteminfo($category, $item_id)
+function wggallery_notify_iteminfo($category, $item_id): ?array
 {
     global $xoopsDB;
 
-    if (!\defined('\WGGALLERY_URL')) {
-        \define('\WGGALLERY_URL', \XOOPS_URL . '/modules/wggallery');
+    if (!\defined('WGGALLERY_URL')) {
+        \define('WGGALLERY_URL', \XOOPS_URL . '/modules/wggallery');
     }
 
     switch ($category) {

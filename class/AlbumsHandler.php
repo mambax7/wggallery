@@ -18,8 +18,6 @@ namespace XoopsModules\Wggallery;
  * @copyright      module for xoops
  * @license        GPL 2.0 or later
  * @package        wggallery
- * @since          1.0
- * @min_xoops      2.5.11
  * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version        $Id: 1.0 albums.php 1 Mon 2018-03-19 10:04:50Z XOOPS Project (www.xoops.org) $
  */
@@ -44,11 +42,11 @@ class AlbumsHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * @param bool $isNew
+     * @param $isNew
      *
      * @return object
      */
-    public function create($isNew = true)
+    public function create($isNew = true): object
     {
         return parent::create($isNew);
     }
@@ -56,35 +54,34 @@ class AlbumsHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve a field
      *
-     * @param int   $i field id
-     * @param array $fields
-     * @return mixed reference to the {@link Get} object
+     * @param $id
+     * @param $fields
+     * @return \XoopsObject|null reference to the {@link Get} object
      */
-    public function get($i = null, $fields = null)
+    public function get($id = null, $fields = null): ?\XoopsObject
     {
-        return parent::get($i, $fields);
+        return parent::get($id, $fields);
     }
 
     /**
      * get inserted id
      *
-     * @param null
      * @return int reference to the {@link Get} object
      */
-    public function getInsertId()
+    public function getInsertId(): int
     {
         return $this->db->getInsertId();
     }
 
     /**
      * Get Count Albums in the database
-     * @param int    $start
-     * @param int    $limit
+     * @param int $start
+     * @param int $limit
      * @param string $sort
      * @param string $order
      * @return int
      */
-    public function getCountAlbums($start = 0, $limit = 0, $sort = 'alb_weight ASC, alb_date', $order = 'DESC')
+    public function getCountAlbums(int $start = 0, int $limit = 0, string $sort = 'alb_weight ASC, alb_date', string $order = 'DESC'): int
     {
         $crCountAlbums = new \CriteriaCompo();
         $crCountAlbums = $this->getAlbumsCriteria($crCountAlbums, $start, $limit, $sort, $order);
@@ -94,13 +91,13 @@ class AlbumsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get All Albums in the database
-     * @param int    $start
-     * @param int    $limit
+     * @param int $start
+     * @param int $limit
      * @param string $sort
      * @param string $order
      * @return array
      */
-    public function getAllAlbums($start = 0, $limit = 0, $sort = 'alb_weight ASC, alb_date', $order = 'DESC')
+    public function getAllAlbums(int $start = 0, int $limit = 0, string $sort = 'alb_weight ASC, alb_date', string $order = 'DESC'): array
     {
         $crAllAlbums = new \CriteriaCompo();
         $crAllAlbums = $this->getAlbumsCriteria($crAllAlbums, $start, $limit, $sort, $order);
@@ -115,9 +112,9 @@ class AlbumsHandler extends \XoopsPersistableObjectHandler
      * @param  $limit
      * @param  $sort
      * @param  $order
-     * @return int
+     * @return \CriteriaCompo
      */
-    private function getAlbumsCriteria($crAlbums, $start, $limit, $sort, $order)
+    private function getAlbumsCriteria($crAlbums, $start, $limit, $sort, $order): \CriteriaCompo
     {
         $crAlbums->setStart($start);
         $crAlbums->setLimit($limit);
@@ -131,7 +128,7 @@ class AlbumsHandler extends \XoopsPersistableObjectHandler
      * Get Criteria Albums
      * @return bool
      */
-    public function setAlbumIsColl()
+    public function setAlbumIsColl(): bool
     {
         // reset (necessary after deleting)
         $strSQL = 'UPDATE ' . $GLOBALS['xoopsDB']->prefix('wggallery_albums') . ' SET ' . $GLOBALS['xoopsDB']->prefix('wggallery_albums') . '.alb_iscoll = 0';
@@ -153,8 +150,9 @@ class AlbumsHandler extends \XoopsPersistableObjectHandler
      * Get all childs of a category
      * @param $albPid
      * @return string
+     * @throws \Exception
      */
-    public function getChildsOfCategory($albPid)
+    public function getChildsOfCategory($albPid): string
     {
         $childsAll = '';
         $helper        = \XoopsModules\Wggallery\Helper::getInstance();
@@ -182,8 +180,9 @@ class AlbumsHandler extends \XoopsPersistableObjectHandler
      * Get all childs of a category
      * @param $albPid
      * @return bool|string
+     * @throws \Exception
      */
-    public function getListChildsOfCollection($albPid)
+    public function getListChildsOfCollection($albPid): bool|string
     {
         if ($albPid > 0) {
             $childsAll = '<ol>';
@@ -203,7 +202,7 @@ class AlbumsHandler extends \XoopsPersistableObjectHandler
         // Table view albums
         if ($albumsCount > 0) {
             foreach (\array_keys($albumsAll) as $i) {
-                if ($permissionsHandler->permAlbumEdit($albumsAll[$i]->getVar('alb_id'), $albumsAll[$i]->getVar('alb_submitter'))) {
+                if ($permissionsHandler->permAlbumEdit((int)$albumsAll[$i]->getVar('alb_id'), (int)$albumsAll[$i]->getVar('alb_submitter'))) {
                     $child     = $this->getListChildsOfCollection($albumsAll[$i]->getVar('alb_id'));
                     $childsAll .= '<li style="display: list-item;" class="mjs-nestedSortable-branch mjs-nestedSortable-collapsed" id="menuItem_' . $albumsAll[$i]->getVar('alb_id') . '">';
 
@@ -242,8 +241,9 @@ class AlbumsHandler extends \XoopsPersistableObjectHandler
      * @param $target
      * @param bool $showThumb
      * @return bool|string
+     * @throws \Exception
      */
-    public function getListChildsOfCollectionIndex($albPid, $target, $showThumb = false)
+    public function getListChildsOfCollectionIndex($albPid, $target, bool $showThumb = false): bool|string
     {
         if ($albPid > 0) {
             $childsAll = '<ol class="wgg-alblist-ol">';
@@ -264,7 +264,7 @@ class AlbumsHandler extends \XoopsPersistableObjectHandler
         if ($albumsCount > 0) {
             foreach (\array_keys($albumsAll) as $i) {
                 $album = $albumsAll[$i]->getValuesAlbums();
-                if ($permissionsHandler->permAlbumView($album['alb_id'])) {
+                if ($permissionsHandler->permAlbumView((int)$album['alb_id'])) {
                     $child     = $this->getListChildsOfCollectionIndex($album['alb_id'], $target, $showThumb);
                     $childsAll .= '<li class="wgg-alblist-li" id="menuItem_' . $album['alb_id'] . '">';
 

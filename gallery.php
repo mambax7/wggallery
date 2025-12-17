@@ -15,8 +15,6 @@
  * @copyright      module for xoops
  * @license        GPL 2.0 or later
  * @package        wggallery
- * @since          1.0
- * @min_xoops      2.5.11
  * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version        $Id: 1.0 images.php 1 Mon 2018-03-19 10:04:51Z XOOPS Project (www.xoops.org) $
  */
@@ -83,7 +81,7 @@ $albSubmitter = '';
 $albumsObj = $albumsHandler->get($albId);
 if (isset($albumsObj) && \is_object($albumsObj)) {
     $albName      = $albumsObj->getVar('alb_name');
-    $albSubmitter = $albumsObj->getVar('alb_submitter');
+    $albSubmitter = (int)$albumsObj->getVar('alb_submitter');
 }
 $GLOBALS['xoopsTpl']->assign('alb_name', $albName);
 // $GLOBALS['xoopsTpl']->assign('alb_allowdownload', $permissionsHandler->permAlbumDownload($albId));

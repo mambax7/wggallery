@@ -15,8 +15,6 @@
  * @copyright      module for xoops
  * @license        GPL 2.0 or later
  * @package        wggallery
- * @since          1.0
- * @min_xoops      2.5.11
  * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version        $Id: 1.0 images.php 1 Mon 2018-03-19 10:04:51Z XOOPS Project (www.xoops.org) $
  */
@@ -154,7 +152,7 @@ require __DIR__ . '/footer.php';
  * @param  $params
  * @return array
  */
-function batchRead($nb, $file, $params)
+function batchRead($nb, $file, $params): array
 {
     $imagePath = \WGGALLERY_UPLOAD_BATCH_PATH . '/' . $file;
     list($width, $height, $type, $attr) = \getimagesize($imagePath);
@@ -167,13 +165,11 @@ function batchRead($nb, $file, $params)
     $check_width   = $params['maxwidth'] < $width ? \str_replace('%s',  $params['maxwidth'],  \_AM_WGGALLERY_BATCH_CHECKWIDTH) : '';
     $check_height  = $params['maxheight'] < $height ? \str_replace('%s', $params['maxheight'],  \_AM_WGGALLERY_BATCH_CHECKHEIGHT) : '';
 
-    $ret = ['nb' => $nb + 1, 'name' => $file,
+    return ['nb' => $nb + 1, 'name' => $file,
         'mimetype' => $mimetype, 'check_mimetype' => $check_mimetype,
         'size' => $size, 'check_size' => $check_size,
         'width' => $width, 'check_width' => $check_width,
         'height' => $height, 'check_height' => $check_height,
         'date' => $date
     ];
-
-    return $ret;
 }

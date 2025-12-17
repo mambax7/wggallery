@@ -18,8 +18,6 @@ namespace XoopsModules\Wggallery;
  * @copyright      module for xoops
  * @license        GPL 3.0 or later
  * @package        wgtimelines
- * @since          1.0
- * @min_xoops      2.5.7
  * @author         TDM XOOPS - Email:<info@email.com> - Website:<https://xoops.org>
  * @version        $Id: 1.0 ratings.php 13070 Wed 2016-12-14 22:22:34Z XOOPS Development Team $
  */
@@ -32,8 +30,6 @@ class Ratings extends \XoopsObject
 {
     /**
      * Constructor
-     *
-     * @param null
      */
     public function __construct()
     {
@@ -48,10 +44,8 @@ class Ratings extends \XoopsObject
 
     /**
      * @static function &getInstance
-     *
-     * @param null
      */
-    public static function getInstance()
+    public static function getInstance(): void
     {
         static $instance = false;
         if (!$instance) {
@@ -63,7 +57,7 @@ class Ratings extends \XoopsObject
      * The new inserted $Id
      * @return int inserted id
      */
-    public function getNewInsertedIdRatings()
+    public function getNewInsertedIdRatings(): int
     {
         return $GLOBALS['xoopsDB']->getInsertId();
     }
@@ -75,7 +69,7 @@ class Ratings extends \XoopsObject
      * @param null $maxDepth
      * @return array
      */
-    public function getValuesRatings($keys = null, $format = null, $maxDepth = null)
+    public function getValuesRatings($keys = null, $format = null, $maxDepth = null): array
     {
         $ret           = $this->getValues($keys, $format, $maxDepth);
         $ret['id']     = $this->getVar('rate_id');
@@ -94,7 +88,7 @@ class Ratings extends \XoopsObject
      *
      * @return array
      */
-    public function toArrayRatings()
+    public function toArrayRatings(): array
     {
         $ret  = [];
         $vars = $this->getVars();

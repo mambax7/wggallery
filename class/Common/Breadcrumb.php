@@ -33,8 +33,8 @@ namespace XoopsModules\Wggallery\Common;
  */
 class Breadcrumb
 {
-    public  $dirname;
-    private $bread = [];
+    public string $dirname;
+    private array $bread = [];
 
     public function __construct()
     {
@@ -47,7 +47,7 @@ class Breadcrumb
      * @param string $title
      * @param string $link
      */
-    public function addLink($title = '', $link = '')
+    public function addLink(string $title = '', string $link = ''): void
     {
         $this->bread[] = [
             'link'  => $link,
@@ -58,7 +58,7 @@ class Breadcrumb
     /**
      * Render Pedigree BreadCrumb
      */
-    public function render()
+    public function render(): false|string
     {
         if (!isset($GLOBALS['xoTheme']) || !\is_object($GLOBALS['xoTheme'])) {
             require $GLOBALS['xoops']->path('class/theme.php');

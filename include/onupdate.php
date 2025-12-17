@@ -15,8 +15,6 @@
  * @param mixed      $module
  * @param null|mixed $prev_version
  * @package        wggallery
- * @since          1.0
- * @min_xoops      2.5.11
  * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version        $Id: 1.0 update.php 1 Mon 2018-03-19 10:04:53Z XOOPS Project (www.xoops.org) $
  * @copyright      module for xoops
@@ -36,7 +34,7 @@ use XoopsModules\Wggallery\Common\ {
  *
  * @return bool true if ready to install, false if not
  */
-function xoops_module_pre_update_wggallery(\XoopsModule $module)
+function xoops_module_pre_update_wggallery(\XoopsModule $module): bool
 {
     $utility = new Wggallery\Utility();
 
@@ -52,7 +50,7 @@ function xoops_module_pre_update_wggallery(\XoopsModule $module)
  *
  * @return bool|null
  */
-function xoops_module_update_wggallery($module, $prev_version = null)
+function xoops_module_update_wggallery($module, $prev_version = null): ?bool
 {
     $ret = null;
 
@@ -112,7 +110,7 @@ function xoops_module_update_wggallery($module, $prev_version = null)
  *
  * @return bool
  */
-function wggallery_check_db($module)
+function wggallery_check_db($module): bool
 {
     // for the moment no action required
     return true;

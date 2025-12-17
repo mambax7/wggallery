@@ -15,8 +15,6 @@
  * @copyright      module for xoops
  * @license        GPL 2.0 or later
  * @package        wggallery
- * @since          1.0
- * @min_xoops      2.5.11
  * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version        $Id: 1.0 albums.php 1 Mon 2018-03-19 10:04:50Z XOOPS Project (www.xoops.org) $
  */
@@ -49,7 +47,7 @@ if (!$permissionsHandler->permGlobalSubmit()) {
 }
 if ($albId > 0) {
     $albumsObj = $albumsHandler->get($albId);
-    if (!$permissionsHandler->permAlbumEdit($albId, $albumsObj->getVar('alb_submitter'))) {
+    if (!$permissionsHandler->permAlbumEdit($albId, (int)$albumsObj->getVar('alb_submitter'))) {
         \redirect_header('albums.php', 3, _NOPERM);
     }
 } else {
@@ -311,7 +309,7 @@ switch ($op) {
         $albImage1 = 'blank.gif';
         if ($albImgid > 0) {
             $imagesObj = $imagesHandler->get($albImgid);
-            if (null !== $imagesObj && \is_object($imagesObj)) {
+            if (\is_object($imagesObj)) {
                 $albImage1 = $imagesObj->getVar('img_name');
             }
         }

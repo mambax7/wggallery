@@ -18,8 +18,6 @@ namespace XoopsModules\Wggallery;
  * @copyright      module for xoops
  * @license        GPL 2.0 or later
  * @package        wggallery
- * @since          1.0
- * @min_xoops      2.5.11
  * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version        $Id: 1.0 albumtypes.php 1 Sat 2018-03-31 11:31:09Z XOOPS Project (www.xoops.org) $
  */
@@ -41,11 +39,11 @@ class AlbumtypesHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * @param bool $isNew
+     * @param $isNew
      *
      * @return object
      */
-    public function create($isNew = true)
+    public function create($isNew = true): object
     {
         return parent::create($isNew);
     }
@@ -53,35 +51,34 @@ class AlbumtypesHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve a field
      *
-     * @param int   $i field id
-     * @param array $fields
-     * @return mixed reference to the {@link Get} object
+     * @param $id
+     * @param $fields
+     * @return \XoopsObject|null reference to the {@link Get} object
      */
-    public function get($i = null, $fields = null)
+    public function get($id = null, $fields = null): ?\XoopsObject
     {
-        return parent::get($i, $fields);
+        return parent::get($id, $fields);
     }
 
     /**
      * get inserted id
      *
-     * @param null
      * @return int reference to the {@link Get} object
      */
-    public function getInsertId()
+    public function getInsertId(): int
     {
         return $this->db->getInsertId();
     }
 
     /**
      * Get Count Albumtypes in the database
-     * @param int    $start
-     * @param int    $limit
+     * @param int $start
+     * @param int $limit
      * @param string $sort
      * @param string $order
      * @return int
      */
-    public function getCountAlbumtypes($start = 0, $limit = 0, $sort = 'at_id ASC, at_name', $order = 'ASC')
+    public function getCountAlbumtypes(int $start = 0, int $limit = 0, string $sort = 'at_id ASC, at_name', string $order = 'ASC'): int
     {
         $crCountAlbumtypes = new \CriteriaCompo();
         $crCountAlbumtypes = $this->getAlbumtypesCriteria($crCountAlbumtypes, $start, $limit, $sort, $order);
@@ -91,13 +88,13 @@ class AlbumtypesHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get All Albumtypes in the database
-     * @param int    $start
-     * @param int    $limit
+     * @param int $start
+     * @param int $limit
      * @param string $sort
      * @param string $order
      * @return array
      */
-    public function getAllAlbumtypes($start = 0, $limit = 0, $sort = 'at_id ASC, at_name', $order = 'ASC')
+    public function getAllAlbumtypes(int $start = 0, int $limit = 0, string $sort = 'at_id ASC, at_name', string $order = 'ASC'): array
     {
         $crAllAlbumtypes = new \CriteriaCompo();
         $crAllAlbumtypes = $this->getAlbumtypesCriteria($crAllAlbumtypes, $start, $limit, $sort, $order);
@@ -112,9 +109,9 @@ class AlbumtypesHandler extends \XoopsPersistableObjectHandler
      * @param  $limit
      * @param  $sort
      * @param  $order
-     * @return int
+     * @return \CriteriaCompo
      */
-    private function getAlbumtypesCriteria($crAlbumtypes, $start, $limit, $sort, $order)
+    private function getAlbumtypesCriteria($crAlbumtypes, $start, $limit, $sort, $order): \CriteriaCompo
     {
         $crAlbumtypes->setStart($start);
         $crAlbumtypes->setLimit($limit);
@@ -128,7 +125,7 @@ class AlbumtypesHandler extends \XoopsPersistableObjectHandler
      * Get primary Albumtype
      * @return array
      */
-    public function getPrimaryAlbum()
+    public function getPrimaryAlbum(): array
     {
         $albumtype    = [];
         $crAlbumtypes = new \CriteriaCompo();
@@ -149,7 +146,7 @@ class AlbumtypesHandler extends \XoopsPersistableObjectHandler
      * @param $atId
      * @return array
      */
-    public function getAlbumtypeOptions($atId)
+    public function getAlbumtypeOptions($atId): array
     {
         $albumtype             = [];
         $albumtypesObj         = $this->get($atId);
@@ -165,7 +162,7 @@ class AlbumtypesHandler extends \XoopsPersistableObjectHandler
      * @param $success
      * @param $errors
      */
-    public function albumtypesCreateReset(&$success, &$errors)
+    public function albumtypesCreateReset(&$success, &$errors): void
     {
         // create new albumtypes if not existing
         $templates = ['default', 'simple', 'hovereffectideas', 'bcards'];
@@ -228,7 +225,7 @@ class AlbumtypesHandler extends \XoopsPersistableObjectHandler
      * @param $primary
      * @return bool
      */
-    public function reset($atId, $template, $primary)
+    public function reset($atId, $template, $primary): bool
     {
         $options = [];
         $at_name = $at_credits = '';
@@ -250,7 +247,7 @@ class AlbumtypesHandler extends \XoopsPersistableObjectHandler
                 break;
             case 'hovereffectideas':
                 $at_name    = 'Hover Effect Ideas';
-                $at_credits = 'Codrops (http://tympanus.net/codrops, http://tympanus.net/Development/HoverEffectIdeas/)';
+                $at_credits = 'Codrops (https://tympanus.net/codrops,https:///tympanus.net/Development/HoverEffectIdeas/)';
                 $options[]  = ['name' => 'number_cols_album', 'value' => '2', 'caption' => '_AM_WGGALLERY_OPTION_AT_NB_COLS_ALB'];
                 $options[]  = ['name' => 'number_cols_cat', 'value' => '2', 'caption' => '_AM_WGGALLERY_OPTION_AT_NB_COLS_CAT'];
                 $options[]  = ['name' => 'hovereffect', 'value' => 'duke', 'caption' => '_AM_WGGALLERY_OPTION_AT_HOVER'];

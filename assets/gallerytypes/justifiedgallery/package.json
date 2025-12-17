@@ -7,7 +7,7 @@
     "type": "git",
     "url": "https://github.com/miromannino/Justified-Gallery.git"
   },
-  "homepage": "http://miromannino.github.io/Justified-Gallery/",
+  "homepage": "https://miromannino.github.io/Justified-Gallery/",
   "keywords": [
     "gallery",
     "justification",
@@ -22,7 +22,7 @@
   "author": {
     "name": "Miro Mannino",
     "email": "miro.mannino@gmail.com",
-    "url": "http://miromannino.com/"
+    "url": "https://miromannino.com/"
   },
   "license": "MIT",
   "engines": {

@@ -3,9 +3,9 @@ LC Lightbox is a modern jQuery lightbox focused on contents.<br/>
 Totally responsive and adaptive, is extremely flexible to be tailored in the minimum details!
 
 Hassle-free and immediate setup using an unique javascript file. <br/>
-Overall plugin weight is only 46KB (JS) + 34KB (CSS)
+Overall plugin weight is only 43KB (JS) + 33KB (CSS)
 
-![lc-lightbox](https://lcweb.it/wp-content/uploads/2018/01/lcl_github_img.png?rev2)
+![lc-lightbox](https://static.lcweb.it/lc-lightbox-lite/lcl_github_img.png)
 
 
 &nbsp;
@@ -34,7 +34,7 @@ Main features
 * 100% CSS Driven
 * (optional) Mousewheel and Keyboard elements navigation
 * Swipe integration to navigate (requires AlloyFinger)
-* Dev-oriented and well-documented [methods & Events](https://lcweb.it/lc-lightbox/documentation?section=methods)
+* Dev-oriented and well-documented [methods & Events](https://lcweb.it/lc-lightbox-jquery-plugin/documentation/?section=methods)
 * 4 layouts (text over element, under element or on right/left side)
 * (optional) closing button on corner position <em>(for inner commands)</em>
 * (optional) navigation buttons on middle position <em>(for inner commands)</em>
@@ -48,8 +48,9 @@ Main features
 * Adapts to your page's code (you set how lightbox fetches contents from binded elements)
 * Full control on each animation/effect timing
 * Modal mode
+* Supporting aria-labels and tab-to-select-commands accessibility methods
 * Thumbnails script support (eg. easily integrates with Timthumb)
-* MUCH MORE! [check lightbox options](https://lcweb.it/lc-lightbox/documentation?section=opts)
+* MUCH MORE! [check lightbox options](https://lcweb.it/lc-lightbox-jquery-plugin/documentation/?section=opts)
 
 
 &nbsp;
@@ -58,7 +59,7 @@ Main features
 Requirements
 ---
 
-* Any modern browser (IE 10+)
+* Any modern browser (IE 11+)
 * jQuery v1.7+
 * To implement touch actions you need to use [AlloyFinger](https://github.com/AlloyTeam/AlloyFinger/) (file included in LIB folder)
 
@@ -68,7 +69,7 @@ Requirements
 
 Live Demo
 ---
-[https://lcweb.it/lc-lightbox](https://lcweb.it/lc-lightbox)
+[https://lcweb.it/lc-lightbox-jquery-plugin/](https://lcweb.it/lc-lightbox-jquery-plugin/)
 
 
 &nbsp;
@@ -76,7 +77,7 @@ Live Demo
 
 Documentation
 ---
-[https://lcweb.it/lc-lightbox/documentation](https://lcweb.it/lc-lightbox/documentation)
+[https://lcweb.it/lc-lightbox-jquery-plugin/documentation/](https://lcweb.it/lc-lightbox-jquery-plugin/documentation/)
 
 Optionally you can install the plugin via Bower, using this instruction: `bower install lc-lightbox-lite`
 
@@ -87,7 +88,7 @@ License
 ---
 
 LC Lightbox LITE is free and released under the MIT license.<br/>
-You can purchase the fully-featured premium version on [Codecanyon](https://codecanyon.net/user/lcweb/portfolio)
+You can purchase the fully-featured premium version on the [LCweb Shop](https://lcweb.it/lc-lightbox-jquery-plugin/)
  
 
 &nbsp;
@@ -96,7 +97,7 @@ You can purchase the fully-featured premium version on [Codecanyon](https://code
 Extra
 ---
 
-Premium LC Lightbox version is implemented in the premium WordPress plugin [Global Gallery](http://www.lcweb.it/global-gallery)
+Premium LC Lightbox version is implemented in the premium WordPress plugin [Global Gallery](https://lcweb.it/global-gallery-wordpress-photogallery-plugin/)
 
 
 &nbsp;
@@ -105,8 +106,8 @@ Premium LC Lightbox version is implemented in the premium WordPress plugin [Glob
 Fun Fact
 ---
 
-Why release starts from v1.1? LC Lightbox has been used and developed for [Global Gallery](http://www.lcweb.it/global-gallery) WordPress plugin in 2017!
+Why release starts from v1.1? LC Lightbox has been used and developed for [Global Gallery](https://lcweb.it/global-gallery-wordpress-photogallery-plugin/) WordPress plugin in 2017!
 
 * * *
 
-Copyright &copy; Luca Montanari (aka LCweb)
+Copyright &copy; Luca Montanari (LCweb)

@@ -18,8 +18,6 @@ namespace XoopsModules\Wggallery;
  * @copyright      module for xoops
  * @license        GPL 2.0 or later
  * @package        wggallery
- * @since          1.0
- * @min_xoops      2.5.11
  * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version        $Id: 1.0 images.php 1 Mon 2018-03-19 10:04:51Z XOOPS Project (www.xoops.org) $
  */
@@ -36,75 +34,75 @@ class ImagesHandler extends \XoopsPersistableObjectHandler
     /**
      * @var int
      */
-    private $permUseralbum = 0;
+    private int $permUseralbum = 0;
     /**
      * @var int
      */
-    private $albumId = 0;
+    private int $albumId = 0;
     /**
      * @var int
      */
-    private $imageId = 0;
+    private int $imageId = 0;
     /**
      * @var string
      */
-    private $imageOrigName = null;
+    private ?string $imageOrigName = null;
     /**
      * @var string
      */
-    private $imageName = null;
+    private ?string $imageName = null;
     /**
      * @var string
      */
-    private $imageNameLarge = null;
+    private ?string $imageNameLarge = null;
     /**
      * @var string
      */
-    private $imageNicename = null;
+    private ?string $imageNicename = null;
     /**
      * @var string
      */
-    private $imagePath = null;
+    private ?string $imagePath = null;
     /**
      * @var string
      */
-    private $imageNameOrig = null;
+    private ?string $imageNameOrig = null;
     /**
      * @var string
      */
-    private $imageMimetype = null;
+    private ?string $imageMimetype = null;
     /**
      * @var int
      */
-    private $imageSize = 0;
+    private int $imageSize = 0;
     /**
      * @var int
      */
-    private $imageWidth = 0;
+    private int $imageWidth = 0;
     /**
      * @var int
      */
-    private $imageHeight = 0;
+    private int $imageHeight = 0;
     /**
      * @var string
      */
-    private $pathUpload = null;
+    private ?string $pathUpload = null;
     /**
      * @var string
      */
-    private $exifData = null;
+    private ?string $exifData = null;
     /**
      * @var string
      */
-    private $imageTags = null;
+    private ?string $imageTags = null;
     /**
      * @var string
      */
-    private $imageTitle = null;
+    private ?string $imageTitle = null;
     /**
      * @var string
      */
-    private $imageDesc = null;
+    private ?string $imageDesc = null;
 
 
     /**
@@ -118,11 +116,11 @@ class ImagesHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * @param bool $isNew
+     * @param $isNew
      *
      * @return object
      */
-    public function create($isNew = true)
+    public function create($isNew = true): object
     {
         return parent::create($isNew);
     }
@@ -130,36 +128,34 @@ class ImagesHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve a field
      *
-     * @param int   $i field id
-     * @param array $fields
-     * @return mixed reference to the {@link Get} object
+     * @param $id
+     * @param $fields
+     * @return \XoopsObject|null reference to the {@link Get} object
      */
-    public function get($i = null, $fields = null)
+    public function get($id = null, $fields = null): ?\XoopsObject
     {
-        return parent::get($i, $fields);
+        return parent::get($id, $fields);
     }
 
     /**
      * get inserted id
-     *
-     * @param null
      * @return int reference to the {@link Get} object
      */
-    public function getInsertId()
+    public function getInsertId(): int
     {
         return $this->db->getInsertId();
     }
 
     /**
      * Get Count Images in the database
-     * @param int    $albId
-     * @param int    $start
-     * @param int    $limit
+     * @param int $albId
+     * @param int $start
+     * @param int $limit
      * @param string $sort
      * @param string $order
      * @return int
      */
-    public function getCountImages($albId = 0, $start = 0, $limit = 0, $sort = 'img_id ASC, img_name', $order = 'ASC')
+    public function getCountImages(int $albId = 0, int $start = 0, int $limit = 0, string $sort = 'img_id ASC, img_name', string $order = 'ASC'): int
     {
         $crCountImages = new \CriteriaCompo();
         $crCountImages = $this->getImagesCriteria($crCountImages, $albId, $start, $limit, $sort, $order);
@@ -169,13 +165,13 @@ class ImagesHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get All Images in the database
-     * @param int    $start
-     * @param int    $limit
+     * @param int $start
+     * @param int $limit
      * @param string $sort
      * @param string $order
      * @return array
      */
-    public function getAllImages($start = 0, $limit = 0, $sort = 'img_id ASC, img_name', $order = 'ASC')
+    public function getAllImages(int $start = 0, int $limit = 0, string $sort = 'img_id ASC, img_name', string $order = 'ASC'): array
     {
         $crAllImages = new \CriteriaCompo();
         $crAllImages = $this->getImagesCriteria($crAllImages, 0, $start, $limit, $sort, $order);
@@ -191,9 +187,9 @@ class ImagesHandler extends \XoopsPersistableObjectHandler
      * @param  $limit
      * @param  $sort
      * @param  $order
-     * @return int
+     * @return \CriteriaCompo
      */
-    private function getImagesCriteria($crImages, $albId, $start, $limit, $sort, $order)
+    private function getImagesCriteria($crImages, $albId, $start, $limit, $sort, $order): \CriteriaCompo
     {
         if ($albId > 0) {
             $crImages->add(new \Criteria('img_albid', $albId));
@@ -212,7 +208,7 @@ class ImagesHandler extends \XoopsPersistableObjectHandler
      * @param $imageNameLarge
      * @return bool
      */
-    public function unlinkImages($imageName, $imageNameLarge)
+    public function unlinkImages($imageName, $imageNameLarge): bool
     {
         \unlink(\WGGALLERY_UPLOAD_IMAGE_PATH . '/large/' . $imageNameLarge);
         if (\file_exists(\WGGALLERY_UPLOAD_IMAGE_PATH . '/large/' . $imageNameLarge)) {
@@ -234,9 +230,9 @@ class ImagesHandler extends \XoopsPersistableObjectHandler
      * extract data from exif as tags
      * @param  $exifs
      * @param  $exif_tags
-     * @return string or null
+     * @return string|null or null
      */
-    public function exifExtractTags($exifs, $exif_tags)
+    public function exifExtractTags($exifs, $exif_tags): ?string
     {
         $ret = '';
 
@@ -265,7 +261,7 @@ class ImagesHandler extends \XoopsPersistableObjectHandler
      * @param bool $encoded
      * @return string or array
      */
-    public function exifRead($file, $encoded = true)
+    public function exifRead($file, bool $encoded = true): string
     {
         $exif = \exif_read_data($file);
         $ret  = \json_encode($exif, JSON_INVALID_UTF8_IGNORE);
@@ -281,7 +277,7 @@ class ImagesHandler extends \XoopsPersistableObjectHandler
      * @param bool $action
      * @return \XoopsThemeForm
      */
-    public function getFormSingleUpload($albId, $action = false)
+    public function getFormSingleUpload($albId, bool $action = false): \XoopsThemeForm
     {
         $helper = \XoopsModules\Wggallery\Helper::getInstance();
         if (!$action) {
@@ -320,8 +316,9 @@ class ImagesHandler extends \XoopsPersistableObjectHandler
      * @param $imageSize
      * @param $albId
      * @return bool|array
+     * @throws \Exception
      */
-    public function handleSingleUpload($imgName, $imgTitle, $imgDesc, $imageMimetype, $imageSize, $albId)
+    public function handleSingleUpload($imgName, $imgTitle, $imgDesc, $imageMimetype, $imageSize, $albId): bool|array
     {
         require_once \XOOPS_ROOT_PATH . '/modules/wggallery/header.php';
         $helper             = \XoopsModules\Wggallery\Helper::getInstance();
@@ -361,10 +358,8 @@ class ImagesHandler extends \XoopsPersistableObjectHandler
             $this->exifData = $this->exifRead($this->imagePath);
         }
         if ('none' !== $helper->getConfig('exif_tags')) {
-            if ('' == $exif) {
-                // read exif from original image
-                $exif = $this->exifRead($this->imagePath, false);
-            }
+            // read exif from original image
+            $exif = $this->exifRead($this->imagePath, false);
             $this->imageTags = $this->exifExtractTags($exif, $helper->getConfig('exif_tags'));
         }
 
@@ -468,7 +463,7 @@ class ImagesHandler extends \XoopsPersistableObjectHandler
     /**
      * @return bool
      */
-    private function handleImageDB()
+    private function handleImageDB(): bool
     {
         require_once \XOOPS_ROOT_PATH . '/modules/wggallery/header.php';
 
@@ -506,9 +501,9 @@ class ImagesHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * @return bool|string
+     * @return void
      */
-    private function getImageDim()
+    private function getImageDim(): void
     {
         switch ($this->imageMimetype) {
             case 'image/png':
@@ -527,14 +522,13 @@ class ImagesHandler extends \XoopsPersistableObjectHandler
                 $this->imageWidth  = 0;
                 $this->imageHeight = 0;
 
-                return 'Unsupported format';
+                return;
         }
         $this->imageWidth  = \imagesx($img);
         $this->imageHeight = \imagesy($img);
 
         \imagedestroy($img);
 
-        return true;
     }
 
     /**
@@ -542,8 +536,9 @@ class ImagesHandler extends \XoopsPersistableObjectHandler
      * @param array $files
      * @param bool $action
      * @return \XoopsThemeForm
+     * @throws \Exception
      */
-    public function getFormBatchUpload($files, $action = false)
+    public function getFormBatchUpload(array $files, bool $action = false): \XoopsThemeForm
     {
         $helper = \XoopsModules\Wggallery\Helper::getInstance();
         if (!$action) {
@@ -567,7 +562,7 @@ class ImagesHandler extends \XoopsPersistableObjectHandler
         $albumsAll = $albumsHandler->getAll($crAlbums);
 
         foreach (\array_keys($albumsAll) as $i) {
-            if ($permissionsHandler->permAlbumEdit($albumsAll[$i]->getVar('alb_id'), $albumsAll[$i]->getVar('alb_submitter'))) {
+            if ($permissionsHandler->permAlbumEdit((int)$albumsAll[$i]->getVar('alb_id'), (int)$albumsAll[$i]->getVar('alb_submitter'))) {
                 $albName = $albumsAll[$i]->getVar('alb_name');
                 $albPid  = $albumsAll[$i]->getVar('alb_pid');
                 if ($albPid > 0) {
@@ -609,11 +604,11 @@ class ImagesHandler extends \XoopsPersistableObjectHandler
     /**
      * @public function to handle tags for tag module
      * @param string $tags
-     * @param int    $id
-     * @param int    $catid
+     * @param int $id
+     * @param int $catid
      * @return bool
      */
-    public function handleTagsForTagmodule($tags, $id, $catid = 0)
+    public function handleTagsForTagmodule(string $tags, int $id, int $catid = 0): bool
     {
         $helper = \XoopsModules\Wggallery\Helper::getInstance();
         $moduleDirName      = basename(dirname(__DIR__));

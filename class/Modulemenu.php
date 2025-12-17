@@ -28,8 +28,9 @@ class Modulemenu
     /** function to create an array for XOOPS main menu
      *
      * @return array
+     * @throws \Exception
      */
-    public function getMenuitemsDefault()
+    public function getMenuitemsDefault(): array
     {
 
         $moduleDirName = \basename(\dirname(__DIR__));
@@ -87,8 +88,9 @@ class Modulemenu
     /** function to create a list of sublinks
      *
      * @return array
+     * @throws \Exception
      */
-    public function getMenuitemsSbadmin5()
+    public function getMenuitemsSbadmin5(): array
     {
         $moduleDirName = \basename(\dirname(__DIR__));
         $pathname      = \XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/';

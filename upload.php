@@ -16,8 +16,6 @@ use Xmf\Request;
  * @copyright      module for xoops
  * @license        GPL 2.0 or later
  * @package        wggallery
- * @since          1.0
- * @min_xoops      2.5.11
  * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version        $Id: 1.0 upload.php 1 Sat 2018-03-17 09:55:45Z XOOPS Project (www.xoops.org) $
  */
@@ -43,7 +41,7 @@ $GLOBALS['xoopsTpl']->assign('displayButtonText', $helper->getConfig('displayBut
 // check permissions
 if ($albId > 0) {
     $albumsObj = $albumsHandler->get($albId);
-    if (!$permissionsHandler->permAlbumEdit($albId, $albumsObj->getVar('alb_submitter'))) {
+    if (!$permissionsHandler->permAlbumEdit($albId, (int)$albumsObj->getVar('alb_submitter'))) {
         \redirect_header('albums.php', 3, _NOPERM);
     }
     $xoBreadcrumbs[] = ['title' => $albumsObj->getVar('alb_name'), 'link' => \WGGALLERY_URL . '/images.php?op=list&amp;alb_id=' . $albId];
@@ -130,7 +128,7 @@ if ($albId > 0) {
     $GLOBALS['xoopsTpl']->assign('jwt', $jwt);
     setcookie('jwt', $jwt);
     $fineup_debug = 'false';
-    if (($xoopsUser instanceof \XoopsUser ? $xoopsUser->isAdmin() : false)
+    if (($xoopsUser instanceof \XoopsUser && $xoopsUser->isAdmin())
         && isset($_REQUEST['FINEUPLOADER_DEBUG'])) {
         $fineup_debug = 'true';
     }

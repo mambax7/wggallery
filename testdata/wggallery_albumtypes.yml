@@ -18,7 +18,7 @@
     at_id: '3'
     at_primary: '0'
     at_name: 'Hover Effect Ideas'
-    at_credits: 'Codrops (http://tympanus.net/codrops, http://tympanus.net/Development/HoverEffectIdeas/)'
+    at_credits: 'Codrops (https://tympanus.net/codrops,https:///tympanus.net/Development/HoverEffectIdeas/)'
     at_template: hovereffectideas
     at_options: 'a:4:{i:0;a:3:{s:4:"name";s:17:"number_cols_album";s:5:"value";s:1:"2";s:7:"caption";s:35:"_AM_WGGALLERY_OPTION_AT_NB_COLS_ALB";}i:1;a:3:{s:4:"name";s:15:"number_cols_cat";s:5:"value";s:1:"2";s:7:"caption";s:35:"_AM_WGGALLERY_OPTION_AT_NB_COLS_CAT";}i:2;a:3:{s:4:"name";s:11:"hovereffect";s:5:"value";s:4:"duke";s:7:"caption";s:29:"_AM_WGGALLERY_OPTION_AT_HOVER";}i:3;a:2:{s:4:"name";s:11:"option_sort";s:5:"value";s:45:"number_cols_album|number_cols_cat|hovereffect";}}'
     at_date: '1549020143'

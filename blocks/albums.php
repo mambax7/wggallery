@@ -15,8 +15,6 @@
  * @copyright      module for xoops
  * @license        GPL 2.0 or later
  * @package        wggallery
- * @since          1.0
- * @min_xoops      2.5.11
  * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version        $Id: 1.0 albums.php 1 Mon 2018-03-19 10:04:50Z XOOPS Project (www.xoops.org) $
  */
@@ -29,8 +27,9 @@ require_once \XOOPS_ROOT_PATH . '/modules/wggallery/include/common.php';
 /**
  * @param $options
  * @return array
+ * @throws Exception
  */
-function b_wggallery_albums_show($options)
+function b_wggallery_albums_show($options): array
 {
     $block        = [];
     $typeBlock    = $options[0];
@@ -181,8 +180,9 @@ function b_wggallery_albums_show($options)
 /**
  * @param $options
  * @return string
+ * @throws Exception
  */
-function b_wggallery_albums_edit($options)
+function b_wggallery_albums_edit($options): string
 {
     $helper        = Wggallery\Helper::getInstance();
     $albumsHandler = $helper->getHandler('Albums');
@@ -194,7 +194,6 @@ function b_wggallery_albums_edit($options)
     unset($criteria);
     $albumtypesHandler = $helper->getHandler('Albumtypes');
     $albumtypesAll     = $albumtypesHandler->getAll();
-    unset($criteria);
 
     $GLOBALS['xoopsTpl']->assign('wggallery_upload_url', \WGGALLERY_UPLOAD_URL);
 
