@@ -141,10 +141,10 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     /**
      * get perms for current user to view album
      *
-     * @param  $albId
+     * @param  int $albId
      * @return true|int
      */
-    public function permAlbumView($albId): true|int
+    public function permAlbumView(int $albId): true|int
     {
         global $xoopsUser, $xoopsModule;
 
@@ -168,10 +168,10 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * @param $albId
+     * @param int $albId
      * @return int
      */
-    public function permAlbumDownload($albId): int
+    public function permAlbumDownload(int $albId): int
     {
         global $xoopsUser, $xoopsModule;
 
@@ -195,10 +195,10 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * @param $albId
+     * @param int $albId
      * @return int
      */
-    public function permImageDownloadLarge($albId): int
+    public function permImageDownloadLarge(int $albId): int
     {
         global $xoopsUser, $xoopsModule;
 
@@ -222,10 +222,10 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * @param $albId
+     * @param int $albId
      * @return int
      */
-    public function permImageDownloadMedium($albId): int
+    public function permImageDownloadMedium(int $albId): int
     {
         global $xoopsUser, $xoopsModule;
 

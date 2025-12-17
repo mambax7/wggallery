@@ -118,7 +118,7 @@ $albumsAll   = $albumsHandler->getAll($crAlbums);
 $permAlbView = [];
 if ($albumsCount > 0) {
     foreach (\array_keys($albumsAll) as $i) {
-        if ($permissionsHandler->permAlbumView($albumsAll[$i]->getVar('alb_id')) > 0) {
+        if ($permissionsHandler->permAlbumView((int)$albumsAll[$i]->getVar('alb_id')) > 0) {
             $permAlbView[] = $albumsAll[$i]->getVar('alb_id');
         }
         // echo "<br>------------------------------------------------------------";
@@ -155,7 +155,7 @@ if ($albumsCount > 0) {
             $submitter  = $albumsAll[$i]->getVar('alb_submitter');
             //check permissions
             //$albums[$i]['edit'] = $permissionsHandler->permAlbumEdit($albumsAll[$i]->getVar('alb_id'), $albumsAll[$i]->getVar('alb_submitter'));
-            if ($permissionsHandler->permAlbumDownload($albumsAll[$i]->getVar('alb_id'))) {
+            if ($permissionsHandler->permAlbumDownload((int)$albumsAll[$i]->getVar('alb_id'))) {
                 $albums[$i]['download'] = true;
             }
             //set indicator for line break
@@ -203,7 +203,7 @@ $albumsAll   = $albumsHandler->getAll($crAlbums);
 $permAlbView = [];
 if ($catsCount > 0) {
     foreach (\array_keys($albumsAll) as $i) {
-        if ($permissionsHandler->permAlbumView($albumsAll[$i]->getVar('alb_id')) > 0) {
+        if ($permissionsHandler->permAlbumView((int)$albumsAll[$i]->getVar('alb_id')) > 0) {
             $permAlbView[] = $albumsAll[$i]->getVar('alb_id');
         }
         // echo "<br>------------------------------------------------------------";

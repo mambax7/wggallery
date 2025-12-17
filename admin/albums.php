@@ -221,7 +221,7 @@ switch ($op) {
         break;
     case 'delete':
         $albumsObj = $albumsHandler->get($albId);
-        if (!$permissionsHandler->permAlbumEdit($albId, $albumsObj->getVar('alb_submitter'))) {
+        if (!$permissionsHandler->permAlbumEdit($albId, (int)$albumsObj->getVar('alb_submitter'))) {
             \redirect_header('albums.php', 3, _NOPERM);
         }
         if (1 == Request::getInt('ok')) {

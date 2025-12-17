@@ -181,7 +181,7 @@ switch ($op) {
             if ($albumsCount > 0) {
                 $albumsAll = $albumsHandler->getAll($crAlbums);
                 foreach (\array_keys($albumsAll) as $i) {
-                    $albId    = $albumsAll[$i]->getVar('alb_id');
+                    $albId    = (int)$albumsAll[$i]->getVar('alb_id');
                     $permView = $permissionsHandler->permAlbumView($albId);
                     if ($permView) {
                         $album_ids_view[] = $albId;

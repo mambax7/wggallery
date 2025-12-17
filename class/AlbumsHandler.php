@@ -112,9 +112,9 @@ class AlbumsHandler extends \XoopsPersistableObjectHandler
      * @param  $limit
      * @param  $sort
      * @param  $order
-     * @return int
+     * @return \CriteriaCompo
      */
-    private function getAlbumsCriteria($crAlbums, $start, $limit, $sort, $order): int
+    private function getAlbumsCriteria($crAlbums, $start, $limit, $sort, $order): \CriteriaCompo
     {
         $crAlbums->setStart($start);
         $crAlbums->setLimit($limit);
@@ -202,7 +202,7 @@ class AlbumsHandler extends \XoopsPersistableObjectHandler
         // Table view albums
         if ($albumsCount > 0) {
             foreach (\array_keys($albumsAll) as $i) {
-                if ($permissionsHandler->permAlbumEdit($albumsAll[$i]->getVar('alb_id'), $albumsAll[$i]->getVar('alb_submitter'))) {
+                if ($permissionsHandler->permAlbumEdit((int)$albumsAll[$i]->getVar('alb_id'), (int)$albumsAll[$i]->getVar('alb_submitter'))) {
                     $child     = $this->getListChildsOfCollection($albumsAll[$i]->getVar('alb_id'));
                     $childsAll .= '<li style="display: list-item;" class="mjs-nestedSortable-branch mjs-nestedSortable-collapsed" id="menuItem_' . $albumsAll[$i]->getVar('alb_id') . '">';
 
@@ -264,7 +264,7 @@ class AlbumsHandler extends \XoopsPersistableObjectHandler
         if ($albumsCount > 0) {
             foreach (\array_keys($albumsAll) as $i) {
                 $album = $albumsAll[$i]->getValuesAlbums();
-                if ($permissionsHandler->permAlbumView($album['alb_id'])) {
+                if ($permissionsHandler->permAlbumView((int)$album['alb_id'])) {
                     $child     = $this->getListChildsOfCollectionIndex($album['alb_id'], $target, $showThumb);
                     $childsAll .= '<li class="wgg-alblist-li" id="menuItem_' . $album['alb_id'] . '">';
 

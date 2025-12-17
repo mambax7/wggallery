@@ -109,9 +109,9 @@ class WatermarksHandler extends \XoopsPersistableObjectHandler
      * @param  $limit
      * @param  $sort
      * @param  $order
-     * @return int
+     * @return \CriteriaCompo
      */
-    private function getWatermarksCriteria($crWatermarks, $start, $limit, $sort, $order): int
+    private function getWatermarksCriteria($crWatermarks, $start, $limit, $sort, $order): \CriteriaCompo
     {
         $crWatermarks->setStart($start);
         $crWatermarks->setLimit($limit);

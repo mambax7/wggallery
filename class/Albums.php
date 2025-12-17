@@ -126,7 +126,7 @@ class Albums extends \XoopsObject
             $albPid->addOption(0, '&nbsp;');
             $albumsAll = $albumsHandler->getAll($criteria);
             foreach (\array_keys($albumsAll) as $i) {
-                if ($permissionsHandler->permAlbumEdit($albumsAll[$i]->getVar('alb_id'), $albumsAll[$i]->getVar('alb_submitter'))) {
+                if ($permissionsHandler->permAlbumEdit((int)$albumsAll[$i]->getVar('alb_id'), (int)$albumsAll[$i]->getVar('alb_submitter'))) {
                     $albName = $albumsAll[$i]->getVar('alb_name');
                     $albAlbPid = $albumsAll[$i]->getVar('alb_pid');
                     if ($albAlbPid > 0) {
@@ -361,7 +361,7 @@ class Albums extends \XoopsObject
         $albumsAll = $albumsHandler->getAll($crAlbums);
 
         foreach (\array_keys($albumsAll) as $i) {
-            if ($permissionsHandler->permAlbumEdit($albumsAll[$i]->getVar('alb_id'), $albumsAll[$i]->getVar('alb_submitter'))) {
+            if ($permissionsHandler->permAlbumEdit((int)$albumsAll[$i]->getVar('alb_id'), (int)$albumsAll[$i]->getVar('alb_submitter'))) {
                 $albName = $albumsAll[$i]->getVar('alb_name');
                 $albPid  = $albumsAll[$i]->getVar('alb_pid');
                 if ($albPid > 0) {

@@ -41,7 +41,7 @@ $GLOBALS['xoopsTpl']->assign('displayButtonText', $helper->getConfig('displayBut
 // check permissions
 if ($albId > 0) {
     $albumsObj = $albumsHandler->get($albId);
-    if (!$permissionsHandler->permAlbumEdit($albId, $albumsObj->getVar('alb_submitter'))) {
+    if (!$permissionsHandler->permAlbumEdit($albId, (int)$albumsObj->getVar('alb_submitter'))) {
         \redirect_header('albums.php', 3, _NOPERM);
     }
     $xoBreadcrumbs[] = ['title' => $albumsObj->getVar('alb_name'), 'link' => \WGGALLERY_URL . '/images.php?op=list&amp;alb_id=' . $albId];

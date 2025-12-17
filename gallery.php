@@ -81,7 +81,7 @@ $albSubmitter = '';
 $albumsObj = $albumsHandler->get($albId);
 if (isset($albumsObj) && \is_object($albumsObj)) {
     $albName      = $albumsObj->getVar('alb_name');
-    $albSubmitter = $albumsObj->getVar('alb_submitter');
+    $albSubmitter = (int)$albumsObj->getVar('alb_submitter');
 }
 $GLOBALS['xoopsTpl']->assign('alb_name', $albName);
 // $GLOBALS['xoopsTpl']->assign('alb_allowdownload', $permissionsHandler->permAlbumDownload($albId));

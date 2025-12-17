@@ -195,7 +195,7 @@ class Images extends \XoopsObject
         $albumsAll = $albumsHandler->getAll($crAlbums);
 
         foreach (\array_keys($albumsAll) as $i) {
-            if ($permissionsHandler->permAlbumEdit($albumsAll[$i]->getVar('alb_id'), $albumsAll[$i]->getVar('alb_submitter'))) {
+            if ($permissionsHandler->permAlbumEdit((int)$albumsAll[$i]->getVar('alb_id'), (int)$albumsAll[$i]->getVar('alb_submitter'))) {
                 //$albId   = $albumsAll[$i]->getVar('alb_id');
                 $albName = $albumsAll[$i]->getVar('alb_name');
                 $albPid  = $albumsAll[$i]->getVar('alb_pid');

@@ -47,7 +47,7 @@ if (!$permissionsHandler->permGlobalSubmit()) {
 }
 if ($albId > 0) {
     $albumsObj = $albumsHandler->get($albId);
-    if (!$permissionsHandler->permAlbumEdit($albId, $albumsObj->getVar('alb_submitter'))) {
+    if (!$permissionsHandler->permAlbumEdit($albId, (int)$albumsObj->getVar('alb_submitter'))) {
         \redirect_header('albums.php', 3, _NOPERM);
     }
 } else {

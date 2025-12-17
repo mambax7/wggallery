@@ -109,9 +109,9 @@ class AlbumtypesHandler extends \XoopsPersistableObjectHandler
      * @param  $limit
      * @param  $sort
      * @param  $order
-     * @return int
+     * @return \CriteriaCompo
      */
-    private function getAlbumtypesCriteria($crAlbumtypes, $start, $limit, $sort, $order): int
+    private function getAlbumtypesCriteria($crAlbumtypes, $start, $limit, $sort, $order): \CriteriaCompo
     {
         $crAlbumtypes->setStart($start);
         $crAlbumtypes->setLimit($limit);

@@ -187,9 +187,9 @@ class ImagesHandler extends \XoopsPersistableObjectHandler
      * @param  $limit
      * @param  $sort
      * @param  $order
-     * @return int
+     * @return \CriteriaCompo
      */
-    private function getImagesCriteria($crImages, $albId, $start, $limit, $sort, $order): int
+    private function getImagesCriteria($crImages, $albId, $start, $limit, $sort, $order): \CriteriaCompo
     {
         if ($albId > 0) {
             $crImages->add(new \Criteria('img_albid', $albId));
@@ -562,7 +562,7 @@ class ImagesHandler extends \XoopsPersistableObjectHandler
         $albumsAll = $albumsHandler->getAll($crAlbums);
 
         foreach (\array_keys($albumsAll) as $i) {
-            if ($permissionsHandler->permAlbumEdit($albumsAll[$i]->getVar('alb_id'), $albumsAll[$i]->getVar('alb_submitter'))) {
+            if ($permissionsHandler->permAlbumEdit((int)$albumsAll[$i]->getVar('alb_id'), (int)$albumsAll[$i]->getVar('alb_submitter'))) {
                 $albName = $albumsAll[$i]->getVar('alb_name');
                 $albPid  = $albumsAll[$i]->getVar('alb_pid');
                 if ($albPid > 0) {
